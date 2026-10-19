@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Utama - Portal Ekstrakurikuler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__logo"><img src="assets/logo.png" alt="" onerror="this.style.display='none'" /></div>
+      <div class="sidebar__name">SMA TRISULA PRAJA<span>EKSTRAKURIKULER</span></div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <p class="sidebar__label">Menu Utama</p>
+
+      <a class="nav-item is-active" href="dashboard-siswa.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-item" href="daftar-ekskul.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Daftar Eksul
+      </a>
+      <a class="nav-item" href="jadwal.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Jadwal
+      </a>
+      <a class="nav-item" href="tugas.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+        Tugas
+      </a>
+      <a class="nav-item" href="absensi.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Absensi
+      </a>
+      <a class="nav-item" href="pengumuman.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Pengumuman
+      </a>
+      <a class="nav-item" href="penilaian.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+        Penilaian
+      </a>
+    </nav>
+
+    <div class="sidebar__foot">
+      <a class="logout" href="login.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Keluar
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== KONTEN ===== -->
+  <div class="main">
+    <header class="header">
+      <div class="header__left">
+        <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <h1 class="header__title">Dashboard Utama</h1>
+      </div>
+      <div class="header__right">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" placeholder="Cari Pengumuman, Tugas..." aria-label="Cari" />
+        </div>
+        <a class="user" href="profil.html">
+  <div class="user__avatar">BS</div>
+    <div>
+      <p class="user__name">Budi Setiawan</p>
+      <p class="user__class">Kelas XI IPA 2</p>
+    </div>
+    </a>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="content__body">
+
+        <!-- Banner sambutan -->
+        <section class="welcome">
+          <div>
+            <p class="welcome__hello">Selamat Datang Kembali 👋</p>
+            <h2 class="welcome__name">Budi Setiawan</h2>
+            <div class="welcome__chips">
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="11" r="2"/><path d="M14 10h4M14 14h4M5 16c.5-1.5 1.5-2 3-2s2.5.5 3 2"/></svg>
+                NIS 202210045
+              </span>
+              <span class="chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                Tahun Angkatan 2025
+              </span>
+            </div>
+          </div>
+          <svg class="welcome__art" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="9" cy="8" r="4"/><path d="M1 21a8 8 0 0 1 16 0z"/>
+            <circle cx="17" cy="8" r="3.4"/><path d="M15.5 13.2A7.8 7.8 0 0 1 23 21h-4.6a9.6 9.6 0 0 0-2.9-7.8z"/>
+          </svg>
+        </section>
+
+        <!-- Ringkasan -->
+        <section class="stats" aria-label="Ringkasan">
+          <a class="stat stat--purple" href="pengumuman.html">
+            <p class="stat__value">3</p>
+            <p class="stat__label">Pengumuman</p>
+            <p class="stat__sub">Baru hari ini</p>
+          </a>
+          <a class="stat stat--red" href="tugas.html">
+            <p class="stat__value">2</p>
+            <p class="stat__label">Tugas Aktif</p>
+            <p class="stat__sub">Harus diselesaikan</p>
+          </a>
+          <a class="stat stat--green" href="jadwal.html">
+            <p class="stat__value">3</p>
+            <p class="stat__label">Agenda Minggu Ini</p>
+            <p class="stat__sub">Terjadwal</p>
+          </a>
+          <a class="stat stat--ok" href="penilaian.html">
+            <p class="stat__value">83%</p>
+            <p class="stat__label">Capaian Rata-rata</p>
+            <p class="stat__sub">Semester Ganjil</p>
+          </a>
+        </section>
+
+        <!-- Pengumuman + Capaian -->
+        <section class="panels">
+          <article class="card">
+            <div class="card__head">
+              <h3 class="card__title"><span class="card__dot"></span>Pengumuman Terbaru</h3>
+              <a class="card__link" href="pengumuman.html">Lihat semua →</a>
+            </div>
+            <div class="notice-list">
+              <div class="notice">
+                <div class="notice__avatar notice__avatar--orange">AH</div>
+                <div class="notice__body">
+                  <p class="notice__from">Abdul Husein, S.T</p>
+                  <p class="notice__title">Jadwal Latihan Pekan Ini</p>
+                  <p class="notice__text">Latihan Project Robotic akan dilaksanakan 08.00 – 11.00 di Lab.</p>
+                  <p class="notice__time">Dibuat 2 jam yang lalu</p>
+                </div>
+              </div>
+              <div class="notice">
+                <div class="notice__avatar notice__avatar--orange">AH</div>
+                <div class="notice__body">
+                  <p class="notice__from">Abdul Husein, S.T</p>
+                  <p class="notice__title">Tugas Konektivitas &amp; IoT Cloud</p>
+                  <p class="notice__text">Deadline Hari Rabu Tanggal 21 Mei.</p>
+                  <p class="notice__time">Dibuat 5 jam yang lalu</p>
+                </div>
+              </div>
+              <div class="notice">
+                <div class="notice__avatar notice__avatar--cyan">LH</div>
+                <div class="notice__body">
+                  <p class="notice__from">Lukman Hakim, S.Pd</p>
+                  <p class="notice__title">Perubahan Jadwal Latihan Bola</p>
+                  <p class="notice__text">Latihan hari sabtu ini ditunda.</p>
+                  <p class="notice__time">Dibuat 1 hari yang lalu</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__head">
+              <h3 class="card__title"><span class="card__dot" style="background:#16a34a"></span>Capaian Semester</h3>
+              <a class="card__link" href="penilaian.html">Detail →</a>
+            </div>
+            <div class="progress-list">
+              <div>
+                <div class="progress__row"><span>Kemandirian</span><span>90%</span></div>
+                <div class="progress__bar"><div class="progress__fill" style="width:90%"></div></div>
+              </div>
+              <div>
+                <div class="progress__row"><span>Kerjasama</span><span>80%</span></div>
+                <div class="progress__bar"><div class="progress__fill" style="width:80%"></div></div>
+              </div>
+              <div>
+                <div class="progress__row"><span>Kedisiplinan</span><span>75%</span></div>
+                <div class="progress__bar"><div class="progress__fill" style="width:75%"></div></div>
+              </div>
+              <div>
+                <div class="progress__row"><span>Kreativitas</span><span>88%</span></div>
+                <div class="progress__bar"><div class="progress__fill" style="width:88%"></div></div>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <p class="footer-note">Portal Ekstrakurikuler © 2026 · SMA Trisula Praja</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Buka/tutup sidebar di layar kecil
+  var sidebar = document.getElementById('sidebar');
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    sidebar.classList.toggle('is-open');
+  });
+  document.querySelector('.main').addEventListener('click', function () {
+    sidebar.classList.remove('is-open');
+  });
+</script>
+</body>
+</html>

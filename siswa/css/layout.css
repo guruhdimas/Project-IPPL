@@ -1,0 +1,196 @@
+/* =========================================================
+   Kerangka bersama halaman Siswa: sidebar + header + area isi
+   Dipakai oleh dashboard, jadwal, tugas, absensi, dst.
+   ========================================================= */
+
+:root {
+  --green: #023724;
+  --green-mid: #0a6244;
+  --green-tint: #eaf4f0;
+  --ink: #1a2332;
+  --slate: #64748b;
+  --slate-light: #94a3b8;
+  --line: #e2e8f0;
+  --bg: #f8fafc;
+  --sidebar-w: 230px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--ink);
+  background: #f4f7f9;
+  min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+.heading { font-family: "DM Sans", "Inter", sans-serif; font-weight: 700; }
+
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-right: 1.5px solid var(--line);
+  box-shadow: 2px 0 4px rgba(2, 55, 36, 0.04);
+  z-index: 20;
+}
+.sidebar__brand {
+  height: 81.5px;
+  padding: 24px 20px 20px;
+  border-bottom: 1.5px solid var(--line);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.sidebar__logo {
+  width: 36px; height: 36px;
+  flex: none;
+  border-radius: 10px;
+  background: #404942;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.sidebar__logo img { width: 30px; height: 30px; object-fit: contain; }
+.sidebar__name { font-family: "DM Sans", sans-serif; font-weight: 700; font-size: 13px; line-height: 15.6px; color: var(--ink); }
+.sidebar__name span { display: block; color: var(--green); }
+
+.sidebar__nav { flex: 1; padding: 16px 12px; overflow-y: auto; }
+.sidebar__label {
+  padding: 0 8px 8px;
+  font-size: 10px; line-height: 15px; font-weight: 600;
+  letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--slate-light);
+}
+.nav-item {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  height: 40px;
+  margin-bottom: 2px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13.5px; line-height: 20px;
+  color: #4b5563;
+  transition: background 0.15s;
+}
+.nav-item svg { width: 18px; height: 18px; flex: none; opacity: 0.7; }
+.nav-item:hover { background: #f3f6f5; }
+.nav-item.is-active { background: var(--green-tint); color: var(--green); font-weight: 600; }
+.nav-item.is-active svg { opacity: 1; }
+.nav-item.is-active::before {
+  content: "";
+  position: absolute; left: 0; top: 10px;
+  width: 3px; height: 20px;
+  background: var(--green);
+  border-radius: 0 3px 3px 0;
+}
+
+.sidebar__foot { padding: 16px 12px; border-top: 1.5px solid var(--line); }
+.logout {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%;
+  padding: 8px;
+  border: 0; border-radius: 8px;
+  background: var(--green-tint);
+  color: var(--green);
+  font-size: 13.5px; font-weight: 600; line-height: 20px;
+}
+.logout svg { width: 20px; height: 20px; }
+.logout:hover { filter: brightness(0.97); }
+
+/* ---------- Header ---------- */
+.main { display: flex; flex-direction: column; min-width: 0; }
+.header {
+  position: sticky; top: 0; z-index: 10;
+  height: 60px;
+  padding: 0 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: #fff;
+  border-bottom: 1.5px solid var(--line);
+  box-shadow: 0 1px 2px rgba(2, 55, 36, 0.05);
+}
+.header__left { display: flex; align-items: center; gap: 12px; }
+.header__title { font-family: "DM Sans", sans-serif; font-weight: 700; font-size: 17px; line-height: 25.5px; }
+.menu-btn {
+  display: none;
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--line); border-radius: 8px;
+  background: #fff;
+  place-items: center;
+}
+.menu-btn svg { width: 18px; height: 18px; }
+.header__right { display: flex; align-items: center; gap: 16px; }
+
+.search { position: relative; width: 240px; }
+.search svg { position: absolute; left: 12px; top: 12px; width: 15px; height: 15px; color: var(--slate-light); pointer-events: none; }
+.search input {
+  width: 100%; height: 38.5px;
+  padding: 8px 16px 8px 36px;
+  background: var(--bg);
+  border: 1.5px solid var(--line); border-radius: 8px;
+  font: 400 13px "Inter", sans-serif; color: #374151;
+}
+.search input::placeholder { color: rgba(55, 65, 81, 0.5); }
+.search input:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+
+.user { display: flex; align-items: center; gap: 8px; }
+.user__avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--green), var(--green-mid));
+  color: #fff; font-size: 12px; font-weight: 700;
+}
+.user__name { font-size: 13px; line-height: 15.6px; font-weight: 600; text-align: center; }
+.user__class { font-size: 11px; line-height: 16.5px; color: var(--slate); text-align: center; }
+
+/* ---------- Area isi ---------- */
+.content {
+  flex: 1;
+  padding: 24px 21px 0;
+  background: rgba(240, 244, 248, 0.5);
+  display: flex; flex-direction: column;
+}
+.content__body { flex: 1; width: 100%; max-width: 1171px; margin: 0 auto; }
+.footer-note { padding: 28px 0 16px; text-align: center; font-size: 12px; line-height: 18px; color: var(--slate-light); }
+
+/* ---------- Kartu umum ---------- */
+.card {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.card__head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1.5px solid var(--line);
+}
+.card__title { display: flex; align-items: center; gap: 8px; font-family: "DM Sans", sans-serif; font-weight: 700; font-size: 14px; line-height: 21px; }
+.card__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.card__link { font-size: 12px; line-height: 18px; font-weight: 500; color: var(--green); }
+.card__link:hover { text-decoration: underline; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed; left: 0; top: 0;
+    width: var(--sidebar-w);
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+  .sidebar.is-open { transform: none; box-shadow: 8px 0 24px rgba(0, 0, 0, 0.18); }
+  .menu-btn { display: grid; }
+  .search { display: none; }
+  .header { padding: 0 16px; }
+}

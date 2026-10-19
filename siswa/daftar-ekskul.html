@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daftar Ekskul – Portal Ekstrakurikuler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;--bg:#f7f9fb;--card:#fff;--line:#e2e8f0;--ink:#0f172a;--ink2:#1a2332;--muted:#64748b;--soft:#4b5563;
+  --green:#023724;--green2:#0f5132;--mint:#eaf4f0;--mint2:#e8f5e9;--chip:#d1e7dd;--cell-off:#f8fafc;--cell-end:#e2e8f0;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-serif;min-height:100vh}
+.app{display:flex;min-height:100vh}
+/* sidebar */
+.side{width:230px;min-width:220px;background:var(--card);border-right:1.5px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:10px;align-items:center;padding:24px 20px 20px;border-bottom:1.5px solid var(--line)}
+.logo{width:36px;height:36px;border-radius:10px;background:#404942;display:grid;place-items:center;color:#fff;flex:none}
+.brand b{display:block;font:700 13px/1.2 "DM Sans",Inter,sans-serif;color:var(--ink2)}
+.brand b+b{color:var(--green)}
+nav{flex:1;padding:16px 12px;overflow:auto}
+.sec{padding:0 8px;font:800 10px/15px Inter;letter-spacing:.8px;text-transform:uppercase;color:var(--green);margin-bottom:2px}
+.nav a{position:relative;display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;margin-top:2px;border-radius:8px;color:var(--soft);text-decoration:none;font-size:13.5px}
+.nav a svg{opacity:.7}
+.nav a.on{background:var(--mint);color:var(--green);font-weight:600}
+.nav a.on svg{opacity:1}
+.nav a.on::before{content:"";position:absolute;left:0;top:10px;width:3px;height:20px;background:var(--green);border-radius:0 3px 3px 0}
+.nav a:hover:not(.on){background:var(--cell-off)}
+.logout{border-top:1.5px solid var(--line);padding:16px 12px}
+.logout button{width:100%;display:flex;gap:10px;align-items:center;padding:8px;border:0;border-radius:8px;background:var(--mint);color:var(--green);font:600 13.5px Inter;cursor:pointer}
+/* main */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+header{height:60px;margin-top:4px;background:var(--card);border-bottom:1.5px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;box-shadow:0 1px 2px rgba(2,55,36,.05);gap:16px}
+header h1{margin:0;font:700 17px/25px "DM Sans",Inter,sans-serif;color:var(--ink2)}
+.hr{display:flex;align-items:center;gap:16px}
+.search{position:relative;width:240px}
+.search svg{position:absolute;left:12px;top:12px;color:var(--muted)}
+.search input{width:100%;height:38px;padding:0 16px 0 36px;border:1.5px solid var(--line);border-radius:8px;background:var(--cell-off);color:var(--ink);font:13px Inter}
+.search input::placeholder{color:var(--muted);opacity:.7}
+.user{display:flex;align-items:center;gap:8px}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#023724,#0a6244);color:#fff;display:grid;place-items:center;font:700 12px Inter}
+.user b{display:block;font:600 13px/15.6px Inter;color:var(--ink2)}
+.user small{display:block;font-size:11px;color:var(--muted)}
+main{padding:24px 28px;flex:1}
+.grid{display:grid;grid-template-columns:minmax(0,732px) minmax(280px,360px);gap:24px;max-width:1116px;margin:0 auto;align-items:stretch}
+.card{background:var(--card);border:1.25px solid var(--line);border-top-width:3.75px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;border-bottom:1.25px solid var(--line)}
+.ch h2{margin:0;font:600 16px/24px Inter}
+.ch p{margin:2px 0 0;color:var(--muted)}
+.sel{position:relative}
+.sel select{appearance:none;height:40px;padding:0 36px 0 12px;border:1.25px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:14px Inter;cursor:pointer}
+.sel svg{position:absolute;right:12px;top:12px;pointer-events:none;color:var(--muted)}
+.body{padding:24px}
+.bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.bar h3{margin:0;font:600 18px/28px Inter}
+.btns{display:flex;gap:8px}
+.btn{height:32px;padding:0 12px;border:1.25px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:600 12px Inter;cursor:pointer;display:grid;place-items:center}
+.btn:hover{background:var(--cell-off)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border:1.25px solid var(--line);border-radius:8px;overflow:hidden}
+.dow{background:var(--mint2);color:var(--green2);font:600 12px/16px Inter;text-align:center;padding:8px 0}
+.cell{background:var(--card);min-height:96px;padding:8px;display:flex;flex-direction:column;gap:4px;align-items:stretch;border:0;text-align:left;color:var(--ink);font-family:inherit;cursor:pointer}
+.cell:hover{background:var(--cell-off)}
+.cell.off{background:var(--cell-off);cursor:default}
+.cell.end{background:var(--cell-end);cursor:default}
+.cell.sel-d{background:var(--mint2)}
+.num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:600 12px Inter;flex:none}
+.cell.today .num{background:var(--green2);color:#fff}
+.chip{background:var(--chip);color:var(--green2);border-radius:4px;padding:2px 6px;font:500 11px/16.5px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{text-align:center;color:var(--muted);padding:24px 0}
+.next{margin-top:12px;border-top:1.25px solid var(--line);padding-top:16px}
+.next h4{margin:0 0 8px;font:600 12px/16px Inter;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px;border-radius:8px;width:100%;border:0;background:none;font:14px Inter;color:var(--ink);cursor:pointer;text-align:left}
+.row:hover{background:var(--cell-off)}
+.row span:last-child{color:var(--muted);white-space:nowrap}
+.ev{display:flex;gap:10px;align-items:center;padding:8px 0}
+.ev i{font-style:normal;background:var(--chip);color:var(--green2);border-radius:4px;padding:2px 8px;font:500 12px Inter}
+footer{text-align:center;color:#94a3b8;font-size:12px;padding:20px 8px}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .side{display:none}
+  header{padding:0 16px}.search{display:none}.user div{display:none}
+  main{padding:16px 12px}.body{padding:12px}.ch{padding:12px 14px;flex-wrap:wrap}
+  .cell{min-height:64px;padding:4px}.chip{font-size:0;padding:0;height:6px;width:6px;border-radius:50%;background:var(--green2);align-self:flex-start}
+}
+
+.page-h{margin:0 auto 12px;max-width:1142px}
+.page-h h2{margin:0;font:700 20px/30px "DM Sans",Inter,sans-serif;color:var(--ink2)}
+.page-h p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.wrap{max-width:1142px;margin:0 auto}
+.panel{background:var(--card);border:1.25px solid var(--line);border-top-width:3.75px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);padding:24px}
+.tools{display:flex;gap:12px;margin-bottom:24px}
+.sbox{position:relative;flex:1;min-width:0}
+.sbox svg{position:absolute;left:12px;top:12px;color:var(--muted)}
+.sbox input{width:100%;height:40px;padding:0 12px 0 36px;border:1.25px solid var(--line);border-radius:8px;background:var(--card);font:14px Inter;color:var(--ink)}
+.sbox input::placeholder{color:var(--muted)}
+.sel select{width:192px}
+.ghost{height:40px;padding:0 16px;border:1.25px solid var(--line);border-radius:8px;background:var(--card);font:600 14px Inter;color:var(--ink);cursor:pointer}
+.ghost:hover{background:var(--cell-off)}
+.eg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.ec{background:var(--card);border:1.25px solid var(--line);border-radius:8px;padding:20px;box-shadow:0 1px 1.5px rgba(0,0,0,.1)}
+.et{display:flex;justify-content:space-between;gap:8px;min-height:79px}
+.et h3{margin:0;font:600 22px/34px Inter;color:var(--ink);max-width:176px}
+.badge{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;background:var(--chip);color:var(--green);border-radius:999px;padding:2px 10px;font:600 12px/16px Inter;white-space:nowrap}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+.badge.full{background:#fee2e2;color:#991b1b}.badge.full::before{background:#991b1b}
+dl{margin:0;padding-top:12px;color:var(--muted)}
+dl div{line-height:22px}dl b{font-weight:400;color:var(--ink)}
+.q{display:flex;justify-content:space-between;padding-top:16px;font-size:12px;color:var(--muted)}
+.q b{font-weight:600;color:var(--ink)}
+.pb{margin-top:6px;height:8px;border-radius:999px;background:var(--mint2);overflow:hidden}
+.pb i{display:block;height:100%;background:var(--green);border-radius:999px}
+.go{margin-top:16px;height:40px;padding:0 16px;border:0;border-radius:8px;background:var(--green);color:#fff;font:600 14px Inter;cursor:pointer;box-shadow:0 1px 1.5px rgba(0,0,0,.1)}
+.go.done{background:var(--mint);color:var(--green)}
+.go:disabled{background:var(--line);color:var(--muted);cursor:not-allowed}
+.none{grid-column:1/-1;text-align:center;color:var(--muted);padding:32px 0}
+@media(max-width:1000px){.eg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.eg{grid-template-columns:1fr}.tools{flex-wrap:wrap}.sbox{flex-basis:100%}.panel{padding:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="logo" id="logo"></div>
+      <div><b>SMA TRISULA PRAJA</b><b>EKSTRAKURIKULER</b></div>
+    </div>
+    <nav class="nav">
+      <div class="sec">Menu Utama</div>
+      <a href="dashboard-siswa.html" data-i="grid">Dashboard</a>
+      <a href="daftar-ekskul.html" class="on" data-i="list">Daftar Ekskul</a>
+      <a href="jadwal.html" data-i="cal">Jadwal</a>
+      <a href="tugas.html" data-i="clip">Tugas</a>
+      <a href="#" data-i="user">Absensi</a>
+      <a href="pengumuman.html" data-i="brief">Pengumuman</a>
+      <a href="penilaian.html" data-i="bar">Penilaian</a>
+    </nav>
+    <div class="logout"><button type="button" onclick="location.href='login.html'"><span data-i="out"></span>Keluar</button></div>
+  </aside>
+  <div class="main">
+    <header>
+      <h1>Daftar Ekskul</h1>
+      <div class="hr">
+        <div class="search"><span data-i="search"></span><input type="text" placeholder="Cari Pengumuman, Tugas..." aria-label="Cari"></div>
+        <a class="user" href="profil.html" style="text-decoration:none;color:inherit"><div class="av">BS</div><div><b>Budi Setiawan</b><small>Kelas XI IPA 2</small></div></a>
+      </div>
+    </header>
+    <main>
+      <div class="page-h"><h2>Daftar Ekstrakurikuler</h2><p>Lihat pembimbing, kuota, dan status pendaftaran</p></div>
+      <div class="wrap"><div class="panel">
+        <div class="tools">
+          <div class="sbox"><span data-i="search"></span><input id="q" type="text" placeholder="Cari Ekstrakurikuler…" aria-label="Cari ekstrakurikuler"></div>
+          <div class="sel"><select id="st" aria-label="Filter status"><option value="all">Semua status</option><option value="open">Dibuka</option><option value="full">Penuh</option></select><span data-i="down"></span></div>
+          <button class="ghost" id="reset" type="button">Reset</button>
+        </div>
+        <div class="eg" id="eg"></div>
+      </div></div>
+    </main>
+    <footer>Portal Ekstrakurikuler © 2026 · SMA Trisula Praja</footer>
+  </div>
+</div>
+<script>
+const ICONS={
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  clip:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>',
+  user:'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  brief:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  bar:'<path d="M12 20V10M18 20V4M6 20v-4"/>',
+  out:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  down:'<path d="m6 9 6 6 6-6"/>',left:'<path d="m15 18-6-6 6-6"/>',right:'<path d="m9 18 6-6-6-6"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'
+};
+const svg=(n,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
+
+document.querySelectorAll('[data-i]').forEach(el=>{
+  const n=el.dataset.i, big=el.classList.contains('btn')||n==='down'?16:(n==='search'?15:18);
+  el.insertAdjacentHTML('afterbegin',svg(n,big));
+});
+document.getElementById('logo').innerHTML=svg('shield',22);
+// Data contoh – ganti dengan data dari API/database
+const CLUBS=[
+  {n:'Robotic &amp; IoT Club',p:'Abdul Husein, S.T',j:'Sabtu, 08.00 - 11.00',k:3,m:8},
+  {n:'Basket dan Futsal Club',p:'Lukman Hakim, S.Pd',j:'Sabtu, 14.00 - 17.00',k:21,m:60},
+  {n:'Cyber Security &amp; Programming',p:'Abdul Husein, S.T',j:'Sabtu, 09.00 - 12.00',k:7,m:10},
+  {n:'English Debate &amp; Speech',p:'Ajeng Mirna, S.pd',j:'Sabtu, 15.00 - 17.00',k:3,m:6},
+  {n:'Seni &amp; Budaya Nusantara',p:'Dewi Ratna, S.Pd',j:'Minggu, 09.00 - 12.00',k:5,m:17},
+  {n:'Science &amp; Research Club',p:'Fathul Masrani, S.T, M.T',j:'Sabtu, 09.00 - 12.00',k:1,m:8}
+];
+const joined=new Set();
+const $=id=>document.getElementById(id);
+function render(){
+  const q=$('q').value.trim().toLowerCase(), st=$('st').value;
+  const list=CLUBS.map((c,i)=>({...c,i})).filter(c=>{
+    const full=c.k>=c.m;
+    return c.n.toLowerCase().includes(q)&&(st==='all'||(st==='full')===full);
+  });
+  $('eg').innerHTML=list.length?list.map(c=>{
+    const full=c.k>=c.m,on=joined.has(c.i),k=c.k+(on?1:0);
+    return `<article class="ec"><div class="et"><h3>${c.n}</h3><span class="badge ${full?'full':''}">${full?'Penuh':'Dibuka'}</span></div>
+    <dl><div>Pembimbing: <b>${c.p}</b></div><div>Jadwal: <b>${c.j}</b></div></dl>
+    <div class="q"><span>Kuota</span><b>${k}/${c.m}</b></div><div class="pb"><i style="width:${Math.min(100,k/c.m*100)}%"></i></div>
+    <button type="button" class="go ${on?'done':''}" data-i="${c.i}" ${full&&!on?'disabled':''}>${on?'Terdaftar ✓':(full?'Kuota Penuh':'Daftar Sekarang')}</button></article>`;
+  }).join(''):'<div class="none">Ekstrakurikuler tidak ditemukan.</div>';
+}
+$('eg').addEventListener('click',e=>{const b=e.target.closest('.go');if(!b||b.disabled)return;const i=+b.dataset.i;joined.has(i)?joined.delete(i):joined.add(i);render();});
+$('q').oninput=render;$('st').onchange=render;
+$('reset').onclick=()=>{$('q').value='';$('st').value='all';render();};
+render();
+</script>
+</body>
+</html>

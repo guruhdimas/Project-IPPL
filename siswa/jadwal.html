@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jadwal – Portal Ekstrakurikuler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;--bg:#f7f9fb;--card:#fff;--line:#e2e8f0;--ink:#0f172a;--ink2:#1a2332;--muted:#64748b;--soft:#4b5563;
+  --green:#023724;--green2:#0f5132;--mint:#eaf4f0;--mint2:#e8f5e9;--chip:#d1e7dd;--cell-off:#f8fafc;--cell-end:#e2e8f0;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-serif;min-height:100vh}
+.app{display:flex;min-height:100vh}
+/* sidebar */
+.side{width:230px;min-width:220px;background:var(--card);border-right:1.5px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:10px;align-items:center;padding:24px 20px 20px;border-bottom:1.5px solid var(--line)}
+.logo{width:36px;height:36px;border-radius:10px;background:#404942;display:grid;place-items:center;color:#fff;flex:none}
+.brand b{display:block;font:700 13px/1.2 "DM Sans",Inter,sans-serif;color:var(--ink2)}
+.brand b+b{color:var(--green)}
+nav{flex:1;padding:16px 12px;overflow:auto}
+.sec{padding:0 8px;font:800 10px/15px Inter;letter-spacing:.8px;text-transform:uppercase;color:var(--green);margin-bottom:2px}
+.nav a{position:relative;display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;margin-top:2px;border-radius:8px;color:var(--soft);text-decoration:none;font-size:13.5px}
+.nav a svg{opacity:.7}
+.nav a.on{background:var(--mint);color:var(--green);font-weight:600}
+.nav a.on svg{opacity:1}
+.nav a.on::before{content:"";position:absolute;left:0;top:10px;width:3px;height:20px;background:var(--green);border-radius:0 3px 3px 0}
+.nav a:hover:not(.on){background:var(--cell-off)}
+.logout{border-top:1.5px solid var(--line);padding:16px 12px}
+.logout button{width:100%;display:flex;gap:10px;align-items:center;padding:8px;border:0;border-radius:8px;background:var(--mint);color:var(--green);font:600 13.5px Inter;cursor:pointer}
+/* main */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+header{height:60px;margin-top:4px;background:var(--card);border-bottom:1.5px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;box-shadow:0 1px 2px rgba(2,55,36,.05);gap:16px}
+header h1{margin:0;font:700 17px/25px "DM Sans",Inter,sans-serif;color:var(--ink2)}
+.hr{display:flex;align-items:center;gap:16px}
+.search{position:relative;width:240px}
+.search svg{position:absolute;left:12px;top:12px;color:var(--muted)}
+.search input{width:100%;height:38px;padding:0 16px 0 36px;border:1.5px solid var(--line);border-radius:8px;background:var(--cell-off);color:var(--ink);font:13px Inter}
+.search input::placeholder{color:var(--muted);opacity:.7}
+.user{display:flex;align-items:center;gap:8px}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#023724,#0a6244);color:#fff;display:grid;place-items:center;font:700 12px Inter}
+.user b{display:block;font:600 13px/15.6px Inter;color:var(--ink2)}
+.user small{display:block;font-size:11px;color:var(--muted)}
+main{padding:24px 28px;flex:1}
+.grid{display:grid;grid-template-columns:minmax(0,732px) minmax(280px,360px);gap:24px;max-width:1116px;margin:0 auto;align-items:stretch}
+.card{background:var(--card);border:1.25px solid var(--line);border-top-width:3.75px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;border-bottom:1.25px solid var(--line)}
+.ch h2{margin:0;font:600 16px/24px Inter}
+.ch p{margin:2px 0 0;color:var(--muted)}
+.sel{position:relative}
+.sel select{appearance:none;height:40px;padding:0 36px 0 12px;border:1.25px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:14px Inter;cursor:pointer}
+.sel svg{position:absolute;right:12px;top:12px;pointer-events:none;color:var(--muted)}
+.body{padding:24px}
+.bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.bar h3{margin:0;font:600 18px/28px Inter}
+.btns{display:flex;gap:8px}
+.btn{height:32px;padding:0 12px;border:1.25px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:600 12px Inter;cursor:pointer;display:grid;place-items:center}
+.btn:hover{background:var(--cell-off)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border:1.25px solid var(--line);border-radius:8px;overflow:hidden}
+.dow{background:var(--mint2);color:var(--green2);font:600 12px/16px Inter;text-align:center;padding:8px 0}
+.cell{background:var(--card);min-height:96px;padding:8px;display:flex;flex-direction:column;gap:4px;align-items:stretch;border:0;text-align:left;color:var(--ink);font-family:inherit;cursor:pointer}
+.cell:hover{background:var(--cell-off)}
+.cell.off{background:var(--cell-off);cursor:default}
+.cell.end{background:var(--cell-end);cursor:default}
+.cell.sel-d{background:var(--mint2)}
+.num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:600 12px Inter;flex:none}
+.cell.today .num{background:var(--green2);color:#fff}
+.chip{background:var(--chip);color:var(--green2);border-radius:4px;padding:2px 6px;font:500 11px/16.5px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{text-align:center;color:var(--muted);padding:24px 0}
+.next{margin-top:12px;border-top:1.25px solid var(--line);padding-top:16px}
+.next h4{margin:0 0 8px;font:600 12px/16px Inter;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px;border-radius:8px;width:100%;border:0;background:none;font:14px Inter;color:var(--ink);cursor:pointer;text-align:left}
+.row:hover{background:var(--cell-off)}
+.row span:last-child{color:var(--muted);white-space:nowrap}
+.ev{display:flex;gap:10px;align-items:center;padding:8px 0}
+.ev i{font-style:normal;background:var(--chip);color:var(--green2);border-radius:4px;padding:2px 8px;font:500 12px Inter}
+footer{text-align:center;color:#94a3b8;font-size:12px;padding:20px 8px}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .side{display:none}
+  header{padding:0 16px}.search{display:none}.user div{display:none}
+  main{padding:16px 12px}.body{padding:12px}.ch{padding:12px 14px;flex-wrap:wrap}
+  .cell{min-height:64px;padding:4px}.chip{font-size:0;padding:0;height:6px;width:6px;border-radius:50%;background:var(--green2);align-self:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="logo" id="logo"></div>
+      <div><b>SMA TRISULA PRAJA</b><b>EKSTRAKURIKULER</b></div>
+    </div>
+    <nav class="nav">
+      <div class="sec">Menu Utama</div>
+      <a href="dashboard-siswa.html" data-i="grid">Dashboard</a>
+      <a href="daftar-ekskul.html" data-i="list">Daftar Ekskul</a>
+      <a href="jadwal.html" class="on" data-i="cal">Jadwal</a>
+      <a href="tugas.html" data-i="clip">Tugas</a>
+      <a href="#" data-i="user">Absensi</a>
+      <a href="pengumuman.html" data-i="brief">Pengumuman</a>
+      <a href="penilaian.html" data-i="bar">Penilaian</a>
+    </nav>
+    <div class="logout"><button type="button" onclick="location.href='login.html'"><span data-i="out"></span>Keluar</button></div>
+  </aside>
+
+  <div class="main">
+    <header>
+      <h1>Jadwal</h1>
+      <div class="hr">
+        <div class="search"><span data-i="search"></span><input type="text" placeholder="Cari Pengumuman, Tugas..." aria-label="Cari"></div>
+        <a class="user" href="profil.html" style="text-decoration:none;color:inherit"><div class="av">BS</div><div><b>Budi Setiawan</b><small>Kelas XI IPA 2</small></div></a>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <section class="card">
+          <div class="ch">
+            <div><h2>Kalender Kegiatan</h2><p>Jadwal ekskul yang Anda ikuti</p></div>
+            <div class="sel">
+              <select id="filter" aria-label="Filter ekskul">
+                <option value="all">Semua ekskul</option>
+                <option value="Robotic">Robotic</option>
+                <option value="Basket">Basket</option>
+                <option value="Tugas">Tugas</option>
+              </select><span data-i="down"></span>
+            </div>
+          </div>
+          <div class="body">
+            <div class="bar">
+              <h3 id="title"></h3>
+              <div class="btns">
+                <button class="btn" id="prev" aria-label="Bulan sebelumnya" data-i="left"></button>
+                <button class="btn" id="today">Hari ini</button>
+                <button class="btn" id="nextm" aria-label="Bulan berikutnya" data-i="right"></button>
+              </div>
+            </div>
+            <div class="cal" id="cal"></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="ch"><div><h2 id="dtitle"></h2><p id="dcount"></p></div></div>
+          <div class="body" id="dbody"></div>
+        </section>
+      </div>
+    </main>
+    <footer>Portal Ekstrakurikuler © 2026 · SMA Trisula Praja</footer>
+  </div>
+</div>
+
+<script>
+const ICONS={
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  clip:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>',
+  user:'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  brief:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  bar:'<path d="M12 20V10M18 20V4M6 20v-4"/>',
+  out:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  down:'<path d="m6 9 6 6 6-6"/>',left:'<path d="m15 18-6-6 6-6"/>',right:'<path d="m9 18 6-6-6-6"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'
+};
+const svg=(n,s)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
+document.querySelectorAll('[data-i]').forEach(el=>{
+  const n=el.dataset.i, big=el.classList.contains('btn')||n==='down'?16:(n==='search'?15:18);
+  el.insertAdjacentHTML('afterbegin',svg(n,big));
+});
+document.getElementById('logo').innerHTML=svg('shield',22);
+
+const MONTHS=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const DOW=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+// Tanggal "hari ini" mengikuti desain Figma (14 Mei 2026)
+const TODAY=new Date(2026,4,14);
+// Data contoh (Mei 2026) – ganti dengan data dari API
+const EVENTS=[
+  {d:'2026-05-03',t:'08:00',n:'Robotic',full:'Robotic & IOT Club',k:'Robotic'},
+  {d:'2026-05-03',t:'14:00',n:'Basket',full:'Basket',k:'Basket'},
+  {d:'2026-05-10',t:'08:00',n:'Robotic',full:'Robotic & IOT Club',k:'Robotic'},
+  {d:'2026-05-10',t:'14:00',n:'Basket',full:'Basket',k:'Basket'},
+  {d:'2026-05-17',t:'08:00',n:'Robotic',full:'Robotic & IOT Club',k:'Robotic'},
+  {d:'2026-05-21',t:'21:59',n:'Tugas IOT',full:'Tugas IOT',k:'Tugas'},
+  {d:'2026-05-24',t:'08:00',n:'Robotic',full:'Robotic & IOT Club',k:'Robotic'},
+  {d:'2026-05-24',t:'14:00',n:'Basket',full:'Basket',k:'Basket'},
+  {d:'2026-05-31',t:'08:00',n:'Robotic',full:'Robotic & IOT Club',k:'Robotic'},
+  {d:'2026-05-31',t:'14:00',n:'Basket',full:'Basket',k:'Basket'}
+];
+const key=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const same=(a,b)=>key(a)===key(b);
+const fmt=d=>`${d.getDate()} ${MONTHS[d.getMonth()].replace('Agustus','Agustus')} ${d.getFullYear()}`.replace(/(\d+) (Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)/,(m,a,b)=>a+' '+(b==='Agustus'?'Agu':b)).replace(/ Agu /,' Agustus ');
+
+let view=new Date(TODAY.getFullYear(),TODAY.getMonth(),1), selected=new Date(TODAY), filter='all';
+const $=id=>document.getElementById(id);
+const evs=d=>EVENTS.filter(e=>e.d===key(d)&&(filter==='all'||e.k===filter));
+
+function render(){
+  $('title').textContent=`${MONTHS[view.getMonth()]} ${view.getFullYear()}`;
+  const first=(new Date(view.getFullYear(),view.getMonth(),1).getDay()+6)%7; // Senin = 0
+  const days=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+  const total=Math.ceil((first+days)/7)*7;
+  let h=DOW.map(d=>`<div class="dow">${d}</div>`).join('');
+  for(let i=0;i<total;i++){
+    const n=i-first+1;
+    if(n<1) {h+='<div class="cell off"></div>';continue;}
+    if(n>days){h+='<div class="cell end"></div>';continue;}
+    const d=new Date(view.getFullYear(),view.getMonth(),n);
+    const c=['cell',same(d,TODAY)&&'today',same(d,selected)&&'sel-d'].filter(Boolean).join(' ');
+    h+=`<button type="button" class="${c}" data-day="${n}"><span class="num">${n}</span>${evs(d).map(e=>`<span class="chip" title="${e.t} ${e.full}">${e.t} ${e.n}</span>`).join('')}</button>`;
+  }
+  $('cal').innerHTML=h;
+  renderDetail();
+}
+function renderDetail(){
+  const list=evs(selected);
+  $('dtitle').textContent=fmt(selected);
+  $('dcount').textContent=`${list.length} kegiatan`;
+  const up=EVENTS.filter(e=>new Date(e.d+'T00:00')>selected&&(filter==='all'||e.k===filter)).slice(0,3);
+  $('dbody').innerHTML=
+    (list.length?list.map(e=>`<div class="ev"><i>${e.t}</i><span>${e.full}</span></div>`).join(''):'<div class="empty">Tidak ada kegiatan pada tanggal ini.</div>')+
+    (up.length?`<div class="next"><h4>Mendatang</h4>${up.map(e=>`<button type="button" class="row" data-go="${e.d}"><span>${e.full}</span><span>${fmt(new Date(e.d+'T00:00'))}</span></button>`).join('')}</div>`:'');
+}
+$('cal').addEventListener('click',e=>{
+  const b=e.target.closest('[data-day]'); if(!b)return;
+  selected=new Date(view.getFullYear(),view.getMonth(),+b.dataset.day); render();
+});
+$('dbody').addEventListener('click',e=>{
+  const b=e.target.closest('[data-go]'); if(!b)return;
+  selected=new Date(b.dataset.go+'T00:00'); view=new Date(selected.getFullYear(),selected.getMonth(),1); render();
+});
+$('prev').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);render()};
+$('nextm').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);render()};
+$('today').onclick=()=>{selected=new Date(TODAY);view=new Date(TODAY.getFullYear(),TODAY.getMonth(),1);render()};
+$('filter').onchange=e=>{filter=e.target.value;render()};
+render();
+</script>
+</body>
+</html>

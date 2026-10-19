@@ -1,0 +1,202 @@
+/* =========================================================
+   Login - Portal Ekstrakurikuler Trisula Praja
+   Sumber: frame Figma "UI LOGIN SISWA" (1440 x 1024)
+   ========================================================= */
+
+:root {
+  --green: #004029;
+  --green-dark: #002015;
+  --green-btn: #023724;
+  --gold: #ffcc00;
+  --lime: #ecff60;
+  --text: #364153;
+  --muted: #4a5565;
+  --border: #d1d5dc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--green);
+  color: #fff;
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- Bar atas ---------- */
+.topbar {
+  position: relative;
+  z-index: 3;
+  height: 85px;
+  background: var(--green-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.topbar__badge {
+  position: absolute;
+  left: clamp(16px, 6.7vw, 96px);
+  top: -204px;
+  width: 125px;
+  height: 350px;
+  background: #404942;
+  border: 8px solid var(--gold);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+.topbar__badge img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  margin-bottom: 4px;
+}
+.topbar__line {
+  position: relative;
+  z-index: 2;
+  height: 21px;
+  background: #fff;
+}
+
+/* ---------- Area utama ---------- */
+.login {
+  position: relative;
+  min-height: calc(100vh - 106px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 48px clamp(16px, 5.5vw, 80px) 48px clamp(16px, 2vw, 32px);
+  overflow: hidden;
+}
+@media (min-height: 940px) { .login { min-height: 918px; } }
+
+.login__watermark {
+  position: absolute;
+  left: -175px;
+  top: -61px;
+  width: 1048px;
+  height: 1048px;
+  object-fit: cover;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+/* ---------- Judul kiri ---------- */
+.brand {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-top: -80px;
+}
+.brand p { white-space: nowrap; line-height: 1.1; font-size: clamp(40px, 6.7vw, 96px); }
+.brand__line1 { font-family: "Condiment", cursive; margin-left: clamp(0px, 5vw, 70px); }
+.brand__line2 { font-family: "Condiment", cursive; margin-left: clamp(0px, 4vw, 60px); }
+.brand__line3 { font-family: "Concert One", sans-serif; color: var(--lime); margin-top: 6px; }
+
+/* ---------- Kartu login ---------- */
+.panel {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 448px;
+  max-width: 448px;
+  width: 100%;
+  margin-top: 70px;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 12.5px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.1);
+}
+.card__title { color: var(--green); font-size: 24px; font-weight: 700; line-height: 32px; }
+.card__subtitle { color: var(--muted); font-size: 16px; line-height: 24px; margin-top: 8px; }
+
+.field { margin-top: 24px; }
+.field:first-of-type { margin-top: 32px; }
+.field label { display: block; color: var(--text); font-size: 14px; line-height: 20px; margin-bottom: 8px; }
+
+.input { position: relative; }
+.input__icon {
+  position: absolute;
+  left: 12px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  color: #6a7282;
+  pointer-events: none;
+}
+.input input {
+  width: 100%;
+  height: 50px;
+  padding: 12px 16px 12px 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: 400 16px "Inter", sans-serif;
+  color: #0a0a0a;
+  background: #fff;
+}
+.input input::placeholder { color: rgba(10, 10, 10, 0.5); }
+.input input:focus { outline: 2px solid var(--green); outline-offset: 1px; border-color: transparent; }
+
+/* ---------- Pilihan peran ---------- */
+.roles { border: 0; margin-top: 24px; }
+.roles legend { color: var(--text); font-size: 14px; line-height: 20px; margin-bottom: 8px; padding: 0; }
+.roles__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.role {
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  color: var(--text);
+  font: 400 16px/24px "Inter", sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.role svg { width: 24px; height: 24px; }
+.role:hover { border-color: #b8c4bd; }
+.role.is-active { background: #eff6ff; border-color: var(--green-btn); color: var(--green-btn); }
+
+/* ---------- Tombol & tautan ---------- */
+.error { margin-top: 16px; color: #c62828; font-size: 14px; }
+.btn-login {
+  display: block;
+  width: 100%;
+  height: 48px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font: 800 24px/24px "Inter", sans-serif;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.btn-login:hover { filter: brightness(1.2); }
+.forgot {
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+  color: var(--green-btn);
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+}
+.forgot:hover { text-decoration: underline; }
+
+.legal { margin-top: 24px; text-align: center; font-size: 12px; line-height: 16px; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 960px) {
+  .login { flex-direction: column; justify-content: flex-start; padding-top: 40px; }
+  .brand { margin-top: 0; }
+  .brand p { margin-left: 0 !important; }
+  .panel { margin-top: 0; flex: none; }
+}

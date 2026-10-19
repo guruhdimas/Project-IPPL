@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Portal Ekstrakurikuler Trisula Praja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Condiment&family=Inter:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+
+  <!-- ===== BAR ATAS ===== -->
+  <header class="topbar">
+    <a class="topbar__badge" href="portal.html" aria-label="Kembali ke Portal">
+      <img src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display='none'" />
+    </a>
+  </header>
+  <div class="topbar__line"></div>
+
+  <main class="login">
+    <img class="login__watermark" src="assets/logo.png" alt="" onerror="this.style.display='none'" />
+
+    <!-- ===== JUDUL KIRI ===== -->
+    <section class="brand">
+      <p class="brand__line1">PORTAL</p>
+      <p class="brand__line2">EKSTRAKURIKULER</p>
+      <p class="brand__line3">TRISULA PRAJA</p>
+    </section>
+
+    <!-- ===== KARTU LOGIN ===== -->
+    <section class="panel">
+      <form class="card" id="loginForm" novalidate>
+        <h2 class="card__title">Selamat Datang Kembali!</h2>
+        <p class="card__subtitle">Masuk untuk melanjutkan ke dasbor Anda</p>
+
+        <div class="field">
+          <label for="username">Username</label>
+          <div class="input">
+            <svg class="input__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
+              <path d="m3 6 7 5 7-5" />
+            </svg>
+            <input id="username" name="username" type="text" placeholder="Masukan Username" autocomplete="username" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input">
+            <svg class="input__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3.5" y="9" width="13" height="8" rx="2" />
+              <path d="M6.5 9V6.5a3.5 3.5 0 0 1 7 0V9" />
+            </svg>
+            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+        </div>
+
+        <fieldset class="roles">
+          <legend>Silahkan Pilih Peran Anda!</legend>
+          <div class="roles__grid">
+            <button type="button" class="role is-active" data-role="siswa" aria-pressed="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
+              </svg>
+              <span>Siswa</span>
+            </button>
+            <button type="button" class="role" data-role="pembimbing" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 9.5 12 5l10 4.5-10 4.5z" />
+                <path d="M6 11.5v4.5c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" />
+                <path d="M22 9.5V15" />
+              </svg>
+              <span>Pembimbing</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <p class="error" id="formError" role="alert" hidden></p>
+
+        <button type="submit" class="btn-login">Login</button>
+
+        <a class="forgot" href="#">Forgot your password?</a>
+      </form>
+
+      <p class="legal">
+        By signing in, you agree to our Terms of Service and Privacy Policy.<br />
+        Your privacy and data security are our top priorities.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var form = document.getElementById('loginForm');
+      var error = document.getElementById('formError');
+      var roleButtons = document.querySelectorAll('.role');
+      var role = 'siswa';
+
+      // Pilih peran (Siswa / Pembimbing)
+      roleButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          role = btn.dataset.role;
+          roleButtons.forEach(function (b) {
+            var active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+        });
+      });
+
+      // Kirim form. Saat ini hanya memeriksa kolom kosong lalu pindah halaman.
+      // Ganti bagian ini dengan proses login ke server jika sudah ada backend.
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var u = form.username.value.trim();
+        var p = form.password.value;
+        if (!u || !p) {
+          error.textContent = 'Username dan password wajib diisi.';
+          error.hidden = false;
+          return;
+        }
+        error.hidden = true;
+        window.location.href = role === 'siswa' ? 'dashboard-siswa.html' : 'dashboard-pembimbing.html';
+      });
+    })();
+  </script>
+</body>
+</html>
