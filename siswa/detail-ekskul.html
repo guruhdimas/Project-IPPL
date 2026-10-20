@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detail Ekskul - Portal Ekstrakurikuler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/detail-ekskul.css" />
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__logo"><img src="assets/logo.png" alt="" onerror="this.style.display='none'" /></div>
+      <div class="sidebar__name">SMA TRISULA PRAJA<span>EKSTRAKURIKULER</span></div>
+    </div>
+    <nav class="sidebar__nav">
+      <p class="sidebar__label">Menu Utama</p>
+      <a class="nav-item" href="dashboard-siswa.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-item is-active" href="daftar-ekskul.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Daftar Ekskul
+      </a>
+      <a class="nav-item" href="jadwal.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Jadwal
+      </a>
+      <a class="nav-item" href="tugas.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+        Tugas
+      </a>
+      <a class="nav-item" href="absensi.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Absensi
+      </a>
+      <a class="nav-item" href="pengumuman.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Pengumuman
+      </a>
+      <a class="nav-item" href="penilaian.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+        Penilaian
+      </a>
+    </nav>
+    <div class="sidebar__foot">
+      <a class="logout" href="login.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Keluar
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== KONTEN ===== -->
+  <div class="main">
+    <header class="header">
+      <div class="header__left">
+        <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <h1 class="header__title">Daftar Ekskul</h1>
+      </div>
+      <div class="header__right">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" placeholder="Cari Pengumuman, Tugas..." aria-label="Cari" />
+        </div>
+        <button class="icon-btn" type="button" aria-label="Notifikasi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          <span class="icon-btn__dot"></span>
+        </button>
+        <a class="user" href="profil.html">
+          <div class="user__avatar">BS</div>
+          <div>
+            <p class="user__name">Budi Setiawan</p>
+            <p class="user__class">Kelas XI IPA 2</p>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    
+<div class="content">
+      <div class="content__body">
+        <div class="wrap">
+
+          <a class="back" href="daftar-ekskul.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Kembali
+          </a>
+
+          <!-- Banner -->
+          <section class="hero">
+            <div class="hero__main">
+              <div class="hero__logo" id="inisial">R</div>
+              <div>
+                <div class="hero__title"><h2 id="nama"></h2><span class="pill pill--open" id="buka">Dibuka</span></div>
+                <p class="hero__desc" id="deskripsi"></p>
+                <div class="hero__meta">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><b style="font-weight:400" id="pembimbing"></b></span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><b style="font-weight:400" id="jadwal"></b></span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg><b style="font-weight:400" id="jmlAnggota"></b></span>
+                </div>
+              </div>
+            </div>
+            <div class="hero__side">
+              <span class="pill hero__status" id="status" hidden></span>
+              <button class="btn-cancel" type="button" id="batal" hidden>Batalkan Pendaftaran</button>
+              <a class="btn-join" id="daftar" href="#" hidden>Daftar Sekarang</a>
+            </div>
+          </section>
+
+          <div class="cols">
+            <div class="stack">
+              <div class="stats">
+                <div class="stat"><p class="stat__label">Jadwal mendatang</p><p class="stat__value" id="stJadwal">0</p><p class="stat__sub" id="stJadwalSub"></p></div>
+                <div class="stat"><p class="stat__label">Tugas aktif</p><p class="stat__value" id="stTugas">0</p><p class="stat__sub" id="stTugasSub"></p></div>
+              </div>
+
+              <section class="box">
+                <div class="box__head">
+                  <h3 class="box__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Jadwal Kegiatan</h3>
+                  <a class="box__link" href="jadwal.html">Lihat kalender</a>
+                </div>
+                <div id="listJadwal"></div>
+              </section>
+
+              <section class="box">
+                <div class="box__head">
+                  <h3 class="box__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Tugas</h3>
+                </div>
+                <div class="box__body" id="listTugas"></div>
+              </section>
+            </div>
+
+            <aside class="stack">
+              <section class="box">
+                <div class="box__head"><h3 class="box__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span id="judulAnggota">Anggota</span></h3></div>
+                <div class="box__body" id="listAnggota"></div>
+              </section>
+              <section class="box">
+                <div class="box__head"><h3 class="box__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Pengumuman</h3></div>
+                <div class="box__body" id="listNews"></div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-note">Portal Ekstrakurikuler © 2026 · SMA Trisula Praja</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/ekskul-data.js"></script>
+<script>
+  // Buka/tutup sidebar di layar kecil
+  var sidebar = document.getElementById('sidebar');
+  document.getElementById('menuBtn').addEventListener('click', function () { sidebar.classList.toggle('is-open'); });
+  document.querySelector('.main').addEventListener('click', function () { sidebar.classList.remove('is-open'); });
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  // Data contoh sesuai Figma (hanya Robotic & IoT Club). Ganti dengan data dari server jika sudah ada backend.
+  var DETAIL = {
+    'robotic-iot': {
+      anggota: [
+        { nama: 'Bima Pratama', kelas: 'X IPA 1' },
+        { nama: 'Eka Wulandari', kelas: 'X IPA 1' },
+        { nama: 'Gilang Ramadhan', kelas: 'XI IPA 1' }
+      ],
+      jadwal: [
+        { tgl: 3,  bln: 'MEI', judul: 'Pertemuan 6: Kinematika Robotika Dasar (Forward Kinematics)', jam: '08:00', tempat: 'Lab AI', status: 'Selesai' },
+        { tgl: 10, bln: 'MEI', judul: 'Pertemuan 7: Kinematika Invers (Inverse Kinematics)', jam: '08:00', tempat: 'Lab AI', status: 'Selesai' },
+        { tgl: 17, bln: 'MEI', judul: 'Jadwal Latihan Pekan Ini', jam: '08:00', tempat: 'Lab AI', status: 'Mendatang', lengkap: '17 Mei 2026' }
+      ],
+      tugas: [
+        { judul: 'Tugas Konektivitas & IoT Cloud', sub: 'Deadline Hari Rabu Tanggal 21 Mei.', deadline: 'Deadline 21 Mei 2026', aktif: true },
+        { judul: 'Tuning Algoritma Kontrol PID (Tugas Kelompok)', sub: 'Cakupan Materi: Pertemuan 8 (Sistem Kontrol Dasar)', deadline: 'Deadline 12 Mei 2025', aktif: false }
+      ],
+      pengumuman: [
+        { judul: 'Jadwal Latihan Pekan Ini', isi: 'Latihan Project Robotic akan dilaksanakan 08.00 – 11.00 di Lab.', waktu: '13 Mei 2026' },
+        { judul: 'Tugas Konektivitas & IoT Cloud', isi: 'Deadline Hari Rabu Tanggal 21 Mei.', waktu: '02 Mei 2026' }
+      ]
+    }
+  };
+
+  var e = cariEkskul(new URLSearchParams(location.search).get('id'));
+  var d = DETAIL[e.id] || { anggota: [], jadwal: [], tugas: [], pengumuman: [] };
+
+  // Status pendaftaran siswa
+  var st = null;
+  try { st = (JSON.parse(localStorage.getItem('pendaftaranEkskul')) || []).filter(function (x) { return x.id === e.id; })[0] || null; } catch (err) {}
+  var status = st ? st.status : null;
+
+  var jml = e.terisi + (status === 'Disetujui' ? 1 : 0);
+  $('inisial').textContent = e.nama.charAt(0);
+  $('nama').textContent = e.nama;
+  $('deskripsi').textContent = e.deskripsi;
+  $('pembimbing').textContent = e.pembimbing;
+  $('jadwal').textContent = e.jadwal.split(' - ')[0].replace(',', ',');
+  $('jmlAnggota').textContent = jml + ' anggota';
+  if (jml >= e.kuota) { $('buka').textContent = 'Penuh'; $('buka').className = 'pill pill--wait'; }
+
+  if (status) {
+    $('status').hidden = false;
+    $('status').textContent = status;
+    $('status').className = 'pill hero__status ' + (status === 'Disetujui' ? 'pill--ok' : 'pill--wait');
+    $('batal').hidden = false;
+  } else {
+    $('daftar').hidden = false;
+    $('daftar').href = 'pendaftaran-ekskul.html?id=' + encodeURIComponent(e.id);
+  }
+
+  // Batalkan pendaftaran (sementara memakai konfirmasi bawaan browser)
+  $('batal').addEventListener('click', function () {
+    if (!confirm('Batalkan pendaftaran ke ' + e.nama + '?')) return;
+    try {
+      var semua = (JSON.parse(localStorage.getItem('pendaftaranEkskul')) || []).filter(function (x) { return x.id !== e.id; });
+      localStorage.setItem('pendaftaranEkskul', JSON.stringify(semua));
+    } catch (err) {}
+    location.href = 'daftar-ekskul.html';
+  });
+
+  // Statistik
+  var mendatang = d.jadwal.filter(function (j) { return j.status === 'Mendatang'; });
+  var aktif = d.tugas.filter(function (t) { return t.aktif; });
+  $('stJadwal').textContent = mendatang.length;
+  $('stJadwalSub').textContent = mendatang.length ? 'Berikutnya ' + mendatang[0].lengkap : 'Belum ada jadwal';
+  $('stTugas').textContent = aktif.length;
+  $('stTugasSub').textContent = d.tugas.length + ' total tugas';
+
+  var jam = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>';
+  var pin = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+
+  $('listJadwal').innerHTML = d.jadwal.length ? d.jadwal.map(function (j) {
+    var selesai = j.status === 'Selesai';
+    return '<div class="sched ' + (selesai ? 'sched--done' : 'sched--soon') + '">' +
+      '<div class="sched__date"><div><b>' + j.tgl + '</b><small>' + j.bln + '</small></div></div>' +
+      '<div class="sched__body"><p class="sched__title">' + esc(j.judul) + '</p>' +
+      '<p class="sched__meta"><span>' + jam + j.jam + '</span><span>' + pin + esc(j.tempat) + '</span></p></div>' +
+      '<span class="pill ' + (selesai ? 'pill--done' : 'pill--soon') + '">' + j.status + '</span></div>';
+  }).join('') : '<p class="empty">Belum ada jadwal kegiatan.</p>';
+
+  $('listTugas').innerHTML = d.tugas.length ? d.tugas.map(function (t) {
+    return '<div class="task"><div class="task__top"><p class="task__title">' + esc(t.judul) + '</p>' +
+      '<span class="task__due' + (t.aktif ? ' task__due--warn' : '') + '">' + esc(t.deadline) + '</span></div>' +
+      '<p class="task__sub">' + esc(t.sub) + '</p></div>';
+  }).join('') : '<p class="empty">Belum ada tugas.</p>';
+
+  $('judulAnggota').textContent = 'Anggota (' + d.anggota.length + ')';
+  $('listAnggota').innerHTML = d.anggota.length ? d.anggota.map(function (a) {
+    var ini = a.nama.split(' ').map(function (w) { return w.charAt(0); }).slice(0, 2).join('').toUpperCase();
+    return '<div class="member"><div class="member__av">' + ini + '</div><div><p class="member__name">' + esc(a.nama) + '</p><p class="member__class">' + esc(a.kelas) + '</p></div></div>';
+  }).join('') : '<p class="empty">Belum ada anggota.</p>';
+
+  $('listNews').innerHTML = d.pengumuman.length ? d.pengumuman.map(function (n) {
+    return '<div class="news"><p class="news__title">' + esc(n.judul) + '</p><p class="news__text">' + esc(n.isi) + '</p><p class="news__time">' + esc(n.waktu) + '</p></div>';
+  }).join('') : '<p class="empty">Belum ada pengumuman.</p>';
+</script>
+</body>
+</html>

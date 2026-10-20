@@ -1,0 +1,147 @@
+/* =========================================================
+   Daftar Ekskul (Siswa)
+   Sumber: frame Figma "UI DAFTAR EKSKUL bagian 01"
+   ========================================================= */
+
+.page-head h2 { font-family: "DM Sans", sans-serif; font-weight: 700; font-size: 20px; line-height: 30px; }
+.page-head p { padding-top: 2px; font-size: 13px; line-height: 19.5px; color: var(--slate); }
+
+/* ---------- Panel utama ---------- */
+.panel {
+  margin-top: 20px;
+  padding: 24px;
+  background: #fff;
+  border: 1.25px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Toolbar ---------- */
+.toolbar { display: flex; gap: 12px; align-items: stretch; }
+.toolbar__search { position: relative; flex: 1 1 auto; min-width: 0; }
+.toolbar__search svg {
+  position: absolute; left: 12px; top: 12px;
+  width: 16px; height: 16px;
+  color: var(--slate); pointer-events: none;
+}
+.toolbar input,
+.toolbar select {
+  height: 40px;
+  background: #fff;
+  border: 1.25px solid var(--line);
+  border-radius: 8px;
+  font: 400 14px/20px "Inter", sans-serif;
+  color: #0f172a;
+}
+.toolbar input { width: 100%; padding: 0 12px 0 36px; }
+.toolbar input::placeholder { color: var(--slate); }
+.toolbar__select { position: relative; flex: none; width: 192px; }
+.toolbar__select select {
+  width: 100%;
+  padding: 0 36px 0 12px;
+  appearance: none; -webkit-appearance: none;
+  cursor: pointer;
+}
+.toolbar__select svg {
+  position: absolute; right: 12px; top: 12px;
+  width: 16px; height: 16px;
+  color: var(--slate); pointer-events: none;
+}
+.toolbar input:focus,
+.toolbar select:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+
+.btn-reset {
+  flex: none;
+  height: 40px;
+  padding: 0 16px;
+  background: #fff;
+  border: 1.25px solid var(--line);
+  border-radius: 8px;
+  font: 600 14px/20px "Inter", sans-serif;
+  color: #0f172a;
+  transition: background 0.15s;
+}
+.btn-reset:hover { background: var(--bg); }
+
+/* ---------- Grid kartu ---------- */
+.ekskul-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+.ekskul-card {
+  display: flex; flex-direction: column;
+  padding: 20px;
+  background: #fff;
+  border: 1.25px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.1);
+}
+.ekskul-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; min-height: 79px; }
+.ekskul-card__name {
+  max-width: 176px;
+  font: 600 22px/34px "Inter", sans-serif;
+  color: #0f172a;
+}
+.status {
+  flex: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #d1e7dd;
+  color: var(--green);
+  font: 600 12px/16px "Inter", sans-serif;
+}
+.status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status--full { background: #fee2e2; color: #b91c1c; }
+
+.ekskul-card__info { padding-top: 12px; font-size: 14px; line-height: 20px; color: var(--slate); }
+.ekskul-card__info p + p { padding-top: 2px; }
+.ekskul-card__info b { font-weight: 400; color: #0f172a; }
+
+.quota { display: flex; justify-content: space-between; padding-top: 16px; font-size: 12px; line-height: 16px; color: var(--slate); }
+.quota strong { font-weight: 600; color: #0f172a; }
+.bar { height: 8px; margin-top: 6px; border-radius: 999px; background: #e8f5e9; overflow: hidden; }
+.bar__fill { height: 100%; border-radius: 999px; background: var(--green); }
+
+.btn-join {
+  align-self: flex-start;
+  margin-top: 12px;
+  height: 40px;
+  padding: 0 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 8px;
+  background: var(--green);
+  box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font: 600 14px/20px "Inter", sans-serif;
+  transition: filter 0.15s;
+}
+.btn-join:hover { filter: brightness(1.25); }
+.btn-join[aria-disabled="true"] { background: #cbd5e1; color: #64748b; box-shadow: none; pointer-events: none; }
+
+/* Status pendaftaran siswa (frame Figma 04 & 07): menggantikan tombol "Daftar Sekarang" */
+.reg-status { display: flex; align-items: center; margin-top: 12px; min-height: 40px; }
+.reg-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font: 600 12px/16px "Inter", sans-serif;
+}
+.reg-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.reg-badge--wait { background: #fff7ed; color: #d97706; }
+.reg-badge--ok { background: #d1e7dd; color: var(--green); }
+
+.empty { grid-column: 1 / -1; padding: 40px 0; text-align: center; font-size: 14px; color: var(--slate); }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 1100px) {
+  .ekskul-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .ekskul-grid { grid-template-columns: 1fr; }
+  .toolbar { flex-wrap: wrap; }
+  .toolbar__search { flex-basis: 100%; }
+  .toolbar__select { flex: 1; width: auto; }
+}
