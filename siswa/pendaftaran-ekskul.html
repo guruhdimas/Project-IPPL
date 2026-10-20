@@ -201,34 +201,39 @@
   </div>
 </div>
 
-<script src="js/ekskul-data.js"></script>
+<script src="js/api.js"></script>
 <script>
   // Buka/tutup sidebar di layar kecil
   var sidebar = document.getElementById('sidebar');
   document.getElementById('menuBtn').addEventListener('click', function () { sidebar.classList.toggle('is-open'); });
   document.querySelector('.main').addEventListener('click', function () { sidebar.classList.remove('is-open'); });
 
-  // Ekskul yang dipilih diambil dari alamat: pendaftaran-ekskul.html?id=robotic-iot
-  var ekskul = cariEkskul(new URLSearchParams(location.search).get('id'));
   var $ = function (id) { return document.getElementById(id); };
-
-  $('judulEkskul').textContent = ekskul.nama;
-  $('namaEkskul').textContent = ekskul.nama;
-  $('deskripsiEkskul').textContent = ekskul.deskripsi;
-  $('pembimbingEkskul').textContent = ekskul.pembimbing;
-  $('jadwalEkskul').textContent = ekskul.jadwal;
-  $('kuotaEkskul').textContent = 'Sisa kuota: ' + (ekskul.kuota - ekskul.terisi) + ' dari ' + ekskul.kuota;
-  $('alasan').placeholder = 'Mengapa Anda ingin bergabung dengan ' + ekskul.nama + '?';
+  var ekskul = null;   // diisi dari database
+  var idEkskul = new URLSearchParams(location.search).get('id');
   $('tanggal').value = tanggalHariIni();
 
-  // Pakai nama & kelas dari halaman Profil jika sudah pernah diedit
-  try {
-    var profil = JSON.parse(localStorage.getItem('profilSiswa'));
-    if (profil) {
-      if (profil.nama) $('nama').value = profil.nama;
-      if (profil.kelas) $('kelas').value = profil.kelas;
+  API.satuEkskul(idEkskul).then(function (res) {
+    ekskul = res.ekskul;
+    var penuh = ekskul.terisi >= ekskul.kuota;
+    // Sudah mendaftar atau kuota penuh: arahkan ke halaman detail / daftar
+    if (ekskul.pendaftaran) { location.replace('detail-ekskul.html?id=' + encodeURIComponent(ekskul.id)); return; }
+    if (penuh) { alert('Kuota ' + ekskul.nama + ' sudah penuh.'); location.replace('daftar-ekskul.html'); return; }
+
+    $('judulEkskul').textContent = ekskul.nama;
+    $('namaEkskul').textContent = ekskul.nama;
+    $('deskripsiEkskul').textContent = ekskul.deskripsi;
+    $('pembimbingEkskul').textContent = ekskul.pembimbing;
+    $('jadwalEkskul').textContent = ekskul.jadwal;
+    $('kuotaEkskul').textContent = 'Sisa kuota: ' + (ekskul.kuota - ekskul.terisi) + ' dari ' + ekskul.kuota;
+    $('alasan').placeholder = 'Mengapa Anda ingin bergabung dengan ' + ekskul.nama + '?';
+    if (res.siswa) {
+      $('nama').value = res.siswa.nama;
+      $('kelas').value = res.siswa.kelas;
+      if (res.siswa.nis) $('nis').value = res.siswa.nis;
+      if (res.siswa.no_hp) $('hp').value = res.siswa.no_hp;
     }
-  } catch (e) {}
+  }).catch(function (err) { alert(err.message); });
 
   // ---------- Validasi ----------
   function nomorHpValid(v) { return /^0\d{8,13}$/.test(v.replace(/[\s-]/g, '')); }
@@ -278,24 +283,23 @@
     }
     if (pertamaSalah) { pertamaSalah.focus(); return; }
 
-    // Simpan di penyimpanan browser. Untuk proyek sungguhan, kirim ke server.
-    var data = [];
-    try { data = JSON.parse(localStorage.getItem('pendaftaranEkskul')) || []; } catch (err) {}
-    data = data.filter(function (d) { return d.id !== ekskul.id; });
-    data.push({
-      id: ekskul.id,
-      tanggal: $('tanggal').value,
-      status: 'Menunggu',
+    if (!ekskul) return;
+    var tombol = $('form').querySelector('button[type="submit"]');
+    tombol.disabled = true;
+    API.kirimPendaftaran({
+      ekskul_id: ekskul.id,
       nis: $('nis').value.trim(),
       hp: $('hp').value.trim(),
       wali: $('wali').value.trim(),
-      hpWali: $('hpWali').value.trim(),
+      hp_wali: $('hpWali').value.trim(),
       alasan: $('alasan').value.trim(),
       pengalaman: $('pengalaman').value.trim()
+    }).then(function () {
+      window.location.href = 'pendaftaran-berhasil.html?id=' + encodeURIComponent(ekskul.id);
+    }).catch(function (err) {
+      tombol.disabled = false;
+      alert(err.message);
     });
-    try { localStorage.setItem('pendaftaranEkskul', JSON.stringify(data)); } catch (err) {}
-
-    window.location.href = 'pendaftaran-berhasil.html?id=' + encodeURIComponent(ekskul.id);
   });
 </script>
 </body>

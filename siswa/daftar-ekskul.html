@@ -118,7 +118,7 @@
   </div>
 </div>
 
-<script src="js/ekskul-data.js"></script>
+<script src="js/api.js"></script>
 <script>
   // Buka/tutup sidebar di layar kecil
   var sidebar = document.getElementById('sidebar');
@@ -128,6 +128,7 @@
   var grid = document.getElementById('grid');
   var q = document.getElementById('q');
   var filterStatus = document.getElementById('status');
+  var EKSKUL = [];   // diisi dari database lewat api/ekskul.php
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
@@ -135,30 +136,12 @@
     });
   }
 
-  // Status pendaftaran siswa: { 'robotic-iot': 'Menunggu', ... } (disimpan oleh pendaftaran-ekskul.html)
-  function ambilStatus() {
-    var peta = {};
-    try {
-      (JSON.parse(localStorage.getItem('pendaftaranEkskul')) || []).forEach(function (d) { peta[d.id] = d.status; });
-    } catch (err) {}
-    return peta;
-  }
-
   function render() {
-    // Penjaga: jika file data belum ada di folder js, tampilkan petunjuk (bukan layar kosong)
-    if (typeof EKSKUL === 'undefined') {
-      grid.innerHTML = '<p class="empty">Data ekskul belum termuat. Pastikan file <b>js/ekskul-data.js</b> ada di folder siswa.</p>';
-      return;
-    }
     var kata = q.value.trim().toLowerCase();
     var filter = filterStatus.value;
-    var daftar = ambilStatus();
-
-    // Pendaftaran yang sudah disetujui menambah jumlah terisi (sesuai Figma: 3/8 -> 4/8)
-    function terisiDari(e) { return e.terisi + (daftar[e.id] === 'Disetujui' ? 1 : 0); }
 
     var hasil = EKSKUL.filter(function (e) {
-      var penuh = terisiDari(e) >= e.kuota;
+      var penuh = e.terisi >= e.kuota;
       var cocokKata = !kata || (e.nama + ' ' + e.pembimbing).toLowerCase().indexOf(kata) !== -1;
       var cocokStatus = !filter || (filter === 'penuh') === penuh;
       return cocokKata && cocokStatus;
@@ -170,13 +153,14 @@
     }
 
     grid.innerHTML = hasil.map(function (e) {
-      var terisi = terisiDari(e);
-      var penuh = terisi >= e.kuota;
-      var persen = Math.min(100, (terisi / e.kuota) * 100);
-      var st = daftar[e.id];
+      var penuh = e.terisi >= e.kuota;
+      var persen = Math.min(100, (e.terisi / e.kuota) * 100);
+      var st = e.pendaftaran ? e.pendaftaran.status : null;
+      var detail = 'detail-ekskul.html?id=' + encodeURIComponent(e.id);
       var aksi;
-      if (st === 'Disetujui') aksi = '<div class="reg-status"><a class="reg-badge reg-badge--ok" href="detail-ekskul.html?id=' + encodeURIComponent(e.id) + '">Disetujui</a></div>';
-      else if (st === 'Menunggu') aksi = '<div class="reg-status"><a class="reg-badge reg-badge--wait" href="detail-ekskul.html?id=' + encodeURIComponent(e.id) + '">Menunggu</a></div>';
+      if (st === 'Disetujui') aksi = '<div class="reg-status"><a class="reg-badge reg-badge--ok" href="' + detail + '">Disetujui</a></div>';
+      else if (st === 'Menunggu') aksi = '<div class="reg-status"><a class="reg-badge reg-badge--wait" href="' + detail + '">Menunggu</a></div>';
+      else if (st === 'Ditolak') aksi = '<div class="reg-status"><a class="reg-badge reg-badge--no" href="' + detail + '">Ditolak</a></div>';
       else aksi = '<a class="btn-join" href="pendaftaran-ekskul.html?id=' + encodeURIComponent(e.id) + '"' +
             (penuh ? ' aria-disabled="true" tabindex="-1"' : '') + '>Daftar Sekarang</a>';
       return '' +
@@ -189,7 +173,7 @@
             '<p>Pembimbing: <b>' + esc(e.pembimbing) + '</b></p>' +
             '<p>Jadwal: <b>' + esc(e.jadwal) + '</b></p>' +
           '</div>' +
-          '<div class="quota"><span>Kuota</span><strong>' + terisi + '/' + e.kuota + '</strong></div>' +
+          '<div class="quota"><span>Kuota</span><strong>' + e.terisi + '/' + e.kuota + '</strong></div>' +
           '<div class="bar"><div class="bar__fill" style="width:' + persen + '%"></div></div>' +
           aksi +
         '</article>';
@@ -203,18 +187,14 @@
     filterStatus.value = '';
     render();
   });
-  render();
 
-  // Untuk uji tampilan "Disetujui" (frame Figma 07) tanpa halaman pembimbing:
-  // buka Console (F12) lalu ketik  ubahStatusEkskul('robotic-iot', 'Disetujui')
-  window.ubahStatusEkskul = function (id, status) {
-    var data = [];
-    try { data = JSON.parse(localStorage.getItem('pendaftaranEkskul')) || []; } catch (err) {}
-    var ada = data.filter(function (d) { return d.id === id; })[0];
-    if (ada) ada.status = status; else data.push({ id: id, status: status, tanggal: tanggalHariIni() });
-    localStorage.setItem('pendaftaranEkskul', JSON.stringify(data));
+  grid.innerHTML = '<p class="empty">Memuat data…</p>';
+  API.semuaEkskul().then(function (res) {
+    EKSKUL = res.ekskul;
     render();
-  };
+  }).catch(function (err) {
+    grid.innerHTML = '<p class="empty">' + esc(err.message) + '</p>';
+  });
 </script>
 </body>
 </html>

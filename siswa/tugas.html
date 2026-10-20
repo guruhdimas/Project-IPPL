@@ -19,7 +19,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-
 /* sidebar */
 .side{width:230px;min-width:220px;background:var(--card);border-right:1.5px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
 .brand{display:flex;gap:10px;align-items:center;padding:24px 20px 20px;border-bottom:1.5px solid var(--line)}
-.logo{width:36px;height:36px;border-radius:10px;background:#404942;display:grid;place-items:center;color:#fff;flex:none}
+.logo{width:36px;height:36px;border-radius:10px;background:#404942;display:grid;place-items:center;flex:none}
+.logo img{width:26px;height:26px;object-fit:contain;display:block}
 .brand b{display:block;font:700 13px/1.2 "DM Sans",Inter,sans-serif;color:var(--ink2)}
 .brand b+b{color:var(--green)}
 nav{flex:1;padding:16px 12px;overflow:auto}
@@ -186,7 +187,7 @@ document.querySelectorAll('[data-i]').forEach(el=>{
   const n=el.dataset.i, big=el.classList.contains('btn')||n==='down'?16:(n==='search'?15:18);
   el.insertAdjacentHTML('afterbegin',svg(n,big));
 });
-document.getElementById('logo').innerHTML=svg('shield',22);
+document.getElementById('logo').innerHTML='<img src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display=\'none\'">';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function toast(t){const m=$('msg');m.textContent=t;m.classList.add('on');setTimeout(()=>m.classList.remove('on'),2200);}

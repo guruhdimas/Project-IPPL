@@ -112,7 +112,7 @@
   </div>
 </div>
 
-<script src="js/ekskul-data.js"></script>
+<script src="js/api.js"></script>
 <script>
   // Buka/tutup sidebar di layar kecil
   var sidebar = document.getElementById('sidebar');
@@ -120,20 +120,14 @@
   document.querySelector('.main').addEventListener('click', function () { sidebar.classList.remove('is-open'); });
 
   var $ = function (id) { return document.getElementById(id); };
-  var ekskul = cariEkskul(new URLSearchParams(location.search).get('id'));
-
-  // Ambil data pendaftaran yang disimpan oleh formulir (jika ada)
-  var tersimpan = null;
-  try {
-    var semua = JSON.parse(localStorage.getItem('pendaftaranEkskul')) || [];
-    tersimpan = semua.filter(function (d) { return d.id === ekskul.id; })[0] || null;
-  } catch (e) {}
-
-  $('namaEkskul').textContent = ekskul.nama;
-  $('pembimbing').textContent = ekskul.pembimbing;
-  $('sumEkskul').textContent = ekskul.nama;
-  $('sumTanggal').textContent = tersimpan ? tersimpan.tanggal : tanggalHariIni();
-  $('sumStatus').textContent = tersimpan ? tersimpan.status : 'Menunggu';
+  API.satuEkskul(new URLSearchParams(location.search).get('id')).then(function (res) {
+    var e = res.ekskul, p = e.pendaftaran;
+    $('namaEkskul').textContent = e.nama;
+    $('pembimbing').textContent = e.pembimbing;
+    $('sumEkskul').textContent = e.nama;
+    $('sumTanggal').textContent = p ? formatTanggal(p.tanggal) : tanggalHariIni();
+    $('sumStatus').textContent = p ? p.status : 'Menunggu';
+  }).catch(function (err) { alert(err.message); });
 </script>
 </body>
 </html>

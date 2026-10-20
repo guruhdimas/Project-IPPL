@@ -159,7 +159,7 @@
   </div>
 </div>
 
-<script src="js/ekskul-data.js"></script>
+<script src="js/api.js"></script>
 <script>
   // Buka/tutup sidebar di layar kecil
   var sidebar = document.getElementById('sidebar');
@@ -193,15 +193,12 @@
     }
   };
 
-  var e = cariEkskul(new URLSearchParams(location.search).get('id'));
+  API.satuEkskul(new URLSearchParams(location.search).get('id')).then(function (res) {
+  var e = res.ekskul;
   var d = DETAIL[e.id] || { anggota: [], jadwal: [], tugas: [], pengumuman: [] };
+  var status = e.pendaftaran ? e.pendaftaran.status : null;
 
-  // Status pendaftaran siswa
-  var st = null;
-  try { st = (JSON.parse(localStorage.getItem('pendaftaranEkskul')) || []).filter(function (x) { return x.id === e.id; })[0] || null; } catch (err) {}
-  var status = st ? st.status : null;
-
-  var jml = e.terisi + (status === 'Disetujui' ? 1 : 0);
+  var jml = e.terisi;   // sudah termasuk pendaftaran yang Disetujui (dihitung di database)
   $('inisial').textContent = e.nama.charAt(0);
   $('nama').textContent = e.nama;
   $('deskripsi').textContent = e.deskripsi;
@@ -213,21 +210,24 @@
   if (status) {
     $('status').hidden = false;
     $('status').textContent = status;
-    $('status').className = 'pill hero__status ' + (status === 'Disetujui' ? 'pill--ok' : 'pill--wait');
-    $('batal').hidden = false;
+    if (status === 'Disetujui') {
+      // Frame Figma 06: lencana putih di kanan bawah, tombol batal tidak ada
+      $('status').className = 'pill hero__status hero__status--ok';
+      document.querySelector('.hero__side').classList.add('hero__side--end');
+    } else {
+      $('status').className = 'pill hero__status ' + (status === 'Ditolak' ? 'pill--no' : 'pill--wait');
+      $('batal').hidden = (status !== 'Menunggu');
+    }
   } else {
     $('daftar').hidden = false;
     $('daftar').href = 'pendaftaran-ekskul.html?id=' + encodeURIComponent(e.id);
   }
 
-  // Batalkan pendaftaran (sementara memakai konfirmasi bawaan browser)
+  // Batalkan pendaftaran (hanya saat masih Menunggu)
   $('batal').addEventListener('click', function () {
     if (!confirm('Batalkan pendaftaran ke ' + e.nama + '?')) return;
-    try {
-      var semua = (JSON.parse(localStorage.getItem('pendaftaranEkskul')) || []).filter(function (x) { return x.id !== e.id; });
-      localStorage.setItem('pendaftaranEkskul', JSON.stringify(semua));
-    } catch (err) {}
-    location.href = 'daftar-ekskul.html';
+    API.batalkan(e.id).then(function () { location.href = 'daftar-ekskul.html'; })
+      .catch(function (err) { alert(err.message); });
   });
 
   // Statistik
@@ -256,8 +256,14 @@
       '<p class="task__sub">' + esc(t.sub) + '</p></div>';
   }).join('') : '<p class="empty">Belum ada tugas.</p>';
 
-  $('judulAnggota').textContent = 'Anggota (' + d.anggota.length + ')';
-  $('listAnggota').innerHTML = d.anggota.length ? d.anggota.map(function (a) {
+  // Jika sudah disetujui, siswa sendiri tampil sebagai anggota pertama (Figma 06)
+  var anggota = d.anggota.slice();
+  if (status === 'Disetujui' && d.anggota.length) {
+    var nama = res.siswa ? res.siswa.nama : 'Budi Setiawan', kelas = res.siswa ? res.siswa.kelas : 'XI IPA 2';
+    anggota.unshift({ nama: nama, kelas: kelas });
+  }
+  $('judulAnggota').textContent = 'Anggota (' + anggota.length + ')';
+  $('listAnggota').innerHTML = anggota.length ? anggota.map(function (a) {
     var ini = a.nama.split(' ').map(function (w) { return w.charAt(0); }).slice(0, 2).join('').toUpperCase();
     return '<div class="member"><div class="member__av">' + ini + '</div><div><p class="member__name">' + esc(a.nama) + '</p><p class="member__class">' + esc(a.kelas) + '</p></div></div>';
   }).join('') : '<p class="empty">Belum ada anggota.</p>';
@@ -265,6 +271,10 @@
   $('listNews').innerHTML = d.pengumuman.length ? d.pengumuman.map(function (n) {
     return '<div class="news"><p class="news__title">' + esc(n.judul) + '</p><p class="news__text">' + esc(n.isi) + '</p><p class="news__time">' + esc(n.waktu) + '</p></div>';
   }).join('') : '<p class="empty">Belum ada pengumuman.</p>';
+
+  }).catch(function (err) {
+    document.querySelector('.content__body').innerHTML = '<p class="empty">' + esc(err.message) + '</p>';
+  });
 </script>
 </body>
 </html>

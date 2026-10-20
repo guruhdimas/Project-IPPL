@@ -1,131 +1,111 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login - Portal Ekstrakurikuler Trisula Praja</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Condiment&family=Inter:wght@400;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/login.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login - Portal Ekstrakurikuler SMA Trisula Praja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inter:wght@400;500;600;700&family=Rubik+Mono+One&display=swap" rel="stylesheet" />
+<style>
+:root{--hijau:#003e29;--gelap:#001f15;--kuning:#ffc700;--lime:#e6ff4d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;min-height:100vh;background:var(--hijau);color:#fff;position:relative;overflow-x:hidden}
+/* Watermark logo besar */
+body::before{content:"";position:fixed;left:-6%;top:12%;width:62%;height:100%;background:url(img/logo-perisai.png) center/contain no-repeat;opacity:.22;pointer-events:none}
+.bar{height:78px;background:var(--gelap);border-bottom:19px solid #fff;position:relative;box-sizing:content-box}
+.tab{position:absolute;left:88px;top:0;width:112px;height:132px;background:#454c46;border:7px solid var(--kuning);border-top:0;border-radius:0 0 34px 34px;display:grid;place-items:center;z-index:2}
+.tab img{width:76px}
+main{min-height:calc(100vh - 97px);display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:20px;padding:30px 7vw 40px 3vw;position:relative}
+.judul{padding-left:2vw}
+.judul .a{font-family:"Fugaz One",cursive;font-style:italic;font-size:clamp(40px,6.4vw,92px);line-height:.95;letter-spacing:.01em;transform:skewX(-6deg)}
+.judul .a span{display:block;margin-left:4vw}
+.judul .b{font-family:"Rubik Mono One",sans-serif;color:var(--lime);font-size:clamp(34px,5.4vw,78px);line-height:1.1;margin-top:6px}
+/* Kartu login */
+.kartu{width:min(405px,100%);justify-self:end;background:#fff;color:#003e29;border-radius:16px;padding:28px;box-shadow:0 12px 34px rgba(0,0,0,.35)}
+.kartu h1{font-size:21px;margin-bottom:8px}
+.sub{font-size:14px;color:#4b5a53;margin-bottom:26px}
+label.l{display:block;font-size:13px;color:#2e3d35;margin-bottom:8px}
+.in{display:flex;align-items:center;gap:10px;border:1px solid #d6dbd8;border-radius:8px;padding:0 14px;height:46px;margin-bottom:22px;color:#8b9791}
+.in:focus-within{border-color:var(--hijau);box-shadow:0 0 0 3px rgba(0,62,41,.12)}
+.in svg{width:18px;flex:none}
+.in input{border:0;outline:0;flex:1;font:inherit;font-size:14.5px;color:#12261d;background:none}
+.peran{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
+.peran button{font:inherit;font-size:14.5px;color:#4b5a53;background:#fff;border:1px solid #d6dbd8;border-radius:8px;height:82px;display:grid;place-items:center;align-content:center;gap:8px;cursor:pointer}
+.peran svg{width:20px}
+.peran button.on{background:#eef5ff;border:2px solid var(--hijau);color:var(--hijau)}
+.go{width:100%;height:44px;border:0;border-radius:8px;background:var(--hijau);color:#fff;font:700 17px Inter,sans-serif;cursor:pointer}
+.go:hover{background:#00553a}
+.lupa{display:block;text-align:center;font-size:13px;margin-top:22px;color:var(--hijau)}
+.err{display:none;background:#fdecec;color:#a11d1d;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:16px}
+.catatan{position:absolute;right:7vw;bottom:44px;width:min(405px,86vw);text-align:center;font-size:11.5px;line-height:1.9}
+@media(max-width:900px){body::before{left:-30%;width:120%;opacity:.14}main{grid-template-columns:1fr;padding:30px 20px 90px}.judul{padding:0}.kartu{justify-self:center}.tab{left:24px}.catatan{position:static;margin:16px auto 0}}
+</style>
 </head>
 <body>
+<div class="bar"><a class="tab" href="portal.html" aria-label="Kembali ke portal"><img src="img/logo-perisai.png" alt="Logo SMA Trisula Praja" /></a></div>
 
-  <!-- ===== BAR ATAS ===== -->
-  <header class="topbar">
-    <a class="topbar__badge" href="portal.html" aria-label="Kembali ke Portal">
-      <img src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display='none'" />
-    </a>
-  </header>
-  <div class="topbar__line"></div>
+<main>
+  <div class="judul">
+    <div class="a"><span>PORTAL</span><span>EKSTRAKURIKULER</span></div>
+    <div class="b">TRISULA PRAJA</div>
+  </div>
 
-  <main class="login">
-    <img class="login__watermark" src="assets/logo.png" alt="" onerror="this.style.display='none'" />
+  <div>
+    <form class="kartu" id="form" novalidate>
+      <h1>Selamat Datang Kembali!</h1>
+      <p class="sub">Masuk untuk melanjutkan ke dasbor Anda</p>
+      <div class="err" id="err" role="alert"></div>
 
-    <!-- ===== JUDUL KIRI ===== -->
-    <section class="brand">
-      <p class="brand__line1">PORTAL</p>
-      <p class="brand__line2">EKSTRAKURIKULER</p>
-      <p class="brand__line3">TRISULA PRAJA</p>
-    </section>
+      <label class="l" for="user">Username</label>
+      <div class="in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        <input id="user" type="text" placeholder="Masukan Username" autocomplete="username" />
+      </div>
 
-    <!-- ===== KARTU LOGIN ===== -->
-    <section class="panel">
-      <form class="card" id="loginForm" novalidate>
-        <h2 class="card__title">Selamat Datang Kembali!</h2>
-        <p class="card__subtitle">Masuk untuk melanjutkan ke dasbor Anda</p>
+      <label class="l" for="pass">Password</label>
+      <div class="in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input id="pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
 
-        <div class="field">
-          <label for="username">Username</label>
-          <div class="input">
-            <svg class="input__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
-              <path d="m3 6 7 5 7-5" />
-            </svg>
-            <input id="username" name="username" type="text" placeholder="Masukan Username" autocomplete="username" />
-          </div>
-        </div>
+      <label class="l">Silahkan Pilih Peran Anda!</label>
+      <div class="peran">
+        <button type="button" class="on" data-peran="siswa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Siswa
+        </button>
+        <button type="button" data-peran="pembimbing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Pembimbing
+        </button>
+      </div>
 
-        <div class="field">
-          <label for="password">Password</label>
-          <div class="input">
-            <svg class="input__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3.5" y="9" width="13" height="8" rx="2" />
-              <path d="M6.5 9V6.5a3.5 3.5 0 0 1 7 0V9" />
-            </svg>
-            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" />
-          </div>
-        </div>
+      <button class="go" type="submit">Login</button>
+      <a class="lupa" href="#">Forgot your password?</a>
+    </form>
+    <p class="catatan">By signing in, you agree to our Terms of Service and Privacy Policy.<br />Your privacy and data security are our top priorities.</p>
+  </div>
+</main>
 
-        <fieldset class="roles">
-          <legend>Silahkan Pilih Peran Anda!</legend>
-          <div class="roles__grid">
-            <button type="button" class="role is-active" data-role="siswa" aria-pressed="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
-              </svg>
-              <span>Siswa</span>
-            </button>
-            <button type="button" class="role" data-role="pembimbing" aria-pressed="false">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M2 9.5 12 5l10 4.5-10 4.5z" />
-                <path d="M6 11.5v4.5c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" />
-                <path d="M22 9.5V15" />
-              </svg>
-              <span>Pembimbing</span>
-            </button>
-          </div>
-        </fieldset>
+<script>
+  var peran = 'siswa';
+  var tombol = document.querySelectorAll('.peran button');
+  tombol.forEach(function (b) {
+    b.addEventListener('click', function () {
+      peran = b.dataset.peran;
+      tombol.forEach(function (x) { x.classList.toggle('on', x === b); });
+    });
+  });
 
-        <p class="error" id="formError" role="alert" hidden></p>
-
-        <button type="submit" class="btn-login">Login</button>
-
-        <a class="forgot" href="#">Forgot your password?</a>
-      </form>
-
-      <p class="legal">
-        By signing in, you agree to our Terms of Service and Privacy Policy.<br />
-        Your privacy and data security are our top priorities.
-      </p>
-    </section>
-  </main>
-
-  <script>
-    (function () {
-      var form = document.getElementById('loginForm');
-      var error = document.getElementById('formError');
-      var roleButtons = document.querySelectorAll('.role');
-      var role = 'siswa';
-
-      // Pilih peran (Siswa / Pembimbing)
-      roleButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          role = btn.dataset.role;
-          roleButtons.forEach(function (b) {
-            var active = b === btn;
-            b.classList.toggle('is-active', active);
-            b.setAttribute('aria-pressed', active ? 'true' : 'false');
-          });
-        });
-      });
-
-      // Kirim form. Saat ini hanya memeriksa kolom kosong lalu pindah halaman.
-      // Ganti bagian ini dengan proses login ke server jika sudah ada backend.
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var u = form.username.value.trim();
-        var p = form.password.value;
-        if (!u || !p) {
-          error.textContent = 'Username dan password wajib diisi.';
-          error.hidden = false;
-          return;
-        }
-        error.hidden = true;
-        window.location.href = role === 'siswa' ? 'dashboard-siswa.html' : 'dashboard-pembimbing.html';
-      });
-    })();
-  </script>
+  document.getElementById('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = document.getElementById('err');
+    var u = document.getElementById('user').value.trim();
+    var p = document.getElementById('pass').value;
+    if (!u || !p) { err.textContent = 'Username dan password wajib diisi.'; err.style.display = 'block'; return; }
+    err.style.display = 'none';
+    // Sementara: belum ada pengecekan ke database (login sungguhan = langkah berikutnya).
+    location.href = peran === 'siswa' ? 'dashboard-siswa.html' : 'dashboard-pembimbing.html';
+  });
+</script>
 </body>
 </html>

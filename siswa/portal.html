@@ -1,255 +1,202 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portal Ekstrakurikuler - SMA Trisula Praja</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Cabin:wght@400;700&family=Caladea:wght@400;700&family=Carlito:wght@400;700&family=Concert+One&family=Condiment&family=Poppins&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/portal.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portal Ekstrakurikuler - SMA Trisula Praja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{--hijau:#0b3d2e;--hijau2:#07291f;--kuning:#f5e800;--teks:#fff;--redup:#cfe3da}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:Inter,sans-serif;background:var(--hijau);color:var(--teks);line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"DM Sans",Inter,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+/* Navbar */
+.nav{position:sticky;top:0;z-index:10;background:#fff;color:#111;height:64px}
+.nav .wrap{max-width:1300px;display:flex;align-items:center;gap:28px;height:100%}
+.nav__logo{height:84px;margin-top:20px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
+.nav__links{display:flex;gap:30px;margin:0 auto;font-size:13px;font-weight:500}
+.nav__links a:hover{color:var(--hijau)}
+/* Hero */
+.hero{min-height:560px;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--hijau2) url(img/bg-gelombang.jpg) center/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,41,31,.92),rgba(7,41,31,.55))}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.3fr .7fr;gap:30px;align-items:center;max-width:1300px;width:100%}
+.hero small{font-style:italic;font-size:20px;letter-spacing:.04em}
+.hero h1{font-size:clamp(40px,6vw,76px);line-height:1;margin:8px 0}
+.hero h1 span{display:block;color:var(--kuning)}
+.hero__logo{width:min(340px,70%);margin:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,.5))}
+.btns{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+.btn{padding:10px 34px;border-radius:999px;font-weight:600;font-size:14px;border:2px solid var(--kuning)}
+.btn--y{background:var(--kuning);color:#111}
+.btn--o{color:#fff;border-color:#fff}
+.strip{height:clamp(180px,26vw,360px);background:url(img/gedung-kampus.jpg) center/cover;border-top:6px solid var(--kuning)}
+/* Seksi */
+section{padding:70px 0}
+.judul{text-align:center;font-size:22px;margin-bottom:30px}
+.garis{border:0;border-top:2px solid rgba(255,255,255,.7);max-width:1300px;margin:0 auto}
+.teks p{font-size:13.5px;margin-bottom:14px;text-align:justify;color:#eef6f2}
+.teks .cat{font-size:12px;color:var(--redup);font-style:italic}
+/* Pendiri */
+.pendiri{display:grid;gap:22px;max-width:820px;margin:0 auto}
+.org{display:flex;gap:22px;align-items:center}
+.org img{width:84px;height:100px;object-fit:cover;object-position:top;border-radius:14px;border:2px solid var(--kuning);flex:none}
+.org h3{font-size:14px}.org b{display:block;font-size:12.5px}.org p{font-size:12.5px;color:var(--redup)}
+/* Visi misi */
+.vm{max-width:900px;margin:0 auto;text-align:center}
+.vm h3{font-size:15px;margin:18px 0 8px}
+.vm ol{text-align:left;max-width:640px;margin:0 auto;padding-left:22px;font-size:13.5px}
+/* Prestasi */
+.prestasi{max-width:820px;margin:0 auto;display:grid;gap:22px}
+.pres{display:flex;gap:22px;align-items:center}
+.pres img{width:150px;height:96px;object-fit:cover;border-radius:10px;flex:none}
+.pres h3{font-size:14px}.pres b{display:block;font-size:12.5px;color:var(--kuning)}.pres p{font-size:12.5px;color:var(--redup)}
+.stat{background:#fff;color:#111;padding:22px 0}
+.stat .wrap{max-width:1300px;display:flex;justify-content:space-around;text-align:center;flex-wrap:wrap;gap:14px}
+.stat h4{font-size:17px;font-weight:600}.stat span{font-size:17px;color:var(--hijau)}
+/* Ekskul */
+.rek h2{font-size:18px;margin-bottom:34px;max-width:1300px;margin-inline:auto}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 30px;max-width:1300px;margin:0 auto}
+.card{text-align:center}
+.card img{width:100%;aspect-ratio:339/221;object-fit:cover;border-radius:12px;border:3px solid #fff}
+.card h3{font-size:19px;margin:14px 0 4px;line-height:1.25}
+.card p{font-size:12.5px;color:var(--redup);padding:0 14px}
+/* Peran + footer */
+.peran h2{text-align:center;font-size:26px;margin-bottom:20px}
+.peran ul{max-width:780px;margin:0 auto 30px;padding-left:20px;font-size:13.5px}
+.cta{display:flex;justify-content:center}
+.motto{text-align:center;padding-top:10px}
+.motto img{width:200px;margin:0 auto 10px}.motto h3{font-size:20px}.motto p{font-weight:600;font-size:16px}
+footer{background:var(--hijau2);padding:30px 0;font-size:12px;color:var(--redup);border-top:4px solid var(--kuning)}
+footer .wrap{max-width:1300px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px}
+footer b{color:#fff;display:block;margin-bottom:6px}footer li{list-style:none}
+@media(max-width:800px){.hero .wrap,footer .wrap{grid-template-columns:1fr}.hero__logo{display:none}.grid{grid-template-columns:1fr 1fr}.nav__links{display:none}.org,.pres{flex-direction:column;text-align:center}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <header class="topbar">
-    <div class="topbar__brand"><img src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display='none'" /></div>
-  </header>
-  <nav class="nav">
-    <a href="#hero">Portal</a>
-    <a href="#sejarah">Sejarah Trisula</a>
-    <a href="#prestasi">Prestasi</a>
-    <a href="#ekskul">Rekomendasi Ekskul</a>
-    <a href="login.html">Pendaftaran</a>
-    <a href="#layanan">Layanan</a>
-  </nav>
+<header class="nav">
+  <div class="wrap">
+    <img class="nav__logo" src="img/logo-perisai.png" alt="Logo SMA Trisula Praja" />
+    <nav class="nav__links">
+      <a href="#portal">Portal</a><a href="#sejarah">Sejarah Trisula</a><a href="#prestasi">Prestasi</a>
+      <a href="#ekskul">Rekomendasi Ekskul</a><a href="daftar-ekskul.html">Pendaftaran</a><a href="#layanan">Layanan</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="hero">
-      <img class="hero__bg" src="assets/campus-faded.png" alt="" onerror="this.style.display='none'" />
-      <img class="hero__logo" src="assets/logo.png" alt="" onerror="this.style.display='none'" />
-      <div class="hero__content">
-        <p class="hero__welcome">SELAMAT DATANG</p>
-        <p class="hero__di">di</p>
-        <h1 class="hero__title">PORTAL<br /><span>EKSTRAKURIKULER</span></h1>
-        <p class="hero__school">TRISULA PRAJA</p>
-        <div class="hero__actions">
-          <a class="btn btn--yellow" href="login.html">Masuk</a>
-          <a class="btn btn--outline" href="#sejarah">Pelajari Selengkapnya &gt;</a>
+<main id="portal">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <small>SELAMAT DATANG di</small>
+        <h1>PORTAL EKSTRAKURIKULER <span>TRISULA PRAJA</span></h1>
+        <div class="btns">
+          <a class="btn btn--y" href="login.html">Masuk</a>
+          <a class="btn btn--o" href="#sejarah">Pelajari Selengkapnya &gt;</a>
         </div>
       </div>
-    </section>
-
-    <!-- ===== FOTO SEKOLAH ===== -->
-    <div class="campus">
-      <img src="assets/campus.png" alt="Gedung SMA Trisula Praja" onerror="this.style.display='none'" />
+      <img class="hero__logo" src="img/logo-perisai.png" alt="" />
     </div>
+  </div>
+  <div class="strip" role="img" aria-label="Gedung SMA Trisula Praja"></div>
 
-    <!-- ===== SEJARAH ===== -->
-    <section class="section" id="sejarah">
-      <h2 class="section__title">Sejarah Singkat</h2>
-      <div class="history">
-        <p>SMA Trisula Praja merupakan konsep sekolah menengah atas yang dirancang sebagai sekolah modern, unggul dalam akademik, teknologi, seni, olahraga, serta pembentukan karakter. Sekolah ini mengusung semangat untuk mencetak generasi muda yang disiplin, kreatif, berintegritas, dan siap bersaing di tingkat nasional maupun internasional.</p>
-        <p>Catatan: seluruh sejarah, nama pendiri, statistik, prestasi, alamat, dan informasi kontak di bawah ini merupakan data rekaan untuk keperluan desain profil sekolah, website, atau proyek. Data tersebut bukan klaim tentang sekolah nyata.</p>
-        <p>SMA Trisula Praja didirikan pada 15 Juli 2008 oleh sekelompok tokoh pendidikan dan pemerhati generasi muda yang memiliki visi membangun lembaga pendidikan berkualitas dengan keseimbangan antara ilmu pengetahuan, karakter, dan keterampilan.</p>
-        <p>Pada awal berdirinya, sekolah ini hanya memiliki 6 ruang kelas, 12 tenaga pendidik, dan 96 siswa angkatan pertama. Berkat dukungan para pendiri, guru, orang tua, dan masyarakat, SMA Trisula Praja berkembang menjadi sekolah yang mengutamakan pembelajaran berbasis teknologi, kegiatan penelitian, kewirausahaan, serta pengembangan bakat siswa.</p>
-        <p>Memasuki tahun 2018, sekolah mulai memperluas fasilitas laboratorium komputer, perpustakaan digital, lapangan olahraga, dan pusat kegiatan ekstrakurikuler. Pada 2022, sekolah memperkenalkan program Global Student Exchange sebagai konsep kerja sama pendidikan internasional.</p>
-        <p>Kini, dalam profil konseptualnya, SMA Trisula Praja dikenal sebagai sekolah berwawasan global yang memadukan prestasi akademik, kreativitas, kepemimpinan, dan kepedulian sosial.</p>
-      </div>
-    </section>
+  <section id="sejarah"><div class="wrap teks">
+    <h2 class="judul">Sejarah Singkat</h2>
+    <p>SMA Trisula Praja merupakan konsep sekolah menengah atas yang dirancang sebagai sekolah modern, unggul dalam akademik, teknologi, seni, olahraga, serta pembentukan karakter. Sekolah ini mengusung semangat untuk mencetak generasi muda yang disiplin, kreatif, berintegritas, dan siap bersaing di tingkat nasional maupun internasional.</p>
+    <p class="cat">Catatan: seluruh sejarah, nama pendiri, statistik, prestasi, alamat, dan informasi kontak di bawah ini merupakan data rekaan untuk keperluan desain profil sekolah, website, atau proyek. Data tersebut bukan klaim tentang sekolah nyata.</p>
+    <p>SMA Trisula Praja didirikan pada 15 Juli 2008 oleh sekelompok tokoh pendidikan dan pemerhati generasi muda yang memiliki visi membangun lembaga pendidikan berkualitas dengan keseimbangan antara ilmu pengetahuan, karakter, dan keterampilan.</p>
+    <p>Pada awal berdirinya, sekolah ini hanya memiliki 6 ruang kelas, 12 tenaga pendidik, dan 96 siswa angkatan pertama. Berkat dukungan para pendiri, guru, orang tua, dan masyarakat, SMA Trisula Praja berkembang menjadi sekolah yang mengutamakan pembelajaran berbasis teknologi, kegiatan penelitian, kewirausahaan, serta pengembangan bakat siswa.</p>
+    <p>Memasuki tahun 2018, sekolah mulai memperluas fasilitas laboratorium komputer, perpustakaan digital, lapangan olahraga, dan pusat kegiatan ekstrakurikuler. Pada 2022, sekolah memperkenalkan program Global Student Exchange sebagai konsep kerja sama pendidikan internasional.</p>
+    <p>Kini, dalam profil konseptualnya, SMA Trisula Praja dikenal sebagai sekolah berwawasan global yang memadukan prestasi akademik, kreativitas, kepemimpinan, dan kepedulian sosial.</p>
+  </div></section>
 
-    <!-- ===== PARA PENDIRI ===== -->
-    <section class="section section--founders">
-      <h2 class="section__title section__title--sans">PARA PENDIRI SEKOLAH</h2>
-      <div class="founders">
-        <article class="founder">
-          <div class="photo photo--portrait"><img src="assets/founder-1.png" alt="Dr. H. Arif Pratama, M.Pd." onerror="this.style.display='none'" /></div>
-          <div class="founder__text">
-            <p>Dr. H. Arif Pratama, M.Pd.</p>
-            <p>Pendiri utama dan penggagas sekolah</p>
-            <p>Berperan merumuskan visi pendidikan, standar akademik, dan sistem pembinaan karakter siswa.</p>
-          </div>
-        </article>
-        <article class="founder">
-          <div class="photo photo--portrait"><img src="assets/founder-2.png" alt="Dra. Siti Rahmawati, M.Pd." onerror="this.style.display='none'" /></div>
-          <div class="founder__text">
-            <p>Dra. Siti Rahmawati, M.Pd.</p>
-            <p>Pendiri bidang kurikulum</p>
-            <p>Bertanggung jawab dalam konsep pengembangan kurikulum, metode pembelajaran, dan peningkatan kompetensi guru.</p>
-          </div>
-        </article>
-        <article class="founder">
-          <div class="photo photo--portrait"><img src="assets/founder-3.png" alt="Ir. Bima Saputra, M.Kom." onerror="this.style.display='none'" /></div>
-          <div class="founder__text">
-            <p>Ir. Bima Saputra, M.Kom.</p>
-            <p>Pendiri bidang teknologi dan inovasi</p>
-            <p>Menggagas pemanfaatan teknologi informasi, laboratorium komputer, dan program inovasi digital bagi siswa.</p>
-          </div>
-        </article>
-        <article class="founder">
-          <div class="photo photo--portrait"><img src="assets/founder-4.png" alt="Dr. Maya Kusumawardani, M.M." onerror="this.style.display='none'" /></div>
-          <div class="founder__text">
-            <p>Dr. Maya Kusumawardani, M.M.</p>
-            <p>Pendiri bidang pengembangan siswa</p>
-            <p>Mengembangkan program kepemimpinan, kegiatan sosial, ekstrakurikuler, dan kemitraan masyarakat.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===== VISI & MISI ===== -->
-    <section class="section section--rule" id="visimisi">
-      <h2 class="section__title section__title--sans">VISI DAN MISI SEKOLAH</h2>
-      <h3 class="label">VISI</h3>
-      <p class="vision">Menjadi sekolah menengah atas unggulan yang menghasilkan generasi berkarakter, berprestasi, inovatif, dan mampu bersaing di tingkat internasional.</p>
-      <h3 class="label">MISI</h3>
-      <ol class="mission">
-        <li>Menyelenggarakan pendidikan berkualitas dengan pembelajaran yang kreatif dan inovatif.</li>
-        <li>Membentuk siswa yang disiplin, jujur, bertanggung jawab, dan memiliki jiwa kepemimpinan.</li>
-        <li>Mengembangkan kemampuan teknologi, bahasa asing, sains, seni, dan olahraga.</li>
-        <li>Mendorong siswa untuk aktif mengikuti kompetisi akademik maupun nonakademik.</li>
-        <li>Membangun kerja sama pendidikan dengan sekolah dan lembaga internasional.</li>
-        <li>Menanamkan kepedulian terhadap lingkungan dan masyarakat.</li>
-      </ol>
-    </section>
-
-    <!-- ===== PRESTASI ===== -->
-    <section class="section section--rule" id="prestasi">
-      <h2 class="section__title section__title--sans">PRESTASI UNGGULAN SEKOLAH</h2>
-      <div class="achievements">
-        <article class="achievement">
-          <div class="photo photo--wide"><img src="assets/prestasi-1.png" alt="" onerror="this.style.display='none'" /></div>
-          <div>
-            <strong>Juara 1 Kompetisi Robotika Pelajar Nasional</strong>
-            <span>2025</span>
-            <span>Tim robotika berhasil meraih juara melalui inovasi robot pemilah sampah otomatis berbasis sensor.</span>
-          </div>
-        </article>
-        <article class="achievement">
-          <div class="photo photo--wide"><img src="assets/prestasi-2.png" alt="" onerror="this.style.display='none'" /></div>
-          <div>
-            <strong>Medali Emas Olimpiade Sains Pelajar</strong>
-            <span>2025</span>
-            <span>Siswa memperoleh medali dalam kompetisi sains bidang informatika dan matematika.</span>
-          </div>
-        </article>
-        <article class="achievement">
-          <div class="photo photo--wide"><img src="assets/prestasi-3.png" alt="" onerror="this.style.display='none'" /></div>
-          <div>
-            <strong>Juara Turnamen Basket Antarpelajar</strong>
-            <span>2024</span>
-            <span>Tim basket meraih gelar juara tingkat provinsi melalui pembinaan olahraga yang terarah.</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===== STATISTIK ===== -->
-    <section class="stats">
-      <div><p>Siswa Baru 2025/2026</p><strong>320 Siswa</strong></div>
-      <div><p>Siswa Aktif</p><strong>1.248 Siswa</strong></div>
-      <div><p>Siswa International</p><strong>24 Siswa</strong></div>
-    </section>
-
-    <!-- ===== REKOMENDASI EKSKUL ===== -->
-    <section class="section section--ekskul" id="ekskul">
-      <h2 class="ekskul__heading">Rekomendasi Ekskul Terbaik</h2>
-      <div class="ekskul__grid">
-        <article class="ekskul">
-          <div class="photo photo--card"><img src="assets/ekskul-robotics.png" alt="Robotics and IoT Club" onerror="this.style.display='none'" /></div>
-          <h3>Robotics and IoT Club</h3>
-          <p>Merakit robot, mempelajari sensor, mikrokontroler, Internet of Things, dan mengikuti kompetisi teknologi.</p>
-        </article>
-        <article class="ekskul">
-          <div class="photo photo--card"><img src="assets/ekskul-cyber.png" alt="Cyber Security and Programming" onerror="this.style.display='none'" /></div>
-          <h3>Cyber Security and Programming</h3>
-          <p>Belajar pemrograman, jaringan komputer, keamanan digital, pengembangan website, dan kompetisi Capture the Flag secara legal.</p>
-        </article>
-        <article class="ekskul">
-          <div class="photo photo--card"><img src="assets/ekskul-debate.png" alt="English Debate and Public Speaking" onerror="this.style.display='none'" /></div>
-          <h3>English Debate and Public Speaking</h3>
-          <p>Melatih cara berkomunikasi, argumentasi, presentasi, dan kemampuan berbahasa Inggris.</p>
-        </article>
-        <article class="ekskul">
-          <div class="photo photo--card"><img src="assets/ekskul-science.png" alt="Science Research Club" onerror="this.style.display='none'" /></div>
-          <h3>Science Research Club</h3>
-          <p>Mengembangkan penelitian, eksperimen, karya ilmiah, dan inovasi untuk kompetisi sains.</p>
-        </article>
-        <article class="ekskul">
-          <div class="photo photo--card"><img src="assets/ekskul-seni.png" alt="Seni dan Budaya Nusantara" onerror="this.style.display='none'" /></div>
-          <h3>Seni dan Budaya Nusantara</h3>
-          <p>Mengembangkan bakat tari tradisional, musik, teater, dan pelestarian budaya Indonesia.</p>
-        </article>
-        <article class="ekskul">
-          <div class="photo photo--card"><img src="assets/ekskul-basket.png" alt="Basket dan Futsal club" onerror="this.style.display='none'" /></div>
-          <h3>Basket dan Futsal club</h3>
-          <p>Membangun kebugaran, kerja sama tim, kedisiplinan, dan kemampuan berkompetisi.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===== PERAN ===== -->
-    <section class="section section--rule role" id="peran">
-      <h2 class="role__title">PERAN SMA PRISULA PRAJA</h2>
-      <div class="role__body">
-        <p>SMA Trisula Praja memiliki peran penting dalam konsep pengembangan pendidikan, yaitu:</p>
-        <ul>
-          <li>Meningkatkan kualitas pendidikan: membekali siswa dengan ilmu pengetahuan dan keterampilan yang relevan.</li>
-          <li>Membangun karakter: membentuk pribadi yang jujur, disiplin, mandiri, dan bertanggung jawab.</li>
-          <li>Mengembangkan teknologi: memperkenalkan pemrograman, jaringan komputer, dan inovasi digital.</li>
-          <li>Mendorong prestasi: menyediakan ruang bagi siswa untuk mengembangkan bakat akademik dan nonakademik.</li>
-          <li>Memperluas wawasan global: menyiapkan siswa untuk berinteraksi dalam lingkungan multikultural.</li>
-          <li>Meningkatkan kepedulian sosial: mendorong kegiatan pengabdian masyarakat dan pelestarian lingkungan.</li>
-        </ul>
-      </div>
-      <a class="btn btn--gold" href="login.html">Masuk</a>
-      <img class="role__logo" src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display='none'" />
-      <p class="role__brand">SMA TRISULA PRAJA</p>
-      <p class="role__motto">“Cerdas dalam Ilmu, Tangguh dalam Karakter, Unggul dalam Prestasi.”</p>
-    </section>
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer" id="layanan">
-    <div class="footer__inner">
-      <ul class="contact">
-        <li><img src="assets/icon-map.png" alt="" onerror="this.style.display='none'" />
-          <p>Jl. Trisula Praja No. 15, Kecamatan Marpoyan Damai, Kota Pekanbaru, Riau, Indonesia.<br />Alamat simulasi untuk proyek profil sekolah.</p></li>
-        <li><img src="assets/icon-phone.png" alt="" onerror="this.style.display='none'" />
-          <p>0761-000-000<br />Nomor contoh, bukan nomor aktif terverifikasi.</p></li>
-        <li><img src="assets/icon-headset.png" alt="" onerror="this.style.display='none'" />
-          <p>0761-000-000<br />Nomor contoh, bukan nomor aktif terverifikasi.</p></li>
-        <li><img src="assets/icon-whatsapp.png" alt="" onerror="this.style.display='none'" />
-          <p>0761-000-000<br />Nomor contoh, bukan nomor aktif terverifikasi.</p></li>
-        <li><img src="assets/icon-letter.png" alt="" onerror="this.style.display='none'" />
-          <p>info@trisulapraja.example<br />Alamat email contoh untuk rancangan website.</p></li>
-      </ul>
-
-      <div class="footer__col">
-        <p>Layanan Dan Informasi</p>
-        <p>Layanan</p>
-        <a href="#">Penerimaan siswa baru</a>
-        <a href="#">Akademik</a>
-        <a href="#">Kesiswaan</a>
-        <a href="#">Bimbingan konseling</a>
-        <a href="#">Layanan orang tua</a>
-        <a href="#">Kerja sama internasional</a>
-        <a href="#">Layanan alumni</a>
-      </div>
-
-      <div class="footer__col footer__col--info">
-        <p>Keterangan</p>
-        <p>-Informasi pendaftaran, seleksi, dan pengumuman</p>
-        <p>-Kalender pendidikan, jadwal, dan informasi pembelajaran</p>
-        <p>-Organisasi siswa, ekstrakurikuler, dan prestasi</p>
-        <p>-Pendampingan akademik dan pengembangan diri</p>
-        <p>-Informasi perkembangan belajar siswa</p>
-        <p>-Program pertukaran pelajar dan kegiatan lintas budaya</p>
-        <p>-Pendataan alumni dan informasi studi lanjutan</p>
-      </div>
+  <hr class="garis" />
+  <section><div class="wrap">
+    <h2 class="judul">PARA PENDIRI SEKOLAH</h2>
+    <div class="pendiri">
+      <div class="org"><img src="img/pembimbing-pria-jas.jpg" alt="Dr. H. Arif Pratama, M.Pd." /><div><h3>Dr. H. Arif Pratama, M.Pd.</h3><b>Pendiri utama dan penggagas sekolah</b><p>Berperan merumuskan visi pendidikan, standar akademik, dan sistem pembinaan karakter siswa.</p></div></div>
+      <div class="org"><img src="img/pembimbing-wanita-hijab-putih.jpg" alt="Dra. Siti Rahmawati, M.Pd." /><div><h3>Dra. Siti Rahmawati, M.Pd.</h3><b>Pendiri bidang kurikulum</b><p>Bertanggung jawab dalam konsep pengembangan kurikulum, metode pembelajaran, dan peningkatan kompetensi guru.</p></div></div>
+      <div class="org"><img src="img/pembimbing-batik.jpg" alt="Ir. Bima Saputra, M.Kom." /><div><h3>Ir. Bima Saputra, M.Kom.</h3><b>Pendiri bidang teknologi dan inovasi</b><p>Menggagas pemanfaatan teknologi informasi, laboratorium komputer, dan program inovasi digital bagi siswa.</p></div></div>
+      <div class="org"><img src="img/pembimbing-wanita-blazer-biru.jpg" alt="Dr. Maya Kusumawardani, M.M." /><div><h3>Dr. Maya Kusumawardani, M.M.</h3><b>Pendiri bidang pengembangan siswa</b><p>Mengembangkan program kepemimpinan, kegiatan sosial, ekstrakurikuler, dan kemitraan masyarakat.</p></div></div>
     </div>
-  </footer>
+  </div></section>
 
+  <hr class="garis" />
+  <section><div class="wrap vm">
+    <h2 class="judul">VISI DAN MISI SEKOLAH</h2>
+    <h3>VISI</h3>
+    <p style="font-size:13.5px">Menjadi sekolah menengah atas unggulan yang menghasilkan generasi berkarakter, berprestasi, inovatif, dan mampu bersaing di tingkat internasional.</p>
+    <h3>MISI</h3>
+    <ol>
+      <li>Menyelenggarakan pendidikan berkualitas dengan pembelajaran yang kreatif dan inovatif.</li>
+      <li>Membentuk siswa yang disiplin, jujur, bertanggung jawab, dan memiliki jiwa kepemimpinan.</li>
+      <li>Mengembangkan kemampuan teknologi, bahasa asing, sains, seni, dan olahraga.</li>
+      <li>Mendorong siswa untuk aktif mengikuti kompetisi akademik maupun nonakademik.</li>
+      <li>Membangun kerja sama pendidikan dengan sekolah dan lembaga internasional.</li>
+      <li>Menanamkan kepedulian terhadap lingkungan dan masyarakat.</li>
+    </ol>
+  </div></section>
+
+  <hr class="garis" />
+  <section id="prestasi"><div class="wrap">
+    <h2 class="judul">PRESTASI UNGGULAN SEKOLAH</h2>
+    <div class="prestasi">
+      <div class="pres"><img src="img/robotic-vex.jpg" alt="Tim robotika" /><div><h3>Juara 1 Kompetisi Robotika Pelajar Nasional</h3><b>2025</b><p>Tim robotika berhasil meraih juara melalui inovasi robot pemilah sampah otomatis berbasis sensor.</p></div></div>
+      <div class="pres"><img src="img/sains-tim-medali.jpg" alt="Tim sains" /><div><h3>Medali Emas Olimpiade Sains Pelajar</h3><b>2025</b><p>Siswa memperoleh medali dalam kompetisi sains bidang informatika dan matematika.</p></div></div>
+      <div class="pres"><img src="img/basket-juara.jpg" alt="Tim basket" /><div><h3>Juara Turnamen Basket Antarpelajar</h3><b>2024</b><p>Tim basket meraih gelar juara tingkat provinsi melalui pembinaan olahraga yang terarah.</p></div></div>
+    </div>
+  </div></section>
+
+  <div class="stat"><div class="wrap">
+    <div><h4>Siswa Baru 2025/2026</h4><span>320 Siswa</span></div>
+    <div><h4>Siswa Aktif</h4><span>1.248 Siswa</span></div>
+    <div><h4>Siswa International</h4><span>24 Siswa</span></div>
+  </div></div>
+
+  <section id="ekskul" class="rek"><div class="wrap" style="max-width:1400px">
+    <h2>Rekomendasi Ekskul Terbaik</h2>
+    <div class="grid">
+      <a class="card" href="daftar-ekskul.html"><img src="img/robotic-stem-lab.jpg" alt="" /><h3>Robotics and IoT Club</h3><p>Merakit robot, mempelajari sensor, mikrokontroler, Internet of Things, dan mengikuti kompetisi teknologi.</p></a>
+      <a class="card" href="daftar-ekskul.html"><img src="img/komputer-coding.jpg" alt="" /><h3>Cyber Security and Programming</h3><p>Belajar pemrograman, jaringan komputer, keamanan digital, pengembangan website, dan kompetisi Capture the Flag secara legal.</p></a>
+      <a class="card" href="daftar-ekskul.html"><img src="img/debat.jpg" alt="" /><h3>English Debate and Public Speaking</h3><p>Melatih cara berkomunikasi, argumentasi, presentasi, dan kemampuan berbahasa Inggris.</p></a>
+      <a class="card" href="daftar-ekskul.html"><img src="img/sains-peneliti.jpg" alt="" /><h3>Science Research Club</h3><p>Mengembangkan penelitian, eksperimen, karya ilmiah, dan inovasi untuk kompetisi sains.</p></a>
+      <a class="card" href="daftar-ekskul.html"><img src="img/tari-tradisional.jpg" alt="" /><h3>Seni dan Budaya Nusantara</h3><p>Mengembangkan bakat tari tradisional, musik, teater, dan pelestarian budaya Indonesia.</p></a>
+      <a class="card" href="daftar-ekskul.html"><img src="img/basket-pertandingan.jpg" alt="" /><h3>Basket dan Futsal club</h3><p>Membangun kebugaran, kerja sama tim, kedisiplinan, dan kemampuan berkompetisi.</p></a>
+    </div>
+  </div></section>
+
+  <section class="peran" id="layanan"><div class="wrap">
+    <h2>PERAN SMA PRISULA PRAJA</h2>
+    <p style="max-width:780px;margin:0 auto 10px;font-size:13.5px">SMA Trisula Praja memiliki peran penting dalam konsep pengembangan pendidikan, yaitu:</p>
+    <ul>
+      <li>Meningkatkan kualitas pendidikan: membekali siswa dengan ilmu pengetahuan dan keterampilan yang relevan.</li>
+      <li>Membangun karakter: membentuk pribadi yang jujur, disiplin, mandiri, dan bertanggung jawab.</li>
+      <li>Mengembangkan teknologi: memperkenalkan pemrograman, jaringan komputer, dan inovasi digital.</li>
+      <li>Mendorong prestasi: menyediakan ruang bagi siswa untuk mengembangkan bakat akademik dan nonakademik.</li>
+      <li>Memperluas wawasan global: menyiapkan siswa untuk berinteraksi dalam lingkungan multikultural.</li>
+      <li>Meningkatkan kepedulian sosial: mendorong kegiatan pengabdian masyarakat dan pelestarian lingkungan.</li>
+    </ul>
+    <div class="cta"><a class="btn btn--y" href="login.html">Masuk</a></div>
+    <div class="motto" style="margin-top:40px">
+      <img src="img/logo-perisai.png" alt="Logo SMA Trisula Praja" />
+      <h3>SMA TRISULA PRAJA</h3>
+      <p>“Cerdas dalam Ilmu, Tangguh dalam Karakter, Unggul dalam Prestasi.”</p>
+    </div>
+  </div></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>Kontak</b>Jl. Trisula Praja No. 15, Kecamatan Marpoyan Damai, Kota Pekanbaru, Riau, Indonesia. <i>(Alamat simulasi untuk proyek profil sekolah.)</i><br />0761-000-000 <i>(Nomor contoh)</i><br />info@trisulapraja.example <i>(Email contoh)</i></div>
+    <div><b>Layanan dan Informasi</b><ul><li>Layanan penerimaan siswa baru</li><li>Akademik</li><li>Kesiswaan</li><li>Bimbingan konseling</li><li>Layanan orang tua</li><li>Kerja sama internasional</li><li>Layanan alumni</li></ul></div>
+    <div><b>Keterangan</b><ul><li>Informasi pendaftaran, seleksi, dan pengumuman</li><li>Kalender pendidikan, jadwal, dan informasi pembelajaran</li><li>Organisasi siswa, ekstrakurikuler, dan prestasi</li><li>Pendampingan akademik dan pengembangan diri</li><li>Program pertukaran pelajar dan kegiatan lintas budaya</li><li>Pendataan alumni dan informasi studi lanjutan</li></ul></div>
+  </div>
+</footer>
 </body>
 </html>
