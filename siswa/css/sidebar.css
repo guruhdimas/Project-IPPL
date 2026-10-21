@@ -1,0 +1,76 @@
+/* =========================================================
+   Sidebar siswa (dipakai SEMUA halaman siswa)
+   Statis: position fixed, lebar tetap 230px, tidak ikut bergulir.
+   Semua class berawalan "sb-" supaya tidak bentrok dengan CSS halaman.
+   ========================================================= */
+:root { --sb-w: 230px; --sb-label: #023724; } /* warna "MENU UTAMA" - ubah di sini */
+
+.sb {
+  position: fixed; left: 0; top: 0; bottom: 0; z-index: 50;
+  width: var(--sb-w);
+  display: flex; flex-direction: column;
+  background: #fff;
+  border-right: 1.5px solid #e2e8f0;
+  font: 400 14px/1.45 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+.sb *, .sb *::before, .sb *::after { box-sizing: border-box; }
+
+.sb-brand { display: flex; align-items: center; gap: 10px; padding: 24px 20px 20px; border-bottom: 1.5px solid #e2e8f0; }
+.sb-logo { flex: none; width: 36px; height: 36px; border-radius: 10px; background: #404942; display: grid; place-items: center; }
+.sb-logo img { width: 26px; height: 26px; object-fit: contain; display: block; }
+.sb-name { font: 700 13px/1.2 "DM Sans", "Inter", sans-serif; color: #1a2332; }
+.sb-name span { display: block; color: #023724; }
+
+.sb-scroll { flex: 1; padding: 16px 12px; overflow-y: auto; }
+.sb-label {
+  margin: 0 0 2px; padding: 0 8px;
+  font: 700 10px/15px "Inter", sans-serif; letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--sb-label) !important; /* satu warna di semua halaman */
+}
+.sb-link {
+  position: relative; display: flex; align-items: center; gap: 10px;
+  height: 40px; margin-top: 2px; padding: 0 12px;
+  border-radius: 8px;
+  font: 400 13.5px "Inter", sans-serif; color: #4b5563; text-decoration: none;
+  transition: background 0.15s;
+}
+.sb-link svg { flex: none; width: 18px; height: 18px; opacity: 0.7; }
+.sb-link:hover { background: #f1f5f4; }
+.sb-link.is-active { background: #eaf4f0; color: #023724; font-weight: 600; }
+.sb-link.is-active:hover { background: #eaf4f0; }
+.sb-link.is-active svg { opacity: 1; }
+.sb-link.is-active::before {
+  content: ""; position: absolute; left: 0; top: 10px; width: 3px; height: 20px;
+  background: #023724; border-radius: 0 3px 3px 0;
+}
+.sb-link:focus-visible, .sb-out:focus-visible, .sb-toggle:focus-visible { outline: 2px solid #1d8f6a; outline-offset: 2px; }
+
+.sb-foot { padding: 16px 12px; border-top: 1.5px solid #e2e8f0; }
+.sb-out {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px;
+  border-radius: 8px; background: #eaf4f0; color: #023724;
+  font: 600 13.5px "Inter", sans-serif; text-decoration: none;
+  transition: background 0.15s;
+}
+.sb-out:hover { background: #d9ece4; }
+.sb-out svg { flex: none; width: 18px; height: 18px; }
+
+/* ---- Konten digeser agar tidak tertutup sidebar ---- */
+.app { display: block !important; }
+.app > .main { margin-left: var(--sb-w) !important; width: auto !important; max-width: none !important; min-height: 100vh; }
+
+/* ---- Tombol menu & latar (layar kecil) ---- */
+.sb-toggle { display: none; flex: none; width: 36px; height: 36px; padding: 0; margin-right: 12px; border: 1.5px solid #e2e8f0; border-radius: 8px; background: #fff; color: #1a2332; place-items: center; cursor: pointer; }
+.sb-toggle svg { width: 18px; height: 18px; }
+.sb-backdrop { display: none; position: fixed; inset: 0; z-index: 40; background: rgba(15, 23, 42, 0.4); }
+.menu-btn { display: none !important; } /* tombol lama dari layout.css, diganti .sb-toggle */
+
+@media (max-width: 900px) {
+  .sb { transform: translateX(-100%); transition: transform 0.2s ease; }
+  .sb.is-open { transform: none; box-shadow: 8px 0 24px rgba(0, 0, 0, 0.18); }
+  .sb-backdrop.is-on { display: block; }
+  .app > .main { margin-left: 0 !important; }
+  .sb-toggle { display: grid; }
+}
+@media (prefers-reduced-motion: reduce) { .sb { transition: none; } }

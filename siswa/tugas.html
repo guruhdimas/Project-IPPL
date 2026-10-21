@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tugas – Portal Ekstrakurikuler</title>
+  <script src="js/auth-siswa.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -16,26 +17,9 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-serif;min-height:100vh}
 .app{display:flex;min-height:100vh}
-/* sidebar */
-.side{width:230px;min-width:220px;background:var(--card);border-right:1.5px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
-.brand{display:flex;gap:10px;align-items:center;padding:24px 20px 20px;border-bottom:1.5px solid var(--line)}
-.logo{width:36px;height:36px;border-radius:10px;background:#404942;display:grid;place-items:center;flex:none}
-.logo img{width:26px;height:26px;object-fit:contain;display:block}
-.brand b{display:block;font:700 13px/1.2 "DM Sans",Inter,sans-serif;color:var(--ink2)}
-.brand b+b{color:var(--green)}
-nav{flex:1;padding:16px 12px;overflow:auto}
-.sec{padding:0 8px;font:800 10px/15px Inter;letter-spacing:.8px;text-transform:uppercase;color:var(--green);margin-bottom:2px}
-.nav a{position:relative;display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;margin-top:2px;border-radius:8px;color:var(--soft);text-decoration:none;font-size:13.5px}
-.nav a svg{opacity:.7}
-.nav a.on{background:var(--mint);color:var(--green);font-weight:600}
-.nav a.on svg{opacity:1}
-.nav a.on::before{content:"";position:absolute;left:0;top:10px;width:3px;height:20px;background:var(--green);border-radius:0 3px 3px 0}
-.nav a:hover:not(.on){background:var(--cell-off)}
-.logout{border-top:1.5px solid var(--line);padding:16px 12px}
-.logout button{width:100%;display:flex;gap:10px;align-items:center;padding:8px;border:0;border-radius:8px;background:var(--mint);color:var(--green);font:600 13.5px Inter;cursor:pointer}
 /* main */
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
-header{height:60px;margin-top:4px;background:var(--card);border-bottom:1.5px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;box-shadow:0 1px 2px rgba(2,55,36,.05);gap:16px}
+header{height:60px;margin-top:0;background:var(--card);border-bottom:1.5px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;box-shadow:0 1px 2px rgba(2,55,36,.05);gap:16px}
 header h1{margin:0;font:700 17px/25px "DM Sans",Inter,sans-serif;color:var(--ink2)}
 .hr{display:flex;align-items:center;gap:16px}
 .search{position:relative;width:240px}
@@ -82,7 +66,6 @@ main{padding:24px 28px;flex:1}
 footer{text-align:center;color:#94a3b8;font-size:12px;padding:20px 8px}
 @media(max-width:1000px){.grid{grid-template-columns:1fr}}
 @media(max-width:760px){
-  .side{display:none}
   header{padding:0 16px}.search{display:none}.user div{display:none}
   main{padding:16px 12px}.body{padding:12px}.ch{padding:12px 14px;flex-wrap:wrap}
   .cell{min-height:64px;padding:4px}.chip{font-size:0;padding:0;height:6px;width:6px;border-radius:50%;background:var(--green2);align-self:flex-start}
@@ -125,41 +108,45 @@ a.user{text-decoration:none;color:inherit}
 .none{font-size:12.5px;color:#94a3b8}
 .ub{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:0;border-radius:8px;background:var(--green);color:#fff;font:600 12.5px Inter;cursor:pointer}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.tr{padding:12px 14px}}
+
+/* ===== Penyesuaian dengan desain Figma ===== */
+.sc{border-radius:10px;padding:14px 14px 12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.sc .n{font:700 20px/28px Inter,sans-serif}
+.sc .l{margin-top:2px;font-size:11px}
+.tbl{min-width:760px}
+.tr{grid-template-columns:2.4fr 1.2fr 3fr 1.4fr;gap:16px;padding:10px 20px;border-top:1px solid var(--line)}
+.tr.h{border-top:0;padding:12px 20px 8px;font:600 10.5px/16px Inter;letter-spacing:.6px;color:#94a3b8}
+.tr>div:nth-child(2){text-align:center}
+.tn b{font:600 12.5px/18px Inter}
+.bd{display:inline-block;border-radius:99px;padding:1px 14px;font:600 11px/18px Inter;white-space:nowrap}
+.b-Selesai{background:#e6f2ed;color:#0f5132}
+.b-Dalam{background:#fde7b0;color:#7a4a00}
+.b-Belum{background:#fde8e8;color:#dc2626}
+.dt{font-size:12.5px}
+.dt em{margin-top:2px;font-size:10.5px}
+.ub{height:28px;padding:0 12px;font-size:11.5px;border-radius:6px}
+.ub:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}
+@media(max-width:760px){.tr{padding:10px 14px}}
 </style>
+<link rel="stylesheet" href="css/sidebar.css" />
 </head>
 <body>
 <div class="app">
-  <aside class="side">
-    <div class="brand">
-      <div class="logo" id="logo"></div>
-      <div><b>SMA TRISULA PRAJA</b><b>EKSTRAKURIKULER</b></div>
-    </div>
-    <nav class="nav">
-      <div class="sec">Menu Utama</div>
-      <a href="dashboard-siswa.html" data-i="grid">Dashboard</a>
-      <a href="daftar-ekskul.html" data-i="list">Daftar Ekskul</a>
-      <a href="jadwal.html" data-i="cal">Jadwal</a>
-      <a href="tugas.html" class="on" data-i="clip">Tugas</a>
-      <a href="absensi.html" data-i="user">Absensi</a>
-      <a href="pengumuman.html" data-i="brief">Pengumuman</a>
-      <a href="penilaian.html" data-i="bar">Penilaian</a>
-    </nav>
-    <div class="logout"><button type="button" onclick="location.href='login.html'"><span data-i="out"></span>Keluar</button></div>
-  </aside>
+  <div id="sidebar-slot"></div>
+  <script src="js/sidebar.js"></script>
   <div class="main">
     <header>
       <h1>Tugas</h1>
       <div class="hr">
-        <div class="search"><span data-i="search"></span><input type="text" placeholder="Cari Pengumuman, Tugas..." aria-label="Cari"></div>
         
         <a class="user" href="profil.html"><div class="av">BS</div><div><b>Budi Setiawan</b><small>Kelas XI IPA 2</small></div></a>
       </div>
     </header>
     <main>
-      <div class="pt"><h2>Tugas</h2><p>Kelola semua tugas Anda</p></div>
+      <div class="pt"><h2>Tugas</h2><p>Kelola semua tugas anda!</p></div>
       <div class="wrap">
         <div class="stats" id="stats"></div>
-        <div class="panel" style="border-top-width:1.25px;border-radius:14px"><div class="scroll"><div class="tbl" id="tbl"></div></div></div>
+        <div class="panel" style="border-top-width:1.25px;border-radius:12px"><div class="scroll"><div class="tbl" id="tbl"></div></div></div>
       </div>
       <input type="file" id="file" hidden>
     </main>
@@ -187,37 +174,36 @@ document.querySelectorAll('[data-i]').forEach(el=>{
   const n=el.dataset.i, big=el.classList.contains('btn')||n==='down'?16:(n==='search'?15:18);
   el.insertAdjacentHTML('afterbegin',svg(n,big));
 });
-document.getElementById('logo').innerHTML='<img src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display=\'none\'">';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function toast(t){const m=$('msg');m.textContent=t;m.classList.add('on');setTimeout(()=>m.classList.remove('on'),2200);}
 
 // Data contoh – ganti dengan data dari API/database
 const T=[
-  {n:'Latihan Rutin Teater',j:'Agenda',s:'Dalam Proses',d:'Latihan di Aula, Jam 4 sore'},
-  {n:'Laporan Akhir Panitia Lomba Melukis',j:'Tugas',s:'Belum Selesai',d:'Kumpulkan laporan lengkap beserta dokumentasi',dl:'19 September 2026'},
-  {n:'Rapat Koordinasi Panitia HUT Sekolah',j:'Agenda',s:'Terjadwal',d:'Ruang OSIS, Jam 1 siang'},
-  {n:'Proposal Kegiatan Pensi Akhir Tahun',j:'Tugas',s:'Selesai',d:'Buat proposal kegiatan 10 halaman',dl:'15 September 2026',f:'proposal_pensi.pdf'}
+  {n:'Mini-Project ROS & Visi Komputer',s:'Selesai',d:'Kumpulkan laporan dalam bentuk pdf',dl:'12 April 2026',f:'laporan_ros.pdf'},
+  {n:'Tugas Konektivitas & IoT Clouds',s:'Dalam Proses',d:'Kumpulkan laporan dalam bentuk pdf',dl:'01 Juni 2026',f:'iot_clouds.pdf'},
+  {n:'Tuning Algoritma Kontrol PID',s:'Belum Selesai',d:'Kumpulkan laporan dalam bentuk pdf',dl:'19 Juni 2026'}
 ];
-const OPT={Agenda:['Dalam Proses','Terjadwal','Selesai'],Tugas:['Belum Selesai','Dalam Proses','Selesai']};
-const cls=s=>'st-'+s.split(' ')[0];
+const BD={'Selesai':'b-Selesai','Dalam Proses':'b-Dalam','Belum Selesai':'b-Belum'};
 function render(){
   const c=s=>T.filter(t=>t.s===s).length;
-  $('stats').innerHTML=[[T.length,'Total Item','#023724'],[c('Selesai'),'Selesai','#16a34a'],[c('Dalam Proses'),'Dalam Proses','#0891b2'],[c('Belum Selesai'),'Belum Selesai','#dc2626']]
+  $('stats').innerHTML=[[T.length,'Total Item','#023724'],[c('Selesai'),'Selesai','#16a34a'],[c('Dalam Proses'),'Dalam Proses','#d97706'],[c('Belum Selesai'),'Belum Selesai','#dc2626']]
     .map(([n,l,col])=>`<div class="sc"><div class="n" style="color:${col}">${n}</div><div class="l">${l}</div></div>`).join('');
-  $('tbl').innerHTML='<div class="tr h"><div>Nama Kegiatan</div><div>Jenis</div><div>Status</div><div>Detail / Deadline</div><div>Upload File</div></div>'+
-  T.map((t,i)=>`<div class="tr">
-    <div class="tn"><b>${esc(t.n)}</b>${t.f?`<span class="fl">${svg('check',11)}${esc(t.f)}</span>`:''}</div>
-    <div><span class="jn ${t.j}">${t.j}</span></div>
-    <div><span class="ss"><select class="${cls(t.s)}" data-s="${i}" aria-label="Status">${OPT[t.j].map(o=>`<option ${o===t.s?'selected':''}>${o}</option>`).join('')}</select>${svg('down',12)}</span></div>
-    <div class="dt">${esc(t.d)}${t.dl?`<em>Deadline: ${t.dl}</em>`:''}</div>
-    <div>${t.j==='Tugas'?`<button type="button" class="ub" data-u="${i}">${svg('up',13)}${t.f?'Ganti File':'Upload File'}</button>`:'<span class="none">Tidak diperlukan</span>'}</div>
-  </div>`).join('');
+  $('tbl').innerHTML='<div class="tr h"><div>Nama Tugas</div><div>Status</div><div>Detail / Deadline</div><div>Upload File</div></div>'+
+  T.map((t,i)=>{
+    let aksi;
+    if(t.s==='Selesai') aksi='<button type="button" class="ub" disabled>Diserahkan</button>';
+    else aksi=`<button type="button" class="ub" data-u="${i}">${svg('up',13)}${t.f?'Ganti File':'Upload File'}</button>`;
+    return `<div class="tr">
+    <div class="tn"><b>${esc(t.n)}</b></div>
+    <div><span class="bd ${BD[t.s]}">${esc(t.s)}</span></div>
+    <div class="dt">${esc(t.d)}${t.dl?`<em>Deadline: ${esc(t.dl)}</em>`:''}</div>
+    <div>${aksi}</div>
+  </div>`;}).join('');
 }
 let cur=-1;
-$('tbl').addEventListener('change',e=>{const s=e.target.closest('[data-s]');if(s){T[+s.dataset.s].s=s.value;render();}});
 $('tbl').addEventListener('click',e=>{const b=e.target.closest('[data-u]');if(b){cur=+b.dataset.u;$('file').value='';$('file').click();}});
-$('file').onchange=e=>{const f=e.target.files[0];if(!f||cur<0)return;T[cur].f=f.name;T[cur].s='Selesai';render();toast('File "'+f.name+'" dipilih');};
+$('file').onchange=e=>{const f=e.target.files[0];if(!f||cur<0)return;T[cur].f=f.name;T[cur].s='Dalam Proses';render();toast('File "'+f.name+'" dipilih');};
 render();
 
 </script>

@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Absensi – Portal Ekstrakurikuler</title>
+  <script src="js/auth-siswa.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -16,26 +17,9 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-serif;min-height:100vh}
 .app{display:flex;min-height:100vh}
-/* sidebar */
-.side{width:230px;min-width:220px;background:var(--card);border-right:1.5px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
-.brand{display:flex;gap:10px;align-items:center;padding:24px 20px 20px;border-bottom:1.5px solid var(--line)}
-.logo{width:36px;height:36px;border-radius:10px;background:#404942;display:grid;place-items:center;flex:none}
-.logo img{width:26px;height:26px;object-fit:contain;display:block}
-.brand b{display:block;font:700 13px/1.2 "DM Sans",Inter,sans-serif;color:var(--ink2)}
-.brand b+b{color:var(--green)}
-nav{flex:1;padding:16px 12px;overflow:auto}
-.sec{padding:0 8px;font:800 10px/15px Inter;letter-spacing:.8px;text-transform:uppercase;color:var(--green);margin-bottom:2px}
-.nav a{position:relative;display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;margin-top:2px;border-radius:8px;color:var(--soft);text-decoration:none;font-size:13.5px}
-.nav a svg{opacity:.7}
-.nav a.on{background:var(--mint);color:var(--green);font-weight:600}
-.nav a.on svg{opacity:1}
-.nav a.on::before{content:"";position:absolute;left:0;top:10px;width:3px;height:20px;background:var(--green);border-radius:0 3px 3px 0}
-.nav a:hover:not(.on){background:var(--cell-off)}
-.logout{border-top:1.5px solid var(--line);padding:16px 12px}
-.logout button{width:100%;display:flex;gap:10px;align-items:center;padding:8px;border:0;border-radius:8px;background:var(--mint);color:var(--green);font:600 13.5px Inter;cursor:pointer}
 /* main */
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
-header{height:60px;margin-top:4px;background:var(--card);border-bottom:1.5px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;box-shadow:0 1px 2px rgba(2,55,36,.05);gap:16px}
+header{height:60px;margin-top:0;background:var(--card);border-bottom:1.5px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;box-shadow:0 1px 2px rgba(2,55,36,.05);gap:16px}
 header h1{margin:0;font:700 17px/25px "DM Sans",Inter,sans-serif;color:var(--ink2)}
 .hr{display:flex;align-items:center;gap:16px}
 .search{position:relative;width:240px}
@@ -82,7 +66,6 @@ main{padding:24px 28px;flex:1}
 footer{text-align:center;color:#94a3b8;font-size:12px;padding:20px 8px}
 @media(max-width:1000px){.grid{grid-template-columns:1fr}}
 @media(max-width:760px){
-  .side{display:none}
   header{padding:0 16px}.search{display:none}.user div{display:none}
   main{padding:16px 12px}.body{padding:12px}.ch{padding:12px 14px;flex-wrap:wrap}
   .cell{min-height:64px;padding:4px}.chip{font-size:0;padding:0;height:6px;width:6px;border-radius:50%;background:var(--green2);align-self:flex-start}
@@ -129,31 +112,16 @@ a.user{text-decoration:none;color:inherit}
 .sp{height:20px}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
+<link rel="stylesheet" href="css/sidebar.css" />
 </head>
 <body>
 <div class="app">
-  <aside class="side">
-    <div class="brand">
-      <div class="logo" id="logo"></div>
-      <div><b>SMA TRISULA PRAJA</b><b>EKSTRAKURIKULER</b></div>
-    </div>
-    <nav class="nav">
-      <div class="sec">Menu Utama</div>
-      <a href="dashboard-siswa.html" data-i="grid">Dashboard</a>
-      <a href="daftar-ekskul.html" data-i="list">Daftar Ekskul</a>
-      <a href="jadwal.html" data-i="cal">Jadwal</a>
-      <a href="tugas.html" data-i="clip">Tugas</a>
-      <a href="absensi.html" class="on" data-i="user">Absensi</a>
-      <a href="pengumuman.html" data-i="brief">Pengumuman</a>
-      <a href="penilaian.html" data-i="bar">Penilaian</a>
-    </nav>
-    <div class="logout"><button type="button" onclick="location.href='login.html'"><span data-i="out"></span>Keluar</button></div>
-  </aside>
+  <div id="sidebar-slot"></div>
+  <script src="js/sidebar.js"></script>
   <div class="main">
     <header>
       <h1>Absensi</h1>
       <div class="hr">
-        <div class="search"><span data-i="search"></span><input type="text" placeholder="Cari Pengumuman, Tugas..." aria-label="Cari"></div>
         
         <a class="user" href="profil.html"><div class="av">BS</div><div><b>Budi Setiawan</b><small>Kelas XI IPA 2</small></div></a>
       </div>
@@ -201,7 +169,6 @@ document.querySelectorAll('[data-i]').forEach(el=>{
   const n=el.dataset.i, big=el.classList.contains('btn')||n==='down'?16:(n==='search'?15:18);
   el.insertAdjacentHTML('afterbegin',svg(n,big));
 });
-document.getElementById('logo').innerHTML='<img src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display=\'none\'">';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function toast(t){const m=$('msg');m.textContent=t;m.classList.add('on');setTimeout(()=>m.classList.remove('on'),2200);}

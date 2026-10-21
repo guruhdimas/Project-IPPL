@@ -6,103 +6,353 @@
 <title>Login - Portal Ekstrakurikuler SMA Trisula Praja</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inter:wght@400;500;600;700&family=Rubik+Mono+One&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Condiment&family=Concert+One&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
-:root{--hijau:#003e29;--gelap:#001f15;--kuning:#ffc700;--lime:#e6ff4d}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,sans-serif;min-height:100vh;background:var(--hijau);color:#fff;position:relative;overflow-x:hidden}
-/* Watermark logo besar */
-body::before{content:"";position:fixed;left:-6%;top:12%;width:62%;height:100%;background:url(img/logo-perisai.png) center/contain no-repeat;opacity:.22;pointer-events:none}
-.bar{height:78px;background:var(--gelap);border-bottom:19px solid #fff;position:relative;box-sizing:content-box}
-.tab{position:absolute;left:88px;top:0;width:112px;height:132px;background:#454c46;border:7px solid var(--kuning);border-top:0;border-radius:0 0 34px 34px;display:grid;place-items:center;z-index:2}
-.tab img{width:76px}
-main{min-height:calc(100vh - 97px);display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:20px;padding:30px 7vw 40px 3vw;position:relative}
-.judul{padding-left:2vw}
-.judul .a{font-family:"Fugaz One",cursive;font-style:italic;font-size:clamp(40px,6.4vw,92px);line-height:.95;letter-spacing:.01em;transform:skewX(-6deg)}
-.judul .a span{display:block;margin-left:4vw}
-.judul .b{font-family:"Rubik Mono One",sans-serif;color:var(--lime);font-size:clamp(34px,5.4vw,78px);line-height:1.1;margin-top:6px}
-/* Kartu login */
-.kartu{width:min(405px,100%);justify-self:end;background:#fff;color:#003e29;border-radius:16px;padding:28px;box-shadow:0 12px 34px rgba(0,0,0,.35)}
-.kartu h1{font-size:21px;margin-bottom:8px}
-.sub{font-size:14px;color:#4b5a53;margin-bottom:26px}
-label.l{display:block;font-size:13px;color:#2e3d35;margin-bottom:8px}
-.in{display:flex;align-items:center;gap:10px;border:1px solid #d6dbd8;border-radius:8px;padding:0 14px;height:46px;margin-bottom:22px;color:#8b9791}
-.in:focus-within{border-color:var(--hijau);box-shadow:0 0 0 3px rgba(0,62,41,.12)}
-.in svg{width:18px;flex:none}
-.in input{border:0;outline:0;flex:1;font:inherit;font-size:14.5px;color:#12261d;background:none}
-.peran{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 22px}
-.peran button{font:inherit;font-size:14.5px;color:#4b5a53;background:#fff;border:1px solid #d6dbd8;border-radius:8px;height:82px;display:grid;place-items:center;align-content:center;gap:8px;cursor:pointer}
-.peran svg{width:20px}
-.peran button.on{background:#eef5ff;border:2px solid var(--hijau);color:var(--hijau)}
-.go{width:100%;height:44px;border:0;border-radius:8px;background:var(--hijau);color:#fff;font:700 17px Inter,sans-serif;cursor:pointer}
-.go:hover{background:#00553a}
-.lupa{display:block;text-align:center;font-size:13px;margin-top:22px;color:var(--hijau)}
-.err{display:none;background:#fdecec;color:#a11d1d;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:16px}
-.catatan{position:absolute;right:7vw;bottom:44px;width:min(405px,86vw);text-align:center;font-size:11.5px;line-height:1.9}
-@media(max-width:900px){body::before{left:-30%;width:120%;opacity:.14}main{grid-template-columns:1fr;padding:30px 20px 90px}.judul{padding:0}.kartu{justify-self:center}.tab{left:24px}.catatan{position:static;margin:16px auto 0}}
+/* =========================================================
+   Login - Portal Ekstrakurikuler Trisula Praja
+   Sumber: frame Figma "UI LOGIN SISWA" (1440 x 1024)
+   ========================================================= */
+
+:root {
+  --green: #004029;
+  --green-dark: #002015;
+  --green-btn: #023724;
+  --gold: #ffcc00;
+  --lime: #ecff60;
+  --text: #364153;
+  --muted: #4a5565;
+  --border: #d1d5dc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--green);
+  color: #fff;
+  font-family: "Inter", system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- Bar atas ---------- */
+.topbar {
+  position: relative;
+  z-index: 3;
+  height: 85px;
+  background: var(--green-dark);
+  margin-bottom: 21px; /* ruang untuk garis putih di bawah bar */
+}
+.topbar__badge {
+  position: absolute;
+  z-index: 3;
+  left: clamp(16px, 6.7vw, 96px);
+  top: -204px;
+  width: 125px;
+  height: 350px;
+  background: #404942;
+  border: 8px solid var(--gold);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+.topbar__badge img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  margin-bottom: 4px;
+}
+.topbar__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 2;
+  height: 21px;
+  background: #fff;
+}
+
+/* ---------- Area utama ---------- */
+.login {
+  position: relative;
+  min-height: calc(100vh - 106px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 48px clamp(16px, 5.5vw, 80px) 48px clamp(16px, 2vw, 32px);
+  overflow: hidden;
+}
+@media (min-height: 940px) { .login { min-height: 918px; } }
+
+.login__watermark {
+  position: absolute;
+  left: -175px;
+  top: -61px;
+  width: 1048px;
+  height: 1048px;
+  object-fit: cover;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+/* ---------- Judul kiri ---------- */
+.brand {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-top: -80px;
+}
+.brand p { white-space: nowrap; line-height: 1.1; font-size: clamp(40px, 6.7vw, 96px); }
+.brand__line1 { font-family: "Condiment", cursive; margin-left: clamp(0px, 5vw, 70px); }
+.brand__line2 { font-family: "Condiment", cursive; margin-left: clamp(0px, 4vw, 60px); }
+.brand__line3 { font-family: "Concert One", sans-serif; color: var(--lime); margin-top: 6px; }
+
+/* ---------- Kartu login ---------- */
+.panel {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 448px;
+  max-width: 448px;
+  width: 100%;
+  margin-top: 70px;
+}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 12.5px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.1);
+}
+.card__title { color: var(--green); font-size: 24px; font-weight: 700; line-height: 32px; }
+.card__subtitle { color: var(--muted); font-size: 16px; line-height: 24px; margin-top: 8px; }
+
+.field { margin-top: 24px; }
+.field:first-of-type { margin-top: 32px; }
+.field label { display: block; color: var(--text); font-size: 14px; line-height: 20px; margin-bottom: 8px; }
+
+.input { position: relative; }
+.input__icon {
+  position: absolute;
+  left: 12px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  color: #6a7282;
+  pointer-events: none;
+}
+.input input {
+  width: 100%;
+  height: 50px;
+  padding: 12px 16px 12px 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: 400 16px "Inter", sans-serif;
+  color: #0a0a0a;
+  background: #fff;
+}
+.input input::placeholder { color: rgba(10, 10, 10, 0.5); }
+.input input:focus { outline: 2px solid var(--green); outline-offset: 1px; border-color: transparent; }
+
+/* ---------- Pilihan peran ---------- */
+.roles { border: 0; margin-top: 24px; }
+.roles legend { color: var(--text); font-size: 14px; line-height: 20px; margin-bottom: 8px; padding: 0; }
+.roles__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.role {
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  color: var(--text);
+  font: 400 16px/24px "Inter", sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.role svg { width: 24px; height: 24px; }
+.role:hover { border-color: #b8c4bd; }
+.role.is-active { background: #eff6ff; border-color: var(--green-btn); color: var(--green-btn); }
+
+/* ---------- Tombol & tautan ---------- */
+.error { margin-top: 16px; color: #c62828; font-size: 14px; }
+.btn-login {
+  display: block;
+  width: 100%;
+  height: 48px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font: 800 24px/24px "Inter", sans-serif;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+.btn-login:hover { filter: brightness(1.2); }
+.forgot {
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+  color: var(--green-btn);
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+}
+.forgot:hover { text-decoration: underline; }
+
+.legal { margin-top: 24px; text-align: center; font-size: 12px; line-height: 16px; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 960px) {
+  .login { flex-direction: column; justify-content: flex-start; padding-top: 40px; }
+  .brand { margin-top: 0; }
+  .brand p { margin-left: 0 !important; }
+  .panel { margin-top: 0; flex: none; }
+}
+
+/* ---------- Tambahan: bantuan WhatsApp, status, aksesibilitas ---------- */
+.help {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--green-btn);
+  font-size: 14px;
+  line-height: 20px;
+}
+.help a {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.help a:hover strong { text-decoration: underline; }
+.help svg { width: 20px; height: 20px; color: #0f5132; margin-top: -6px; }
+
+.error[hidden] { display: none; }
+.input.is-invalid input { border-color: #c62828; }
+.btn-login:disabled { opacity: 0.7; cursor: progress; filter: none; }
+
+.btn-login:focus-visible,
+.role:focus-visible,
+.help a:focus-visible,
+.topbar__badge:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
 </style>
 </head>
 <body>
-<div class="bar"><a class="tab" href="portal.html" aria-label="Kembali ke portal"><img src="img/logo-perisai.png" alt="Logo SMA Trisula Praja" /></a></div>
 
-<main>
-  <div class="judul">
-    <div class="a"><span>PORTAL</span><span>EKSTRAKURIKULER</span></div>
-    <div class="b">TRISULA PRAJA</div>
+<header class="topbar">
+  <a class="topbar__badge" href="portal.html" aria-label="Kembali ke portal">
+    <img src="img/logo-perisai.png" alt="Logo SMA Trisula Praja" />
+  </a>
+  <div class="topbar__line"></div>
+</header>
+
+<main class="login">
+  <img class="login__watermark" src="img/logo-perisai.png" alt="" aria-hidden="true" />
+
+  <div class="brand">
+    <p class="brand__line1">PORTAL</p>
+    <p class="brand__line2">EKSTRAKURIKULER</p>
+    <p class="brand__line3">TRISULA PRAJA</p>
   </div>
 
-  <div>
-    <form class="kartu" id="form" novalidate>
-      <h1>Selamat Datang Kembali!</h1>
-      <p class="sub">Masuk untuk melanjutkan ke dasbor Anda</p>
-      <div class="err" id="err" role="alert"></div>
+  <div class="panel">
+    <form class="card" id="form" novalidate>
+      <h1 class="card__title">Selamat Datang Kembali!</h1>
+      <p class="card__subtitle">Masuk untuk melanjutkan ke dasbor Anda</p>
 
-      <label class="l" for="user">Username</label>
-      <div class="in">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-        <input id="user" type="text" placeholder="Masukan Username" autocomplete="username" />
+      <div class="field">
+        <label for="user">Username</label>
+        <div class="input">
+          <svg class="input__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          <input id="user" type="text" placeholder="Masukan Username" autocomplete="username" autocapitalize="none" spellcheck="false" />
+        </div>
       </div>
 
-      <label class="l" for="pass">Password</label>
-      <div class="in">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <input id="pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+      <div class="field">
+        <label for="pass">Password</label>
+        <div class="input">
+          <svg class="input__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input id="pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
       </div>
 
-      <label class="l">Silahkan Pilih Peran Anda!</label>
-      <div class="peran">
-        <button type="button" class="on" data-peran="siswa">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Siswa
-        </button>
-        <button type="button" data-peran="pembimbing">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Pembimbing
-        </button>
-      </div>
+      <fieldset class="roles">
+        <legend>Silahkan Pilih Peran Anda!</legend>
+        <div class="roles__grid">
+          <button type="button" class="role is-active" data-peran="siswa" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+            Siswa
+          </button>
+          <button type="button" class="role" data-peran="pembimbing" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 10-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+            Pembimbing
+          </button>
+        </div>
+      </fieldset>
 
-      <button class="go" type="submit">Login</button>
-      <a class="lupa" href="#">Forgot your password?</a>
+      <p class="error" id="err" role="alert" hidden></p>
+
+      <button class="btn-login" id="go" type="submit">Login</button>
+
+      <p class="help">
+        Butuh Bantuan?
+        <a href="https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20butuh%20bantuan%20login%20Portal%20Ekstrakurikuler" target="_blank" rel="noopener noreferrer" aria-label="Hubungi admin lewat WhatsApp">
+          <strong>klik disini</strong>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.4 15.1L2 22l5-1.6A9.9 9.9 0 1 0 12.04 2Zm5.8 14c-.25.7-1.45 1.35-2 1.4-.5.05-1.15.07-1.85-.15a15 15 0 0 1-1.7-.62c-3-1.3-4.95-4.3-5.1-4.5-.15-.2-1.2-1.6-1.2-3s.75-2.1 1-2.4c.25-.3.55-.37.75-.37h.55c.18 0 .42-.07.65.5.25.6.85 2.1.92 2.25.07.15.12.32.02.52-.1.2-.15.32-.3.5l-.45.52c-.15.15-.3.3-.12.6.17.3.77 1.27 1.65 2.05 1.13 1 2.1 1.32 2.4 1.47.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.7.8 2 .95.3.15.5.22.57.35.07.12.07.72-.18 1.4Z"/></svg>
+        </a>
+      </p>
     </form>
-    <p class="catatan">By signing in, you agree to our Terms of Service and Privacy Policy.<br />Your privacy and data security are our top priorities.</p>
+
+    <p class="legal">By signing in, you agree to our Terms of Service and Privacy Policy.<br />Your privacy and data security are our top priorities.</p>
   </div>
 </main>
 
 <script>
   var peran = 'siswa';
-  var tombol = document.querySelectorAll('.peran button');
-  tombol.forEach(function (b) {
-    b.addEventListener('click', function () {
-      peran = b.dataset.peran;
-      tombol.forEach(function (x) { x.classList.toggle('on', x === b); });
+  var tombol = document.querySelectorAll('.role');
+
+  function pilih(nilai) {
+    peran = nilai;
+    tombol.forEach(function (x) {
+      var aktif = x.dataset.peran === nilai;
+      x.classList.toggle('is-active', aktif);
+      x.setAttribute('aria-pressed', aktif);
     });
-  });
+  }
+
+  // Jika dialihkan dari halaman pembimbing (?peran=pembimbing), pilih peran itu otomatis.
+  if (new URLSearchParams(location.search).get('peran') === 'pembimbing') pilih('pembimbing');
+  tombol.forEach(function (b) { b.addEventListener('click', function () { pilih(b.dataset.peran); }); });
 
   document.getElementById('form').addEventListener('submit', function (e) {
     e.preventDefault();
     var err = document.getElementById('err');
-    var u = document.getElementById('user').value.trim();
-    var p = document.getElementById('pass').value;
-    if (!u || !p) { err.textContent = 'Username dan password wajib diisi.'; err.style.display = 'block'; return; }
-    err.style.display = 'none';
+    var iu = document.getElementById('user'), ip = document.getElementById('pass');
+    var u = iu.value.trim(), p = ip.value;
+    iu.parentNode.classList.toggle('is-invalid', !u);
+    ip.parentNode.classList.toggle('is-invalid', !p);
+    if (!u || !p) {
+      err.textContent = !u && !p ? 'Username dan password wajib diisi.' : (!u ? 'Username wajib diisi.' : 'Password wajib diisi.');
+      err.hidden = false;
+      (!u ? iu : ip).focus();
+      return;
+    }
+    err.hidden = true;
+    var go = document.getElementById('go');
+    go.disabled = true;
+    go.textContent = 'Memproses...';
+    // Simpan peran supaya dibaca penjaga akses (js/auth.js dan js/auth-siswa.js).
+    try { localStorage.setItem('peran', peran); } catch (x) {}
     // Sementara: belum ada pengecekan ke database (login sungguhan = langkah berikutnya).
     location.href = peran === 'siswa' ? 'dashboard-siswa.html' : 'dashboard-pembimbing.html';
   });
