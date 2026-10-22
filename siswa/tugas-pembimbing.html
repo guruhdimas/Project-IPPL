@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tugas · Pembimbing | Portal Ekstrakurikuler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&family=Carlito:wght@400;700&family=Concert+One&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/pb-layout.css">
+<style>
+:root{--g:#013020;--g2:#0f5132;--line:#e2e8f0;--ink:#0f172a;--mut:#64748b;--red:#cc0000;--cal:Calibri,Carlito,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{background:#f7f9fb;font-family:Inter,sans-serif;color:var(--ink);min-height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+
+/* Panel daftar tugas (jarak & lebar #app diatur .pb-page di css/pb-layout.css) */
+.panel{background:#fff;border:1px solid var(--line);border-top:4px solid var(--line);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden}
+.panel-h{padding:16px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.panel-h h2{font:600 16px/24px Inter,sans-serif}
+.panel-h p{font:400 14px/20px Inter,sans-serif;color:var(--mut);margin-top:2px}
+.btn-add{display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;background:var(--g2);color:#fff;font:600 14px Inter,sans-serif;box-shadow:0 1px 1.5px rgba(0,0,0,.1)}
+.btn-add:hover{background:#0b3d27}
+.btn-add svg{width:16px;height:16px}
+.panel-b{padding:22px 24px 28px}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;max-width:840px;margin:0 auto}
+
+/* Kartu tugas */
+.tg{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,.08);padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px}
+.tg .eks{font:600 12px/16px Inter,sans-serif;color:var(--g2);padding-right:90px}
+.tg h3{font:600 16px/24px Inter,sans-serif;padding-right:8px}
+.tg .ds{font:400 14px/20px Inter,sans-serif;color:var(--mut);margin-top:4px}
+.tg .dl{font:500 12px/16px Inter,sans-serif;color:var(--red);margin-top:10px}
+.tg .sub{align-self:flex-start;margin-top:10px;height:28px;padding:0 12px;border-radius:6px;background:#e8f5e9;color:var(--g2);font:600 12px/28px Inter,sans-serif}
+.tg .sub:hover{background:#d1e7dd}
+.badge{position:absolute;right:16px;top:14px;height:20px;padding:0 10px;border-radius:12px;display:flex;align-items:center;gap:6px;font:600 12px/16px Inter,sans-serif}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.on{background:#d1e7dd;color:var(--g2)}
+.badge.off{background:#f1f5f9;color:var(--mut)}
+.none{text-align:center;color:var(--mut);font:400 14px/20px Inter,sans-serif;padding:32px 0}
+
+/* Modal */
+.ov{position:fixed;inset:0;background:rgba(15,23,42,.4);display:none;align-items:center;justify-content:center;padding:24px;z-index:20}
+.ov.on{display:flex}
+.dlg{width:462px;max-width:100%;max-height:100%;overflow:auto;background:#fff;border-radius:8px;box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1)}
+.dlg.wide{width:672px}
+.dlg-h{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line)}
+.dlg-h h3{font:600 16px/24px Inter,sans-serif}
+.x{width:32px;height:32px;border-radius:8px;display:grid;place-items:center}.x:hover{background:#f1f5f9}
+.x svg{width:16px;height:16px}
+.form{padding:24px;display:flex;flex-direction:column;gap:14px}
+.form .f{display:flex;flex-direction:column;gap:6px}
+.form label,.form .lb{font:500 14px/20px Inter,sans-serif}
+.form small{font:400 12px/16px var(--cal);color:#475569}
+.form input,.form select,.form textarea{border:1px solid var(--line);border-radius:8px;padding:0 12px;background:#fff;font:500 14px Inter,sans-serif;outline:0;width:100%}
+.form input,.form select{height:40px}
+.form textarea{height:70px;padding:10px 12px;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--g2)}
+.form .err input,.form .err select,.form .err textarea{border-color:#dc2626}
+.form .errmsg{font:400 12px/16px Inter,sans-serif;color:#dc2626}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.row .f{width:120px}
+.row.jam .f{width:48px}
+.row.jam input{padding:0 6px;text-align:center}
+.dlg-f{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;background:#f8fafc;border-top:1px solid var(--line)}
+.dlg-f button{height:40px;padding:0 16px;border-radius:8px;font:600 14px Inter,sans-serif}
+.dlg-f .cancel{background:#fff;border:1px solid var(--line)}.dlg-f .cancel:hover{background:#f1f5f9}
+.dlg-f .save{background:var(--g2);color:#fff;box-shadow:0 1px 1.5px rgba(0,0,0,.1)}.dlg-f .save:hover{background:#0b3d27}
+
+/* Tabel pengumpulan */
+.tw{margin:24px;border:1px solid var(--line);border-radius:8px;overflow:auto}
+table{width:100%;border-collapse:collapse;font:400 14px/20px Inter,sans-serif;min-width:560px}
+th{background:#e8f5e9;color:var(--g2);font:600 12px/16px Inter,sans-serif;text-transform:uppercase;text-align:left;padding:12px 16px;white-space:nowrap}
+td{padding:10px 16px;border-top:1px solid var(--line);vertical-align:middle;color:var(--mut)}
+td:first-child{color:var(--ink);font-weight:500}
+td .file{color:var(--g2);display:inline-flex;align-items:center;gap:6px}
+td .file svg{width:16px;height:16px;flex:none}
+td .late{color:var(--red)}
+.nilai{width:54px;height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;font:500 14px Inter,sans-serif;color:var(--ink)}
+.nilai:hover{border-color:var(--g2)}
+.mini{height:28px;padding:0 12px;border-radius:6px;background:var(--g2);color:#fff;font:600 12px Inter,sans-serif}
+.mini:hover{background:#0b3d27}
+.empty{padding:28px;text-align:center;color:var(--mut);font:400 14px Inter,sans-serif}
+
+@media(max-width:600px){.list{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<aside id="pb-sidebar" data-active="tugas"></aside>
+
+<div class="pb-main">
+  <header id="pb-topbar"></header>
+  <main id="app" class="pb-page"></main>
+  <div id="pb-foot"></div>
+</div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dlgT"></div>
+
+<script src="js/pb-layout.js"></script>
+<script>
+/* ---------- Data ---------- */
+const NAMA_EKSKUL = {robotic:'Robotic', cyber:'Cyber', english:'English Club', science:'Science Research Club', seni:'Seni Dan Budaya', basket:'Basket Dan Futsal'};
+const NILAI = ['A+','A','B+','B','C','D','E'];
+const TOTAL_ANGGOTA = 8;
+const BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+let TUGAS = [
+  {id:1, ekskul:'robotic', judul:'Mini-Project ROS & Visi Komputer', ket:'Kumpulkan laporan dalam bentuk pdf', deadline:'2026-04-12T23:59',
+    kumpul:[{siswa:'Agus Santoso', file:'laporan_ros_agus.pdf', tgl:'2026-04-11', nilai:'A+', pesan:''},
+            {siswa:'Dimas Saputra', file:'laporan_ros_dimas.pdf', tgl:'2026-04-12', nilai:'', pesan:''}]},
+  {id:2, ekskul:'robotic', judul:'Tugas Konektivitas & IoT Clouds', ket:'Kumpulkan laporan dalam bentuk pdf', deadline:'2026-12-19T23:59',
+    kumpul:[{siswa:'Agus Santoso', file:'iot_cloud_agus.pdf', tgl:'2026-10-20', nilai:'', pesan:''}]},
+  {id:3, ekskul:'robotic', judul:'Tuning Algoritma Kontrol PID', ket:'Kumpulkan laporan dalam bentuk pdf', deadline:'2026-12-19T23:59', kumpul:[]}
+];
+let nextId = 4;
+
+/* ---------- Penyimpanan (localStorage) ---------- */
+const KEY = 'tugas-pembimbing-v1';
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && Array.isArray(s.tugas)) { TUGAS = s.tugas; nextId = s.nextId || nextId; } } catch (_) {}
+const persist = () => { try { localStorage.setItem(KEY, JSON.stringify({tugas:TUGAS, nextId})); } catch (_) {} };
+
+/* Ekskul yang diampu diambil dari halaman Kelola Anggota (kalau belum ada: Robotic) */
+function ekskulSaya(){
+  let ids = [];
+  try { const s = JSON.parse(localStorage.getItem('kelola-anggota-pembimbing-v2')); if (s && Array.isArray(s.diampu)) ids = s.diampu; } catch (_) {}
+  ids = ids.filter(id => NAMA_EKSKUL[id]);
+  if (!ids.length) ids = ['robotic'];
+  return ids.map(id => ({id, nama:NAMA_EKSKUL[id]}));
+}
+
+/* ---------- Util ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tglPanjang = d => `${d.getDate()} ${BULAN[d.getMonth()]} ${d.getFullYear()}`;
+const dl = t => new Date(t.deadline);
+const tutup = t => Date.now() > dl(t).getTime();
+const nama = id => NAMA_EKSKUL[id] || id;
+const tglStr = iso => tglPanjang(new Date(iso + 'T00:00'));
+const ICON_X = '<svg viewBox="0 0 16 16" fill="none" stroke="#64748b" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>';
+const ICON_FILE = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2"/><path d="m5.5 8 2 2 3-3.5"/></svg>';
+
+/* ---------- Tampilan utama ---------- */
+function render(){
+  persist();
+  $('#app').innerHTML = `<section class="panel">
+    <div class="panel-h"><div><h2>Daftar Tugas</h2><p>Buat tugas dan nilai pengumpulan</p></div>
+      <button class="btn-add" data-act="buat"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>Buat Tugas</button></div>
+    <div class="panel-b">${TUGAS.length ? `<div class="list">${TUGAS.map(kartu).join('')}</div>` : '<div class="none">Belum ada tugas. Klik "Buat Tugas" untuk menambahkan.</div>'}</div>
+  </section>`;
+}
+function kartu(t){
+  const off = tutup(t);
+  return `<article class="tg">
+    <span class="badge ${off?'off':'on'}">${off?'Ditutup':'Dibuka'}</span>
+    <div class="eks">${esc(nama(t.ekskul))}</div>
+    <h3>${esc(t.judul)}</h3>
+    <p class="ds">${esc(t.ket || 'Kumpulkan tugas sesuai petunjuk pembimbing')}</p>
+    <p class="dl">Deadline: ${tglPanjang(dl(t))}</p>
+    <button class="sub" data-act="kumpul" data-id="${t.id}">Pengumpulan (${t.kumpul.length}/${TOTAL_ANGGOTA})</button>
+  </article>`;
+}
+
+/* ---------- Modal: buat tugas ---------- */
+function openBuat(err = {}, v = {}){
+  const eks = ekskulSaya();
+  const f = (k, d = '') => esc(v[k] != null ? v[k] : d);
+  $('#ov').innerHTML = `<div class="dlg">
+    <div class="dlg-h"><h3 id="dlgT">Buat Tugas Baru</h3><button class="x" data-act="close" aria-label="Tutup">${ICON_X}</button></div>
+    <div class="form">
+      <div class="f"><label for="fe">Ekstrakurikuler</label><select id="fe">${eks.map(e => `<option value="${e.id}" ${v.ekskul === e.id ? 'selected' : ''}>${esc(e.nama)}</option>`).join('')}</select></div>
+      <div class="f ${err.judul?'err':''}"><label for="fj">Judul Tugas</label><input id="fj" value="${f('judul')}" maxlength="80">${err.judul?'<span class="errmsg">Judul tugas wajib diisi</span>':''}</div>
+      <div class="f"><label for="fk">Deskripsi Tugas</label><textarea id="fk" maxlength="300">${f('ket')}</textarea></div>
+      <div class="f ${err.dl?'err':''}"><span class="lb">Deadline</span>
+        <div class="row">
+          <div class="f"><small>tanggal</small><input id="fd" type="number" min="1" max="31" inputmode="numeric" value="${f('d')}"></div>
+          <div class="f"><small>bulan</small><input id="fb" type="number" min="1" max="12" inputmode="numeric" value="${f('b')}"></div>
+          <div class="f"><small>tahun</small><input id="fy" type="number" min="2026" inputmode="numeric" value="${f('y')}"></div>
+        </div>
+        <small style="margin-top:6px">jam</small>
+        <div class="row jam"><div class="f"><input id="fh" type="number" min="0" max="23" inputmode="numeric" aria-label="Jam" value="${f('h')}"></div>
+          <div class="f"><input id="fm" type="number" min="0" max="59" inputmode="numeric" aria-label="Menit" value="${f('m')}"></div></div>
+        ${err.dl?`<span class="errmsg">${esc(err.dl)}</span>`:''}</div>
+    </div>
+    <div class="dlg-f"><button class="cancel" data-act="close">Batal</button><button class="save" data-act="simpan-tugas">Simpan &amp; Kirim</button></div>
+  </div>`;
+  $('#ov').classList.add('on');
+}
+function simpanTugas(){
+  const v = {ekskul:$('#fe').value, judul:$('#fj').value.trim(), ket:$('#fk').value.trim(),
+    d:$('#fd').value, b:$('#fb').value, y:$('#fy').value, h:$('#fh').value, m:$('#fm').value};
+  const err = {};
+  if (!v.judul) err.judul = true;
+  const d = +v.d, b = +v.b, y = +v.y, h = v.h === '' ? 23 : +v.h, mi = v.m === '' ? 59 : +v.m;
+  const dt = new Date(y, b - 1, d, h, mi);
+  if (!v.d || !v.b || !v.y) err.dl = 'Isi tanggal, bulan, dan tahun deadline';
+  else if (isNaN(dt) || dt.getDate() !== d || dt.getMonth() !== b - 1 || dt.getFullYear() !== y || h > 23 || mi > 59) err.dl = 'Tanggal atau jam tidak valid';
+  else if (dt.getTime() <= Date.now()) err.dl = 'Deadline harus setelah waktu sekarang';
+  if (err.judul || err.dl) return openBuat(err, v);
+  const p = n => String(n).padStart(2, '0');
+  TUGAS.unshift({id:nextId++, ekskul:v.ekskul, judul:v.judul, ket:v.ket, deadline:`${y}-${p(b)}-${p(d)}T${p(h)}:${p(mi)}`, kumpul:[]});
+  closeDlg(); render(); toast('Tugas "' + v.judul + '" dibuat');
+}
+
+/* ---------- Modal: daftar pengumpulan ---------- */
+let curId = null, curSiswa = null;
+function openKumpul(id){
+  const t = TUGAS.find(x => x.id === id); if (!t) return; curId = id;
+  const rows = t.kumpul.map(k => `<tr>
+      <td>${esc(k.siswa)}</td>
+      <td><span class="file">${ICON_FILE}${esc(k.file)}</span></td>
+      <td>${esc(tglStr(k.tgl))}</td>
+      <td><button class="nilai" data-act="beri" data-s="${esc(k.siswa)}" aria-label="Beri nilai ${esc(k.siswa)}">${k.nilai ? esc(k.nilai) : '&nbsp;'}</button></td>
+      <td class="late">${tglPanjang(dl(t))}</td>
+      <td><button class="mini" data-act="beri" data-s="${esc(k.siswa)}">${k.nilai ? 'Perbarui' : 'Simpan'}</button></td></tr>`).join('');
+  $('#ov').innerHTML = `<div class="dlg wide">
+    <div class="dlg-h"><h3 id="dlgT">Pengumpulan — ${esc(t.judul)}</h3><button class="x" data-act="close" aria-label="Tutup">${ICON_X}</button></div>
+    <div class="tw"><table><thead><tr><th>Siswa</th><th>File</th><th>Tanggal</th><th>Nilai</th><th>Deadline</th><th></th></tr></thead>
+      <tbody>${rows || '<tr><td colspan="6" class="empty">Belum ada siswa yang mengumpulkan.</td></tr>'}</tbody></table></div>
+    <div class="dlg-f"><button class="cancel" data-act="close">Tutup</button></div>
+  </div>`;
+  $('#ov').classList.add('on');
+}
+
+/* ---------- Modal: beri nilai ---------- */
+function openNilai(siswa){
+  const t = TUGAS.find(x => x.id === curId); if (!t) return;
+  const k = t.kumpul.find(x => x.siswa === siswa); if (!k) return; curSiswa = siswa;
+  $('#ov').innerHTML = `<div class="dlg">
+    <div class="dlg-h"><h3 id="dlgT">Beri Nilai</h3><button class="x" data-act="back-kumpul" aria-label="Tutup">${ICON_X}</button></div>
+    <div class="form">
+      <div class="f"><small>${esc(k.siswa)} · ${esc(k.file)}</small></div>
+      <div class="f"><label for="fn">Nilai</label><select id="fn">${NILAI.map(n => `<option ${k.nilai === n ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
+      <div class="f"><label for="fp">Pesan (opsional)</label><textarea id="fp" maxlength="300">${esc(k.pesan || '')}</textarea></div>
+    </div>
+    <div class="dlg-f"><button class="cancel" data-act="back-kumpul">Batal</button><button class="save" data-act="simpan-nilai">Simpan &amp; Kirim</button></div>
+  </div>`;
+  $('#ov').classList.add('on');
+}
+function simpanNilai(){
+  const t = TUGAS.find(x => x.id === curId), k = t && t.kumpul.find(x => x.siswa === curSiswa); if (!k) return;
+  k.nilai = $('#fn').value; k.pesan = $('#fp').value.trim();
+  persist(); toast('Nilai ' + k.siswa + ' disimpan'); openKumpul(curId);
+}
+
+const closeDlg = () => { $('#ov').classList.remove('on'); $('#ov').innerHTML = ''; curId = curSiswa = null; };
+
+/* ---------- Events ---------- */
+document.addEventListener('click', ev => {
+  if (ev.target === $('#ov')) return closeDlg();
+  const el = ev.target.closest('[data-act]'); if (!el) return;
+  switch (el.dataset.act) {
+    case 'buat': openBuat(); break;
+    case 'simpan-tugas': simpanTugas(); break;
+    case 'kumpul': openKumpul(+el.dataset.id); break;
+    case 'beri': openNilai(el.dataset.s); break;
+    case 'simpan-nilai': simpanNilai(); break;
+    case 'back-kumpul': openKumpul(curId); break;
+    case 'close': closeDlg(); break;
+  }
+});
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape') closeDlg(); });
+document.addEventListener('pb:nav-active', () => { closeDlg(); render(); });
+
+render();
+</script>
+</body>
+</html>

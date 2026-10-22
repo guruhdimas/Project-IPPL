@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jadwal · Pembimbing | Portal Ekstrakurikuler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&family=Carlito:wght@400;700&family=Concert+One&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/pb-layout.css">
+<style>
+:root{--g:#013020;--g2:#0f5132;--line:#e2e8f0;--ink:#0f172a;--mut:#64748b;--cal:Calibri,Carlito,sans-serif}
+*{box-sizing:border-box;margin:0}
+body{background:#f7f9fb;font-family:Inter,sans-serif;color:var(--ink);min-height:100vh}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+
+
+/* Layout halaman */
+#app{display:flex;gap:24px;justify-content:center;align-items:stretch;flex-wrap:wrap}  /* jarak & lebar diatur .pb-page di css/pb-layout.css */
+.card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--line);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);overflow:hidden;display:flex;flex-direction:column}
+.cal{width:597px;max-width:100%}
+.side{width:360px;max-width:100%}
+
+/* Header kalender */
+.cal-h{background:#023724;border-bottom:1px solid var(--line);padding:16px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:#fff}
+.cal-h .t{width:176px}
+.cal-h h2{font:600 16px/24px Inter,sans-serif}
+.cal-h p{font:400 14px/20px Inter,sans-serif;margin-top:2px}
+.ctrl{display:flex;gap:12px}
+.sel{position:relative;width:165px}
+.sel select{width:100%;height:40px;appearance:none;background:#fff;border:1px solid var(--line);border-radius:8px;padding:0 36px 0 12px;font:400 14px Inter,sans-serif;color:#000;cursor:pointer;outline:0}
+.sel select:focus{border-color:var(--g2)}
+.sel img,.sel svg{position:absolute;right:12px;top:12px;width:16px;height:16px;pointer-events:none}
+.btn-add{display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;background:var(--g2);color:#fff;font:600 14px Inter,sans-serif;box-shadow:0 1px 1.5px rgba(0,0,0,.1)}
+.btn-add:hover{background:#0b3d27}
+.btn-add img,.btn-add svg{width:15px;height:16px}
+
+/* Kalender */
+.cal-b{padding:24px}
+.nav-m{display:flex;justify-content:space-between;align-items:center}
+.nav-m h3{font:600 18px/28px Inter,sans-serif}
+.nav-m div{display:flex;gap:8px}
+.ib{height:32px;min-width:42px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:#fff;display:grid;place-items:center;font:600 12px Inter,sans-serif}
+.ib:hover{background:#f1f5f9}
+.ib img,.ib svg{width:16px;height:16px}
+.grid{margin-top:16px;display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.dow{background:#e8f5e9;color:var(--g2);font:600 12px/16px Inter,sans-serif;text-align:center;padding:8px 0}
+.cell{background:#fff;min-height:96px;padding:8px;display:flex;flex-direction:column;gap:4px;align-items:stretch;text-align:left;min-width:0}
+.cell.e{background:#f8fafc;cursor:default}
+.cell.tail{background:var(--line);cursor:default}
+button.cell:hover{background:#f1f8f2}
+.cell.sel-d{background:#e8f5e9}
+.n{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:600 12px/16px Inter,sans-serif;flex:none}
+.cell.today .n{background:var(--g2);color:#fff}
+.chip{background:#d1e7dd;border-radius:4px;padding:2px 6px;font:500 11px/16.5px Inter,sans-serif;color:var(--g2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.more{font:500 10px/12px Inter,sans-serif;color:var(--mut);padding-left:2px}
+
+/* Panel kanan */
+.side-h{padding:16px 24px;border-bottom:1px solid var(--line)}
+.side-h h2{font:600 16px/24px Inter,sans-serif}
+.side-h p{font:400 14px/20px Inter,sans-serif;color:var(--mut);margin-top:2px}
+.side-b{padding:24px;flex:1}
+.none{text-align:center;color:var(--mut);font:400 14px/20px Inter,sans-serif;padding:24px 0}
+.ev{border:1px solid var(--line);border-left:3px solid var(--g2);border-radius:8px;padding:10px 12px;margin-bottom:10px;display:flex;justify-content:space-between;gap:8px}
+.ev b{display:block;font:600 14px/20px Inter,sans-serif}
+.ev small{display:block;font:400 12px/16px Inter,sans-serif;color:var(--mut)}
+.ev-a{display:flex;gap:12px;align-self:flex-start}.ev .edt{font:500 12px Inter,sans-serif;color:var(--g2)}.ev .edt:hover{text-decoration:underline}
+.ev .del{font:500 12px Inter,sans-serif;color:#dc2626}
+.ev .del:hover{text-decoration:underline}
+.up{margin-top:12px;border-top:1px solid var(--line);padding-top:16px}
+.up h4{font:600 12px/16px Inter,sans-serif;letter-spacing:.3px;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.up button{display:flex;width:100%;justify-content:space-between;gap:8px;padding:8px;border-radius:8px;font:400 14px/20px Inter,sans-serif;text-align:left}
+.up button:hover{background:#f1f5f9}
+.up button span:last-child{color:var(--mut);white-space:nowrap}
+
+/* Modal */
+.ov{position:fixed;inset:0;background:rgba(15,23,42,.4);display:none;align-items:center;justify-content:center;padding:24px;z-index:20}
+.ov.on{display:flex}
+.dlg{width:512px;max-width:100%;max-height:100%;overflow:auto;background:#fff;border-radius:8px;box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1)}
+.dlg-h{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line)}
+.dlg-h h3{font:600 16px/24px Inter,sans-serif}
+.x{width:32px;height:32px;border-radius:8px;display:grid;place-items:center}.x:hover{background:#f1f5f9}
+.x img,.x svg{width:16px;height:16px}
+.form{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form .f{display:flex;flex-direction:column;gap:6px}
+.form .full{grid-column:1/-1}
+.form label{font:500 14px/20px Inter,sans-serif}
+.form input,.form select{height:40px;border:1px solid var(--line);border-radius:8px;padding:0 12px;background:#fff;font:500 14px Inter,sans-serif;outline:0}
+.form input::placeholder{color:var(--mut)}
+.form input:focus,.form select:focus{border-color:var(--g2)}
+.form .sel{width:100%}
+.form .sel select{width:100%;padding-right:36px}
+.form .err input,.form .err select{border-color:#dc2626}
+.dlg-f{display:flex;justify-content:flex-end;gap:12px;padding:16px 24px;background:#f8fafc;border-top:1px solid var(--line)}
+.dlg-f button{height:40px;padding:0 16px;border-radius:8px;font:600 14px Inter,sans-serif}
+.dlg-f .cancel{background:#fff;border:1px solid var(--line)}.dlg-f .cancel:hover{background:#f1f5f9}
+.dlg-f .save{background:var(--g2);color:#fff;box-shadow:0 1px 1.5px rgba(0,0,0,.1)}.dlg-f .save:hover{background:#0b3d27}
+
+
+@media(max-width:900px){
+ .cell{min-height:72px;padding:4px}.form{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<aside id="pb-sidebar" data-active="jadwal"></aside>
+
+<div class="pb-main">
+  <header id="pb-topbar"></header>
+  <main id="app" class="pb-page"></main>
+  <div id="pb-foot"></div>
+</div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dlgT"></div>
+
+<script src="js/pb-layout.js"></script>
+<script>
+/* ---------- Data ---------- */
+const EKSKUL = ['Robotic','Cyber','English Club','Science Research Club','Seni Dan Budaya','Basket Dan Futsal','Paduan Suara'];
+const BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const HARI = ['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+let nextId = 10;
+let EVENTS = [
+  {id:1, date:'2026-05-03', time:'08:00', ekskul:'Robotic', lokasi:'Lab Komputer', ket:'Latihan rutin'},
+  {id:2, date:'2026-05-10', time:'08:00', ekskul:'Robotic', lokasi:'Lab Komputer', ket:'Latihan rutin'},
+  {id:3, date:'2026-05-16', time:'14:00', ekskul:'Paduan Suara', lokasi:'Aula', ket:'Latihan rutin'},
+  {id:4, date:'2026-05-17', time:'08:00', ekskul:'Robotic', lokasi:'Lab Komputer', ket:'Latihan rutin'},
+  {id:5, date:'2026-05-24', time:'08:00', ekskul:'Robotic', lokasi:'Lab Komputer', ket:'Latihan rutin'}
+];
+
+/* ---------- Penyimpanan (localStorage) ---------- */
+const KEY = 'jadwal-pembimbing-v1';
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && Array.isArray(s.events)) { EVENTS = s.events; nextId = s.nextId || nextId; } } catch(_) {}
+const persist = () => { try { localStorage.setItem(KEY, JSON.stringify({events:EVENTS, nextId})); } catch(_) {} };
+let editId = null;
+
+/* ---------- Util ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = n => String(n).padStart(2,'0');
+const iso = (y,m,d) => `${y}-${pad(m+1)}-${pad(d)}`;
+const fmt = s => { const [y,m,d] = s.split('-').map(Number); return `${d} ${BULAN[m-1]} ${y}`; };
+const now = new Date(), TODAY = iso(now.getFullYear(), now.getMonth(), now.getDate());
+
+/* Tampilan awal mengikuti desain Figma: Mei 2026, tanggal 14 terpilih */
+const S = {y:2026, m:4, sel:'2026-05-14', filter:''};
+const evOf = d => EVENTS.filter(e => e.date === d && (!S.filter || e.ekskul === S.filter)).sort((a,b)=>a.time.localeCompare(b.time));
+
+/* ---------- Render ---------- */
+function calendar(){
+  const first = new Date(S.y, S.m, 1), days = new Date(S.y, S.m+1, 0).getDate();
+  const off = (first.getDay()+6)%7, rows = Math.ceil((off+days)/7), total = rows*7;
+  let cells = HARI.map(h => `<div class="dow">${h}</div>`).join('');
+  for (let i=0;i<total;i++){
+    const d = i-off+1;
+    if (d<1) { cells += '<div class="cell e"></div>'; continue; }
+    if (d>days) { cells += '<div class="cell tail"></div>'; continue; }
+    const key = iso(S.y,S.m,d), ev = evOf(key);
+    cells += `<button class="cell ${key===S.sel?'sel-d':''} ${key===TODAY?'today':''}" data-act="pick" data-date="${key}">
+      <span class="n">${d}</span>
+      ${ev.slice(0,2).map(e=>`<span class="chip" title="${e.time} · ${esc(e.ekskul)}${e.lokasi?' · '+esc(e.lokasi):''}">${e.time} ${esc(e.ekskul)}</span>`).join('')}
+      ${ev.length>2?`<span class="more">+${ev.length-2} lagi</span>`:''}</button>`;
+  }
+  return `<div class="grid">${cells}</div>`;
+}
+
+function sidePanel(){
+  const ev = evOf(S.sel);
+  const up = EVENTS.filter(e => e.date > S.sel && (!S.filter || e.ekskul === S.filter))
+    .sort((a,b)=> (a.date+a.time).localeCompare(b.date+b.time)).slice(0,3);
+  return `<div class="side-h"><h2>${fmt(S.sel)}</h2><p>${ev.length} kegiatan</p></div>
+    <div class="side-b">
+      ${ev.length ? ev.map(e=>`<div class="ev"><div><b>${e.time} · ${esc(e.ekskul)}</b>
+          ${e.lokasi?`<small>Lokasi: ${esc(e.lokasi)}</small>`:''}${e.ket?`<small>${esc(e.ket)}</small>`:''}</div>
+          <div class="ev-a"><button class="edt" data-act="edit" data-id="${e.id}">Edit</button><button class="del" data-act="hapus" data-id="${e.id}">Hapus</button></div></div>`).join('')
+        : '<p class="none">Tidak ada kegiatan pada tanggal ini.</p>'}
+      <div class="up"><h4>Mendatang</h4>
+        ${up.length ? up.map(e=>`<button data-act="pick" data-date="${e.date}"><span>${esc(e.ekskul)}</span><span>${fmt(e.date)}</span></button>`).join('')
+          : '<p class="none" style="padding:8px 0">Tidak ada jadwal mendatang.</p>'}
+      </div></div>`;
+}
+
+function render(){
+  $('#app').innerHTML = `
+  <section class="card cal">
+    <div class="cal-h">
+      <div class="t"><h2>Kalender Kegiatan</h2><p>Kelola jadwal seluruh ekskul</p></div>
+      <div class="ctrl">
+        <div class="sel"><select data-f="filter"><option value="">Semua ekskul</option>${EKSKUL.map(e=>`<option ${S.filter===e?'selected':''}>${esc(e)}</option>`).join('')}</select><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="#475569" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg></div>
+        <button class="btn-add" data-act="tambah"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="#fff" stroke-width="1.700" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>Tambah Jadwal</button>
+      </div>
+    </div>
+    <div class="cal-b">
+      <div class="nav-m"><h3>${BULAN[S.m]} ${S.y}</h3>
+        <div><button class="ib" data-act="prev" aria-label="Bulan sebelumnya"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="#0f172a" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="m10 4-4 4 4 4"/></svg></button>
+          <button class="ib" data-act="today">Hari ini</button>
+          <button class="ib" data-act="next" aria-label="Bulan berikutnya"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="#0f172a" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="m6 4 4 4-4 4"/></svg></button></div></div>
+      ${calendar()}
+    </div>
+  </section>
+  <aside class="card side">${sidePanel()}</aside>`;
+}
+
+/* ---------- Modal Tambah Jadwal ---------- */
+function openModal(id=null){
+  editId = id; const cur = id ? EVENTS.find(v=>v.id===id) : null;
+  $('#ov').innerHTML = `<div class="dlg">
+    <div class="dlg-h"><h3 id="dlgT">${cur?'Edit Jadwal':'Tambah Jadwal'}</h3><button class="x" data-act="close" aria-label="Tutup"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="#64748b" stroke-width="1.600" stroke-linecap="round"><path d="m3 3 10 10M13 3 3 13"/></svg></button></div>
+    <div class="form">
+      <div class="f full"><label for="f-ek">Ekstrakurikuler</label>
+        <div class="sel"><select id="f-ek">${EKSKUL.map(e=>`<option>${esc(e)}</option>`).join('')}</select><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="#475569" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg></div></div>
+      <div class="f" id="g-tgl"><label for="f-tgl">Tanggal</label><input id="f-tgl" type="date" value="${cur?cur.date:S.sel}"></div>
+      <div class="f" id="g-jam"><label for="f-jam">Waktu</label><input id="f-jam" type="time" value="${cur?cur.time:''}"></div>
+      <div class="f full"><label for="f-lok">Lokasi</label><input id="f-lok" placeholder="cth. Lapangan Utama" value="${cur?esc(cur.lokasi):''}"></div>
+      <div class="f full"><label for="f-ket">Keterangan</label><input id="f-ket" placeholder="cth. Latihan rutin" value="${cur?esc(cur.ket):''}"></div>
+    </div>
+    <div class="dlg-f"><button class="cancel" data-act="close">Batal</button><button class="save" data-act="simpan">Simpan</button></div></div>`;
+  $('#ov').classList.add('on');
+  if (cur) $('#f-ek').value = cur.ekskul; else if (S.filter) $('#f-ek').value = S.filter;
+  $('#f-jam').focus();
+}
+const closeModal = () => $('#ov').classList.remove('on');
+
+
+function simpan(){
+  const date = $('#f-tgl').value, time = $('#f-jam').value;
+  $('#g-tgl').classList.toggle('err', !date);
+  $('#g-jam').classList.toggle('err', !time);
+  if (!date || !time) return toast('Tanggal dan waktu wajib diisi');
+  const ekskul = $('#f-ek').value;
+  if (EVENTS.some(v => v.id!==editId && v.date===date && v.time===time && v.ekskul===ekskul)) return toast('Jadwal yang sama sudah ada');
+  const data = {date, time, ekskul, lokasi:$('#f-lok').value.trim(), ket:$('#f-ket').value.trim()};
+  if (editId) Object.assign(EVENTS.find(v=>v.id===editId), data); else EVENTS.push({id:nextId++, ...data});
+  const [y,m] = date.split('-').map(Number); S.y=y; S.m=m-1; S.sel=date;
+  persist(); closeModal(); render(); toast('Jadwal ' + ekskul + (editId?' diperbarui':' ditambahkan'));
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('click', ev => {
+  if (ev.target === $('#ov')) return closeModal();
+  const el = ev.target.closest('[data-act]'); if (!el) return;
+  switch (el.dataset.act){
+    case 'pick': { S.sel = el.dataset.date; const [y,m] = S.sel.split('-').map(Number); S.y=y; S.m=m-1; break; }
+    case 'prev': S.m--; if (S.m<0){S.m=11;S.y--} break;
+    case 'next': S.m++; if (S.m>11){S.m=0;S.y++} break;
+    case 'today': S.y=now.getFullYear(); S.m=now.getMonth(); S.sel=TODAY; break;
+    case 'tambah': return openModal();
+    case 'edit': return openModal(+el.dataset.id);
+    case 'close': return closeModal();
+    case 'simpan': return simpan();
+    case 'hapus': { const e = EVENTS.find(v=>v.id===+el.dataset.id); if(!e || !confirm('Hapus jadwal '+e.ekskul+' ('+e.time+')?')) return; EVENTS=EVENTS.filter(v=>v!==e); persist(); toast('Jadwal dihapus'); break; }
+  }
+  render();
+});
+document.addEventListener('change', ev => { if (ev.target.dataset.f==='filter'){ S.filter=ev.target.value; render(); } });
+document.addEventListener('keydown', ev => {
+  if (ev.key==='Escape') closeModal();
+  if (ev.key==='Enter' && $('#ov').classList.contains('on') && ev.target.tagName==='INPUT') simpan();
+});
+
+render();
+</script>
+</body>
+</html>

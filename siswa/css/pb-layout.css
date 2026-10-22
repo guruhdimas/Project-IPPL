@@ -1,0 +1,50 @@
+/* pb-layout.css — layout bersama halaman Pembimbing (semua class berawalan "pb-" agar tidak bentrok dengan CSS lain)
+   Sidebar & topbar STATIS (position: fixed): tidak ikut tergulung, hanya konten yang scroll. */
+:root{--pb-green:#013020;--pb-side:268px;--pb-top:80px}
+html{scroll-padding-top:var(--pb-top)}
+
+/* Sidebar */
+.pb-sidebar{position:fixed;top:0;bottom:0;left:0;width:var(--pb-side);z-index:10;background:#fff;border:1px solid #e5e7eb;padding:37px 13px 0;display:flex;flex-direction:column;transition:transform .25s ease}
+.pb-brand{flex:none;width:195px;height:76px;margin:0 auto 39px;border-radius:24px;background:linear-gradient(#3d5340,#253629);border:1px solid #1d2b21;border-radius:22px;display:flex;align-items:center;gap:10px;padding:0 10px}
+.pb-brand b{width:112px;font-weight:400;font-family:'Concert One',sans-serif;color:#caa42e;font-size:16px;text-align:center;line-height:1.2}
+.pb-nav{flex:1;min-height:0;overflow-y:auto}          /* menu boleh scroll sendiri di layar pendek */
+.pb-nav a{display:flex;align-items:center;gap:24px;width:221px;height:44px;margin-bottom:12px;padding-left:12px;border-radius:35px;font:400 16px 'Cabin',sans-serif;color:#000;text-decoration:none}
+.pb-nav a svg{flex:none;width:25px;height:25px;color:#000}
+.pb-nav a:hover{background:rgba(112,192,160,.2)}
+.pb-nav a.on{background:rgba(112,192,160,.5)}
+.pb-logout{flex:none;margin:12px 0 19px 12px;width:86px;height:33px;border:2px solid #000;border-radius:24px;color:red;font:400 12px 'Cabin',sans-serif;background:none;cursor:pointer}
+.pb-logout:hover{background:#fff1f1}
+
+/* Topbar */
+.pb-main{margin-left:var(--pb-side);padding-top:var(--pb-top);min-height:100vh;display:flex;flex-direction:column}
+.pb-topbar{position:fixed;top:0;left:var(--pb-side);right:0;height:var(--pb-top);z-index:9;background:var(--pb-green);display:flex;align-items:center;justify-content:flex-end;gap:12px;padding-right:56px}
+.pb-who{color:#fff;font:400 16px/1.1 Calibri,Carlito,sans-serif;display:flex;flex-direction:column;align-items:center}
+.pb-badge{margin-top:2px;padding:0 12px;height:14px;border-radius:34px;background:rgba(44,255,51,.5);color:#0f0;font-size:12px;line-height:14px}
+.pb-foot{text-align:center;font:400 12px/18px Inter,sans-serif;color:#94a3b8;padding:28px 0}
+
+/* Wadah isi halaman: dipakai semua halaman pembimbing supaya jarak & lebarnya sama */
+.pb-page{flex:1;width:100%;max-width:1172px;margin:0 auto;padding:44px 47px 0 64px}  /* = Figma: panel 1061px, kiri 64px, kanan 47px */
+@media(max-width:900px){.pb-page{padding:24px 16px 0}}
+
+/* Logo & foto profil (SVG bawaan; gambar asli menimpa bila file ada) */
+.pb-logo,.pb-ava{position:relative;display:block;flex:none}
+.pb-logo{width:62px;height:62px}.pb-ava{width:42px;height:42px}
+.pb-logo svg,.pb-logo img,.pb-ava svg,.pb-ava img{position:absolute;inset:0;width:100%;height:100%}
+.pb-logo img{object-fit:cover}.pb-ava img{border-radius:50%;object-fit:cover}
+
+/* Menu geser untuk layar kecil */
+.pb-burger{display:none;place-items:center;width:40px;height:40px;margin-right:auto;color:#fff;background:none;border:0;cursor:pointer}
+.pb-backdrop{display:none}
+@media(max-width:900px){
+  .pb-sidebar{transform:translateX(-100%);z-index:40}
+  .pb-sidebar.open{transform:none;box-shadow:0 0 40px rgba(0,0,0,.25)}
+  .pb-main{margin-left:0}
+  .pb-topbar{left:0;padding:0 20px 0 12px}
+  .pb-burger{display:grid}
+  .pb-backdrop.on{display:block;position:fixed;inset:0;background:rgba(15,23,42,.4);z-index:35}
+}
+
+/* Toast & fokus keyboard */
+.pb-toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#0f172a;color:#fff;padding:10px 18px;border-radius:10px;font:400 14px Inter,sans-serif;opacity:0;pointer-events:none;transition:.25s;z-index:50}
+.pb-toast.on{opacity:1;transform:translate(-50%,0)}
+:focus-visible{outline:2px solid #0f5132;outline-offset:2px}

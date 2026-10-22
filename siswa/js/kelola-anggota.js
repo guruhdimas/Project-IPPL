@@ -147,7 +147,7 @@
         '<div class="eks-card__meta"><div>Pembimbing: <b>' + esc(PEMBIMBING.nama) + '</b></div><div>Jadwal: <b>' + esc(e.jadwal) + '</b></div></div>' +
         kuotaHtml(grup(e.id).aktif.length, true) +
         '<div class="eks-card__foot"><button class="chip-btn" type="button" data-act="kelola" data-id="' + e.id + '">Kelola Anggota' +
-        (menunggu(e.id).length ? ' (' + menunggu(e.id).length + ' baru)' : '') + '</button></div></article>';
+        (menunggu(e.id).length ? '<span class="chip-n" title="Pendaftar menunggu verifikasi">' + menunggu(e.id).length + '</span>' : '') + '</button></div></article>';
     }).join('') : '<p class="km-empty">Tidak ada ekstrakurikuler yang cocok.</p>';
   }
 

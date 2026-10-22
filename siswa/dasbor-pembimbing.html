@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dasbor Pembimbing – SMA Trisula Praja</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&family=Concert+One&family=Inter:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f9fb;--card:#fff;--line:#e5e7eb;--text:#000;--muted:#7c7c7c;--chip:#d9d9d9;--chiptx:#615f5f;--active:#70c0a0;--btn:#000;--sep:#aabfb7;--hero:#013020;--bar:#002015;--foot:#94a3b8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--bg:#0e1512;--card:#17211c;--line:#26332c;--text:#eef3f0;--muted:#9aa8a0;--chip:#2a3830;--chiptx:#b5c0ba;--btn:#cfd8d3;--sep:#3d5247}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bar);z-index:10}
+#box{position:relative;width:100%;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1440px;height:1024px;transform-origin:0 0;background:var(--bg);font-family:"Inter","Segoe UI",Arial,sans-serif}
+#stage *{position:absolute}
+.b{border-radius:14px}
+.t{white-space:nowrap;transform:translateX(-50%);text-align:center;line-height:normal}
+.c{font-family:Cabin,"Segoe UI",sans-serif}
+.k{font-family:Calibri,Carlito,Cabin,sans-serif}
+.o{border:1px solid var(--btn);border-radius:13px;height:26px;background:none}
+.ln{height:1.5px;background:var(--sep)}
+svg{fill:none;stroke:var(--text);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav{cursor:pointer}
+#dash *{pointer-events:auto}
+#stage button{cursor:pointer}
+</style>
+</head>
+<body>
+<div id="box"><div id="stage"></div></div>
+<script>
+var S=document.getElementById('stage'),h='';
+function B(x,y,w,hh,st,cl){h+='<div class="'+(cl||'')+'" style="left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+hh+'px;'+st+'"></div>'}
+function T(x,y,sz,wt,col,txt,cl){h+='<p class="t '+(cl||'')+'" style="left:'+x+'px;top:'+y+'px;font-size:'+sz+'px;font-weight:'+wt+';color:'+col+'">'+txt+'</p>'}
+var W='var(--text)',M='var(--muted)';
+/* top bar */
+B(0,0,1440,81,'background:var(--bar)');
+/* sidebar */
+B(0,0,268,1024,'background:var(--card);border:1px solid var(--line)');
+/* logo */
+B(28,37,195,76,'background:#404942;border-radius:22px');
+h+='<svg viewBox="0 0 62 62" style="left:39px;top:44px;width:62px;height:62px;stroke:none"><circle cx="31" cy="31" r="29" fill="#caa42e" opacity=".35"/><circle cx="31" cy="31" r="21" fill="#0a1230"/><path d="M31 12v34M24 18v10a7 7 0 0014 0V18M31 12l-3 4h6z" stroke="#caa42e" stroke-width="2.4" fill="none"/><path d="M12 38c4 9 11 13 19 13s15-4 19-13" stroke="#caa42e" stroke-width="3" fill="none"/></svg>';
+h+='<p class="t" style="left:152.5px;top:56px;width:125px;white-space:normal;font:16px/19px \'Concert One\',sans-serif;color:#caa42e">SMA TRISULA PRAJA</p>';
+/* nav */
+h+='<div id="hl" style="left:13px;top:159px;width:221px;height:44px;background:var(--active);opacity:.5;border-radius:35px;transition:top .2s"></div>';
+var icons=[
+['M3 12l9-8 9 8M6 10v10h4v-6h4v6h4V10','Dasboard',105.5,171,168],
+['M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM2 20c0-4 3-6 7-6s7 2 7 6M17 5a3 3 0 010 6M18 14c3 .5 4 2.5 4 6','Kelola Anggota',123.5,222,219],
+['M4 6h16v14H4zM4 10h16M8 3v4M16 3v4','Jadwal',95,278,275],
+['M5 3h14v18H5zM9 8h6M9 12h6M9 16h4','Tugas',92,334,331],
+['M6 4h12v17H6zM9 2h6v4H9zM9 13l2 2 4-4','Absensi',99.5,390,387],
+['M3 10v4l11 5V5zM14 8c3 1 3 7 0 8M5 14l1 6h3l-1-5','Pengumuman',121,446,443],
+['M3 3v18h18M7 15l4-4 3 3 5-6','Indeks Penilaian',127.5,506,503]];
+icons.forEach(function(i,n){
+ h+='<svg viewBox="0 0 24 24" style="left:25px;top:'+i[4]+'px;width:25px;height:25px"><path d="'+i[0]+'"/></svg>';
+ T(i[2],i[3],16,400,W,i[1],'c');B(13,i[4]-9,221,44,'border-radius:35px','nav');
+});
+/* logout */
+B(25,952,86,33,'border:2px solid var(--btn);border-radius:24px');
+T(68,961,12,400,'red','Logout','c');
+T(835,989,12,400,'var(--foot)','Portal Ekstrakurikuler © 2026 · SMA Trisula Praja');
+/* top right */
+h+='<svg viewBox="0 0 42 42" style="left:1257px;top:22px;width:42px;height:42px;stroke:none"><circle cx="21" cy="21" r="21" fill="#999999"/><circle cx="21" cy="16" r="6.5" fill="#4b4f4d"/><path d="M8 35c2-8 8-10 13-10s11 2 13 10" fill="#4b4f4d"/></svg>';
+T(1364.5,29,16,400,'#fff','Abdul Husein, S.T','k');
+B(1309,50,75,14,'background:#2cff33;opacity:.5;border-radius:34px');
+T(1346.5,49,12,400,'#0f0','Pembimbing','k');
+h+='<div id="dash" style="left:0;top:0;width:1440px;height:1024px;pointer-events:none">';
+/* hero */
+B(302,103,1101,94,'background:var(--hero)','b');
+T(373,121,12,400,'#fffdfd','14 Oktober 2026','k');
+T(528.5,136,24,400,'#fffdfd','SELAMAT DATANG, Abdul Husein S.Pd','c');
+T(456,165,12,400,'#fffdfd','3 pendaftaran menunggu dan 2 tugas belum dinilai','k');
+B(1164,133,183,37,'background:#fc0','b');
+T(1256,143,14,400,'#fff','Verifikasi Sekarang','k');
+/* stats */
+[302,583,864,1145].forEach(function(x){B(x,220,258,116,'background:var(--card)','b')});
+var st=[[378,233,'Ekskul Aktif',370.5,257,'4',381,306,'Lihat Semua',W],
+[659,232,'Total Anggota',651.5,256,'8',658,305,'Anggota Aktif',W],
+[958,232,'Daftar Menunggu',932.5,255,'3',948,305,'Perlu Verifikasi','red'],
+[1247,232,'Rata Rata Kehadiran',1229,256,'64%',1218.5,305,'Lihat Rekap','#42b761']];
+st.forEach(function(s){T(s[0],s[1],14,400,W,s[2]);T(s[3],s[4],36,700,W,s[5]);T(s[6],s[7],14,400,s[9],s[8])});
+/* two cards */
+B(302,377,539,245,'background:var(--card)','b');B(865,377,539,245,'background:var(--card)','b');
+B(302,421,539,2,'background:var(--sep)');B(864,421,539,2,'background:var(--sep)');
+T(413,389,16,700,W,'Jadwal Mendatang');T(991,389,16,700,W,'Pengumuman Terbaru');
+B(704,384.5,125,26,'','o');B(1267,384.5,125,26,'','o');
+T(767,390,14,400,W,'Lihat Semua');T(1330,390,14,400,W,'Lihat Semua');
+[[434,462,442,'18','Pameran Robotic',467,438,'14.00 Aula'],[492,520,500,'20','English Debate',459.5,438,'14.00 Aula'],[550,578,558,'21','Basket Tournament',476,476,'08.00 Lapangan Basket']].forEach(function(r,n){
+ B(338,r[0],50,50,'background:var(--chip);border-radius:8px');
+ T(361.5,r[1],12,400,W,'okt');T(361.5,r[2],20,700,W,r[3]);
+ var y=444+n*58;T(r[5],y,14,700,W,r[4]);T(r[6],y+17,12,700,M,r[7]);
+});
+[[442,'Pelatihan Robotic Bersama Ahli',1024,'Pelahtihan Mengenai Sistem Robotic Bersama Dr. Ilham Setiawan M.T',1122],[500,'English Debate',966.5,'Lomba Debat Bahasa Inggris',1000.5],[561,'Basket Tournament',983,'Tournamen Basket Antar Kelas',1007]].forEach(function(r){
+ B(901,r[0],2,30,'background:#fff500');
+ T(r[2],r[0]+2,14,700,W,r[1]);T(r[4],r[0]+19,12,700,M,r[3]);
+});
+/* pendaftar */
+B(302,663,1101,124,'background:var(--card)','b');B(302,715,1102,2,'background:var(--sep)');
+T(411.5,680,16,700,W,'Pendaftar Terbaru');B(1282,677,95,26,'','o');T(1330.5,682.5,14,400,W,'Kelola');
+[[360,'Dimas Saputra',429.5,'Robotic',525,568,616.5],[701,'Randi Darmawan',774.5,'Cyber',872.5,909,957.5],[1032,'Rahayu Dwi Kartika',1112,'Robotic',1211,1240,1288.5]].forEach(function(r){
+ B(r[0],731,313,41,'background:var(--chip)','b');
+ T(r[2],744,14,700,W,r[1]);T(r[4],744,14,400,'var(--chiptx)',r[3]);
+ B(r[5],749,7,7,'background:#d97706;border-radius:50%');T(r[6],744,14,700,'#d97706','Menunggu');
+});
+h+='</div>';
+h+='<div id="pg" style="left:302px;top:103px;width:1101px;height:200px;display:none;background:var(--card);border-radius:14px"><p id="pgt" style="left:32px;top:30px;font:700 24px Cabin,sans-serif;color:var(--text)"></p><p style="left:32px;top:76px;font:14px Inter,sans-serif;color:var(--muted)">Halaman ini belum dibuat. Pilih Dasboard untuk kembali.</p><button id="back" style="left:32px;top:120px;height:36px;padding:0 20px;border:0;border-radius:14px;background:#fc0;color:#fff;font:14px Calibri,Carlito,sans-serif">Kembali ke Dasboard</button></div>';
+S.innerHTML=h;
+/* navigasi antar halaman */
+var NM=['Dasboard','Kelola Anggota','Jadwal','Tugas','Absensi','Pengumuman','Indeks Penilaian'],SL=['dasboard','kelola-anggota','jadwal','tugas','absensi','pengumuman','indeks-penilaian'];
+function go(n){
+ document.getElementById('dash').style.display=n==0?'block':'none';
+ document.getElementById('pg').style.display=n==0?'none':'block';
+ document.getElementById('hl').style.top=(159+[0,51,107,163,219,275,335][n])+'px';
+ document.getElementById('pgt').textContent=NM[n];
+ document.title=NM[n]+' – SMA Trisula Praja';
+}
+function route(){var i=SL.indexOf((location.hash||'').slice(1));go(i<0?0:i)}
+S.querySelectorAll('.nav').forEach(function(e,i){e.addEventListener('click',function(){go(i);try{location.hash=SL[i]}catch(x){}})});
+document.getElementById('back').addEventListener('click',function(){go(0);try{location.hash=SL[0]}catch(x){}});
+addEventListener('hashchange',route);route();
+var box=document.getElementById('box');
+function fit(){var k=box.clientWidth/1440;S.style.transform='scale('+k+')';box.style.height=(1024*k)+'px'}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portal Pembimbing – SMA Trisula Praja</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600&family=Carlito:wght@400;700&family=Concert+One&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:#f7f9fb;color:#000;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#002015;z-index:10}
+#box{position:relative;width:100%;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1440px;height:1024px;transform-origin:0 0;background:#f7f9fb;font-family:Inter,"Segoe UI",Arial,sans-serif}
+.a{position:absolute}
+.v{position:absolute;left:0;top:0;width:1440px;height:1024px;pointer-events:none}
+.v *{pointer-events:auto}
+.t{white-space:nowrap;transform:translateX(-50%);text-align:center;line-height:normal}
+.c{font-family:Cabin,"Segoe UI",sans-serif}
+.k{font-family:Carlito,Calibri,sans-serif}
+.o{border:1px solid #000;border-radius:13px;height:26px}
+.b{border-radius:14px}
+svg{fill:none;stroke:#000;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav,.btn{cursor:pointer}
+/* Kelola Anggota */
+#kc{left:332px;top:124px;width:1061px;height:586px;background:#fff;border-radius:14px;overflow:hidden}
+#kc>*{position:absolute}
+#q,#cat{height:35px;border:1px solid #999;border-radius:14px;background:#fff;color:#000;font:14px Inter,sans-serif;outline:none}
+#q{left:24px;top:139px;width:600px;padding:0 18px;font-weight:700}
+#q::placeholder{color:#757575;opacity:1}
+#cat{left:659px;top:139px;width:201px;text-align:center;text-align-last:center;appearance:none;-webkit-appearance:none;cursor:pointer}
+#grid{left:24px;top:195px;width:1013px;display:grid;grid-template-columns:repeat(4,206px);gap:21px 24px}
+.ek{position:relative;width:206px;height:149px;border:1px solid #999;border-radius:14px;padding:20px 17px 0}
+.ek h4{font:700 14px Inter,sans-serif}
+.ek p{margin-top:4px;width:165px;text-align:justify;color:#928787;font-family:Carlito,Calibri,sans-serif;line-height:normal}
+.ek button{position:absolute;left:105px;top:119px;width:88px;height:17px;border:0;border-radius:12px;background:#d9d9d9;font:12px Carlito,Calibri,sans-serif;text-align:left;padding:0 0 0 14px;cursor:pointer;color:#000}
+.ek button.on{background:#b7dfcf}
+#empty{left:24px;top:215px;font:14px Inter,sans-serif;color:#757575;display:none}
+#tabs button{position:absolute;top:7px;height:28px;border:0;border-radius:10px;background:none;font:16px Carlito,Calibri,sans-serif;color:#000;cursor:pointer}
+#tv{left:11px;width:101px}#ta{left:148px;width:116px}
+#tabs button.on{background:#f9e470}
+#mc{left:315px;top:214px;width:1075px;height:367px;background:#fff;border-radius:14px}
+#mc>*{position:absolute}
+.f{height:35px;border:1px solid #999;border-radius:14px;background:#fff;color:#000;font:14px Inter,sans-serif;outline:none;text-align:center;text-align-last:center;appearance:none;-webkit-appearance:none;cursor:pointer}
+#fq{text-align:left;text-align-last:left;font-weight:700;padding:0 20px;cursor:text}
+#fq::placeholder{color:#757575;opacity:1}
+#rs{font-weight:700;border-color:#000}
+#all{border:0;border-radius:12px;background:#999;color:#fff;font:16px Carlito,Calibri,sans-serif;text-align:left;padding-left:68px;cursor:pointer}
+#all:hover:not(:disabled){background:#0f5132}
+#tbl{border:1px solid #757575;border-radius:14px;overflow:hidden}
+.th,.rw{position:relative}
+.th{height:40px}
+.th.g{background:#e8f5e9}
+.rw{height:51px;border-top:1px solid #757575}
+.rw.n{border-top:0}
+.cl{position:absolute;top:50%;transform:translateY(-50%);white-space:nowrap;font:14px Inter,sans-serif;color:#615f5f}
+.cl b{color:#000}
+.th .cl{color:#004029}
+.dt{position:absolute;top:50%;margin-top:-3.5px;width:7px;height:7px;border-radius:50%}
+.ab{position:absolute;top:50%;margin-top:-12.5px;width:76px;height:25px;border-radius:14px;font:14px Carlito,Calibri,sans-serif;cursor:pointer}
+.ok{background:#0f5132;color:#fff;border:0}
+.no{background:none;border:1px solid #757575;color:#000}
+.md{position:absolute;left:464px;top:354px;width:512px;height:326px;background:#fff;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,.25);overflow:hidden;font-family:Inter,sans-serif}
+.md>*{position:absolute}
+.md .sc{width:146px;height:64px;top:166px;background:#e8f5e9;border-radius:8px;padding:10px 8px;font-size:12px;color:#6b7280}
+.md .sc b{display:block;margin-top:8px;font-size:14px;color:#000}
+.md button{height:42px;border-radius:8px;font:600 14px Inter,sans-serif;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="box"><div id="stage"></div></div>
+<script>
+var S=document.getElementById('stage'),h='';
+function B(x,y,w,hh,st,cl){h+='<div class="a '+(cl||'')+'" style="left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+hh+'px;'+st+'"></div>'}
+function T(x,y,sz,wt,col,txt,cl){h+='<p class="a t '+(cl||'')+'" style="left:'+x+'px;top:'+y+'px;font-size:'+sz+'px;font-weight:'+wt+';color:'+col+'">'+txt+'</p>'}
+var M='#7c7c7c';
+
+/* ===== bagian tetap: bar atas + sidebar ===== */
+B(0,0,1440,81,'background:#002015');
+B(0,0,268,1024,'background:#fff;border:1px solid #e5e7eb');
+B(28,37,195,76,'background:#404942;border-radius:22px');
+h+='<svg class="a" viewBox="0 0 62 62" style="left:39px;top:44px;width:62px;height:62px;stroke:none"><circle cx="31" cy="31" r="29" fill="#caa42e" opacity=".35"/><circle cx="31" cy="31" r="21" fill="#0a1230"/><path d="M31 12v34M24 18v10a7 7 0 0014 0V18M31 12l-3 4h6z" stroke="#caa42e" stroke-width="2.4" fill="none"/><path d="M12 38c4 9 11 13 19 13s15-4 19-13" stroke="#caa42e" stroke-width="3" fill="none"/></svg>';
+h+='<p class="a t" style="left:152.5px;top:56px;width:125px;white-space:normal;font:16px/19px \'Concert One\',sans-serif;color:#caa42e">SMA TRISULA PRAJA</p>';
+h+='<div class="a" id="hl" style="left:13px;top:159px;width:221px;height:44px;background:#70c0a0;opacity:.5;border-radius:35px;transition:top .2s"></div>';
+var MENU=[
+['M3 12l9-8 9 8M6 10v10h4v-6h4v6h4V10','Dasboard',105.5,171,168],
+['M9 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM2 20c0-4 3-6 7-6s7 2 7 6M17 5a3 3 0 010 6M18 14c3 .5 4 2.5 4 6','Kelola Anggota',123.5,222,219],
+['M4 6h16v14H4zM4 10h16M8 3v4M16 3v4','Jadwal',95,278,275],
+['M5 3h14v18H5zM9 8h6M9 12h6M9 16h4','Tugas',92,334,331],
+['M6 4h12v17H6zM9 2h6v4H9zM9 13l2 2 4-4','Absensi',99.5,390,387],
+['M3 10v4l11 5V5zM14 8c3 1 3 7 0 8M5 14l1 6h3l-1-5','Pengumuman',121,446,443],
+['M3 3v18h18M7 15l4-4 3 3 5-6','Indeks Penilaian',127.5,506,503]];
+var HL=[159,208,264,320,376,432,492];
+MENU.forEach(function(m){
+ h+='<svg class="a" viewBox="0 0 24 24" style="left:25px;top:'+m[4]+'px;width:25px;height:25px"><path d="'+m[0]+'"/></svg>';
+ T(m[2],m[3],16,400,'#000',m[1],'c');
+});
+MENU.forEach(function(m){B(13,m[4]-9,221,44,'border-radius:35px','nav')}); /* area klik tiap menu */
+B(25,952,86,33,'border:2px solid #000;border-radius:24px');
+T(68,961,12,400,'red','Logout','c');
+T(835,989,12,400,'#94a3b8','Portal Ekstrakurikuler © 2026 · SMA Trisula Praja');
+h+='<svg class="a" viewBox="0 0 42 42" style="left:1257px;top:22px;width:42px;height:42px;stroke:none"><circle cx="21" cy="21" r="21" fill="#999"/><circle cx="21" cy="16" r="6.5" fill="#4b4f4d"/><path d="M8 35c2-8 8-10 13-10s11 2 13 10" fill="#4b4f4d"/></svg>';
+T(1364.5,29,16,400,'#fff','Abdul Husein, S.T','k');
+B(1309,50,75,14,'background:#2cff33;opacity:.5;border-radius:34px');
+T(1346.5,49,12,400,'#0f0','Pembimbing','k');
+
+/* ===== halaman 0: Dasboard ===== */
+h+='<div class="v" id="v0">';
+B(302,103,1101,94,'background:#013020','b');
+T(373,121,12,400,'#fffdfd','14 Oktober 2026','k');
+T(528.5,136,24,400,'#fffdfd','SELAMAT DATANG, Abdul Husein S.Pd','c');
+T(456,165,12,400,'#fffdfd','3 pendaftaran menunggu dan 2 tugas belum dinilai','k');
+B(1164,133,183,37,'background:#fc0','b');
+T(1256,143,14,400,'#fff','Verifikasi Sekarang','k');
+B(1164,133,183,37,'cursor:pointer','btn" id="vbtn');
+[302,583,864,1145].forEach(function(x){B(x,220,258,116,'background:#fff','b')});
+[[378,233,'Ekskul Aktif',370.5,257,'4',381,306,'Lihat Semua','#000'],
+ [659,232,'Total Anggota',651.5,256,'8',658,305,'Anggota Aktif','#000'],
+ [958,232,'Daftar Menunggu',932.5,255,'3',948,305,'Perlu Verifikasi','red'],
+ [1247,232,'Rata Rata Kehadiran',1229,256,'64%',1218.5,305,'Lihat Rekap','#42b761']].forEach(function(s){
+ T(s[0],s[1],14,400,'#000',s[2]);T(s[3],s[4],36,700,'#000',s[5]);T(s[6],s[7],14,400,s[9],s[8])});
+B(302,377,539,245,'background:#fff','b');B(865,377,539,245,'background:#fff','b');
+B(302,421,539,2,'background:#aabfb7');B(864,421,539,2,'background:#aabfb7');
+T(413,389,16,700,'#000','Jadwal Mendatang');T(991,389,16,700,'#000','Pengumuman Terbaru');
+B(704,384.5,125,26,'','o');B(1267,384.5,125,26,'','o');
+T(767,390,14,400,'#000','Lihat Semua');T(1330,390,14,400,'#000','Lihat Semua');
+[[434,462,442,'18','Pameran Robotic',467,438,'14.00 Aula'],[492,520,500,'20','English Debate',459.5,438,'14.00 Aula'],[550,578,558,'21','Basket Tournament',476,476,'08.00 Lapangan Basket']].forEach(function(r,n){
+ B(338,r[0],50,50,'background:#d9d9d9;border-radius:8px');
+ T(361.5,r[1],12,400,'#000','okt');T(361.5,r[2],20,700,'#000',r[3]);
+ var y=444+n*58;T(r[5],y,14,700,'#000',r[4]);T(r[6],y+17,12,700,M,r[7]);});
+[[442,'Pelatihan Robotic Bersama Ahli',1024,'Pelahtihan Mengenai Sistem Robotic Bersama Dr. Ilham Setiawan M.T',1122],[500,'English Debate',966.5,'Lomba Debat Bahasa Inggris',1000.5],[561,'Basket Tournament',983,'Tournamen Basket Antar Kelas',1007]].forEach(function(r){
+ B(901,r[0],2,30,'background:#fff500');T(r[2],r[0]+2,14,700,'#000',r[1]);T(r[4],r[0]+19,12,700,M,r[3]);});
+B(302,663,1101,124,'background:#fff','b');B(302,715,1102,2,'background:#aabfb7');
+T(411.5,680,16,700,'#000','Pendaftar Terbaru');B(1282,677,95,26,'','o');T(1330.5,682.5,14,400,'#000','Kelola');
+B(1282,677,95,26,'cursor:pointer','btn" id="kbtn');
+[[360,'Dimas Saputra',429.5,'Robotic',525,568,616.5],[701,'Randi Darmawan',774.5,'Cyber',872.5,909,957.5],[1032,'Rahayu Dwi Kartika',1112,'Robotic',1211,1240,1288.5]].forEach(function(r){
+ B(r[0],731,313,41,'background:#d9d9d9','b');
+ T(r[2],744,14,700,'#000',r[1]);T(r[4],744,14,400,'#615f5f',r[3]);
+ B(r[5],749,7,7,'background:#d97706;border-radius:50%');T(r[6],744,14,700,'#d97706','Menunggu');});
+h+='</div>';
+
+/* ===== halaman 1: Kelola Anggota ===== */
+h+='<div class="v" id="v1" style="display:none"><div id="kc" class="a">'
+ +'<div style="left:0;top:0;width:1061px;height:88px;background:#013020"></div>'
+ +'<p style="left:24px;top:27px;font:700 16px Inter,sans-serif;color:#fff;white-space:nowrap">Kelola Ekstrakurikuler</p>'
+ +'<p style="left:24px;top:51px;font:700 14px Inter,sans-serif;color:#fff5f5;white-space:nowrap">Pilih Ekstrakurikuler Yang Ingin Di ampu</p>'
+ +'<input id="q" type="text" placeholder="Cari EKstrakurikuler ..." autocomplete="off">'
+ +'<select id="cat"><option value="">Semua Ekskul</option><option>Teknologi</option><option>Bahasa</option><option>Sains</option><option>Seni</option><option>Olahraga</option></select>'
+ +'<div id="grid"></div><p id="empty">Tidak ada ekstrakurikuler yang cocok.</p></div></div>';
+
+/* ===== halaman 2: Verifikasi / Anggota Aktif ===== */
+h+='<div class="v" id="v2" style="display:none"><div id="tabs" class="a b" style="left:315px;top:127px;width:274px;height:41px;background:#fff"><button id="tv">Verifikasi</button><button id="ta">Anggota Aktif</button></div><div id="mc" class="a"></div></div>';
+/* ===== halaman lain: placeholder ===== */
+h+='<div class="v" id="pg" style="display:none"><div class="a b" style="left:302px;top:103px;width:1101px;height:200px;background:#fff"><p id="pgt" class="a" style="left:32px;top:30px;font:700 24px Cabin,sans-serif"></p><p class="a" style="left:32px;top:76px;font:14px Inter,sans-serif;color:#7c7c7c">Halaman ini belum dibuat. Pilih Dasboard untuk kembali.</p><button id="back" class="a btn b" style="left:32px;top:120px;height:36px;padding:0 20px;border:0;background:#fc0;color:#fff;font:14px Carlito,Calibri,sans-serif">Kembali ke Dasboard</button></div></div>';
+h+='<div class="v" id="md" style="display:none;pointer-events:auto;background:rgba(17,24,39,.4)"></div>';
+S.innerHTML=h;
+
+/* ===== data ekskul ===== */
+var EK=[
+['Robotic','Teknologi','Merakit robot, mempelajari sensor, mikrokontroler, Internet of Things, dan mengikuti kompetisi teknologi.',12],
+['Cyber','Teknologi','Belajar pemrograman, jaringan komputer, keamanan digital, pengembangan website, dan kompetisi Capture the Flag secara legal.',12],
+['English Club','Bahasa','Melatih cara berkomunikasi, argumentasi, presentasi, dan kemampuan berbahasa Inggris.',14],
+['Science Research Club','Sains','Mengembangkan penelitian, eksperimen, karya ilmiah, dan inovasi untuk kompetisi sains.',14],
+['Seni Dan Budaya','Seni','Mengembangkan bakat tari tradisional, musik, teater, dan pelestarian budaya Indonesia.',14],
+['Basket Dan Futsal','Olahraga','Membangun kebugaran, kerja sama tim, kedisiplinan, dan kemampuan berkompetisi.',14]];
+var ampu={};
+function render(){
+ var q=document.getElementById('q').value.trim().toLowerCase(),c=document.getElementById('cat').value,o='',n=0;
+ EK.forEach(function(e,i){
+  if((c&&e[1]!==c)||(q&&(e[0]+' '+e[2]).toLowerCase().indexOf(q)<0))return;
+  n++;
+  o+='<div class="ek"><h4>'+e[0]+'</h4><p style="font-size:'+e[3]+'px">'+e[2]+'</p><button data-i="'+i+'"'+(ampu[i]?' class="on"':'')+'>'+(ampu[i]?'Diampu ✓':'Ampu Ekskul')+'</button></div>';
+ });
+ document.getElementById('grid').innerHTML=o;
+ document.getElementById('empty').style.display=n?'none':'block';
+}
+document.getElementById('q').addEventListener('input',render);
+document.getElementById('cat').addEventListener('change',render);
+document.getElementById('grid').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ var i=+b.getAttribute('data-i');ampu[i]=true;render();openEk(i,'v');
+});
+render();
+
+/* ===== data anggota ===== */
+var DATA={0:{
+ pending:[{n:'Dimas Saputra',k:'XII IPA 2',s:'m'},{n:'Agus Santoso',k:'XII IPA 1',s:'m'},{n:'Rahayu Dwi Kartika',k:'XI IPS 1',s:'m'}],
+ active:[{n:'Dimas Saputra',k:'XII IPA 2'},{n:'Agus Santoso',k:'XII IPA 1'},{n:'Rahayu Dwi Kartika',k:'XI IPS 1'},{n:'Dwi Kartika',k:'XII IPA 3'},{n:'Randi Rahmat',k:'XII IPA 2'},{n:'Wahyu Firmawan',k:'XI IPS 2'}]}};
+var cur=0,tab='v',F={q:'',k:'',s:'m'},$=function(id){return document.getElementById(id)};
+function P(){return DATA[cur]||(DATA[cur]={pending:[],active:[]})}
+var ST=[['10 Februari 2025','100%','1'],['12 Maret 2025','95%','2'],['05 Januari 2025','88%','3'],['20 Februari 2025','92%','2']];
+function stat(n){return n==='Dimas Saputra'?ST[0]:ST[1+n.length%3]}
+
+/* ===== navigasi ===== */
+var NM=MENU.map(function(m){return m[1]});
+function show(id){['v0','v1','v2','pg'].forEach(function(x){$(x).style.display=x===id?'block':'none'});$('md').style.display='none'}
+function go(n){show(n==0?'v0':n==1?'v1':'pg');$('hl').style.top=HL[n]+'px';$('pgt').textContent=NM[n];document.title=NM[n]+' – SMA Trisula Praja'}
+S.querySelectorAll('.nav').forEach(function(e,i){e.addEventListener('click',function(){go(i)})});
+$('back').addEventListener('click',function(){go(0)});
+function openEk(i,t){cur=i;tab=t||'v';F={q:'',k:'',s:'m'};show('v2');$('hl').style.top=HL[1]+'px';document.title='Kelola Anggota – '+EK[i][0];drawPanel()}
+$('vbtn').addEventListener('click',function(){openEk(0,'v')});
+$('kbtn').addEventListener('click',function(){openEk(0,'v')});
+
+/* ===== panel anggota ===== */
+function drawPanel(){
+ var p=P(),isV=tab==='v',np=p.pending.filter(function(x){return x.s==='m'}).length,na=p.active.length,ks={};
+ $('tv').className=isV?'on':'';$('ta').className=isV?'':'on';
+ p.pending.concat(p.active).forEach(function(x){ks[x.k]=1});
+ var ko='<option value="">Kelas</option>'+Object.keys(ks).sort().map(function(k){return '<option'+(F.k===k?' selected':'')+'>'+k+'</option>'}).join('');
+ var fx=isV?549:724,F2='font:16px Carlito,Calibri,sans-serif;color:#fff';
+ var o='<div style="left:0;top:0;width:1075px;height:76px;background:#013020;border-radius:14px 14px 0 0"></div>'
+ +'<p style="left:27px;top:20px;font:700 16px Carlito,Calibri,sans-serif;color:#fff;white-space:nowrap">'+(isV?'Verifikasi Pendaftaran':'Anggota Aktif Ekstrakurikuler')+'</p>'
+ +'<p style="left:27px;top:39px;'+F2+';white-space:nowrap">'+(isV?'Terima Atau Tolak Pendaftar':'Kelola Anggota Ekskul')+'</p>'
+ +'<p style="left:229px;top:32px;font:12px Carlito,Calibri,sans-serif;color:#fff">Kuota</p>'
+ +'<p style="left:481px;top:32px;font:12px Carlito,Calibri,sans-serif;color:#fff;white-space:nowrap">'+na+'/30</p>'
+ +'<div style="left:229px;top:50px;width:281px;height:3px;background:#d9d9d9"></div>'
+ +'<div style="left:229px;top:50px;width:'+Math.min(281,na/30*281)+'px;height:3px;background:#397c40"></div>';
+ if(isV)o+='<button id="all"'+(np?'':' disabled')+' style="left:830px;top:15px;width:221px;height:48px">Terima Semua ('+np+')<svg viewBox="0 0 24 24" style="position:absolute;left:42px;top:14px;width:20px;height:20px;stroke:#fff;stroke-width:2.2"><path d="M4 12l5 5 11-11"/></svg></button>';
+ o+='<input id="fq" class="f" placeholder="Cari Nama Siswa ..." autocomplete="off" value="'+F.q.replace(/"/g,'&quot;')+'" style="left:41px;top:88px;width:'+(isV?494:671)+'px">'
+ +'<select id="fk" class="f" style="left:'+fx+'px;top:88px;width:166px">'+ko+'</select>'
+ +'<svg viewBox="0 0 24 24" style="position:absolute;left:'+(fx+41)+'px;top:96px;width:20px;height:20px;fill:#000;stroke:none;pointer-events:none"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg>';
+ if(isV)o+='<select id="fs" class="f" style="left:732px;top:88px;width:166px"><option value="m"'+(F.s==='m'?' selected':'')+'>Menunggu</option><option value="d"'+(F.s==='d'?' selected':'')+'>Ditolak</option></select>';
+ o+='<button id="rs" class="f" style="left:'+(isV?912:900)+'px;top:88px;width:'+(isV?132:131)+'px">Reset</button>'
+ +'<div id="tbl" style="left:54px;top:148px;width:997px"></div>';
+ $('mc').innerHTML=o;drawRows();
+}
+function drawRows(){
+ var p=P(),isV=tab==='v',q=F.q.toLowerCase(),ek=EK[cur][0];
+ var L=function(l,t){return '<span class="cl" style="left:'+l+'px">'+t+'</span>'};
+ var C=function(c,t,col){return '<span class="cl" style="left:'+c+'px;transform:translate(-50%,-50%)'+(col?';color:'+col:'')+'">'+t+'</span>'};
+ var src=isV?p.pending.filter(function(x){return x.s===F.s}):p.active;
+ var list=src.filter(function(x){return (!F.k||x.k===F.k)&&(!q||x.n.toLowerCase().indexOf(q)>=0)});
+ var t=isV?'<div class="th">'+L(37,'NAMA SISWA')+L(234,'KELAS')+L(326,'EKSTRAKURIKULER')+L(502,'TENGGAT DAFTAR')+L(689,'STATUS')+L(842,'AKSI')+'</div>'
+        :'<div class="th g">'+L(37,'NAMA SISWA')+C(290,'KELAS')+C(501,'EKSTRAKURIKULER')+L(696,'STATUS')+'</div>';
+ list.forEach(function(x,i){
+  var ix=(isV?p.pending:p.active).indexOf(x),cls='rw'+(isV&&i==0?' n':'');
+  if(isV){
+   var m=x.s==='m',col=m?'#d97706':'#dc2626';
+   t+='<div class="'+cls+'">'+L(37,'<b>'+x.n+'</b>')+C(255.5,x.k)+C(389,ek)+C(560.5,'10 Okt 2026','red')
+    +'<i class="dt" style="left:670px;background:'+col+'"></i>'+L(688,'<b style="color:'+col+'">'+(m?'Menunggu':'Ditolak')+'</b>')
+    +(m?'<button class="ab ok" data-a="ok" data-i="'+ix+'" style="left:806px">Terima</button><button class="ab no" data-a="no" data-i="'+ix+'" style="left:892px">Tolak</button>':'')+'</div>';
+  }else{
+   t+='<div class="'+cls+'">'+L(37,'<b>'+x.n+'</b>')+C(290,x.k)+C(501,ek)
+    +'<i class="dt" style="left:696px;background:#0ea5c6"></i>'+L(710,'<b style="color:#0ea5c6">Aktif</b>')
+    +'<button class="ab no" data-a="kelola" data-i="'+ix+'" style="left:855px">Kelola</button></div>';
+  }
+ });
+ if(!list.length)t+='<div class="rw n" style="height:51px"><span class="cl" style="left:50%;transform:translate(-50%,-50%)">'+(isV?'Tidak ada pendaftar.':'Tidak ada anggota.')+'</span></div>';
+ $('tbl').innerHTML=t;
+ $('mc').style.height=(148+$('tbl').offsetHeight+26)+'px';
+}
+function accept(x){var p=P();p.pending.splice(p.pending.indexOf(x),1);if(!p.active.some(function(a){return a.n===x.n}))p.active.push({n:x.n,k:x.k})}
+function modal(x){
+ var s=stat(x.n),ini=x.n.split(' ').slice(0,2).map(function(w){return w[0]}).join('').toUpperCase();
+ $('md').innerHTML='<div class="md"><p style="left:24px;top:22px;font:600 15px Inter,sans-serif">Profil Anggota</p>'
+ +'<button id="mx" style="left:464px;top:20px;width:24px;height:24px;border:0;background:none;font-size:20px;color:#6b7280;padding:0">&times;</button>'
+ +'<div style="left:0;top:65px;width:512px;height:1px;background:#e5e7eb"></div>'
+ +'<div style="left:24px;top:90px;width:56px;height:56px;border-radius:50%;background:#0f5132;color:#fff;font:600 16px Inter,sans-serif;display:grid;place-items:center">'+ini+'</div>'
+ +'<p style="left:96px;top:96px;font:600 18px Inter,sans-serif">'+x.n+'</p>'
+ +'<p style="left:96px;top:121px;font:14px Inter,sans-serif;color:#6b7280;white-space:nowrap">'+x.k+' · '+(cur===0?'Robotic &amp; IoT':EK[cur][0])+' Club</p>'
+ +'<div class="sc" style="left:24px">Bergabung<b>'+s[0]+'</b></div><div class="sc" style="left:183px">Kehadiran<b>'+s[1]+'</b></div><div class="sc" style="left:342px">Tugas Dikumpul<b>'+s[2]+'</b></div>'
+ +'<div style="left:0;top:253px;width:512px;height:73px;background:#f9fafb;border-top:1px solid #e5e7eb"></div>'
+ +'<button id="mk" style="left:302px;top:270px;width:100px;border:0;background:#fecaca;color:#dc2626">Keluarkan</button>'
+ +'<button id="mt" style="left:415px;top:270px;width:73px;border:1px solid #e5e7eb;background:#fff;color:#111">Tutup</button></div>';
+ $('md').style.display='block';
+ var close=function(){$('md').style.display='none'};
+ $('mx').onclick=close;$('mt').onclick=close;
+ $('md').onclick=function(e){if(e.target===$('md'))close()};
+ $('mk').onclick=function(){var a=P().active;a.splice(a.indexOf(x),1);close();drawPanel()};
+}
+$('tv').addEventListener('click',function(){tab='v';F={q:'',k:'',s:'m'};drawPanel()});
+$('ta').addEventListener('click',function(){tab='a';F={q:'',k:'',s:'m'};drawPanel()});
+$('mc').addEventListener('input',function(e){if(e.target.id==='fq'){F.q=e.target.value;drawRows()}});
+$('mc').addEventListener('change',function(e){
+ if(e.target.id==='fk'){F.k=e.target.value;drawRows()}
+ if(e.target.id==='fs'){F.s=e.target.value;drawRows()}
+});
+$('mc').addEventListener('click',function(e){
+ var b=e.target.closest('button');if(!b)return;
+ var p=P();
+ if(b.id==='rs'){F={q:'',k:'',s:'m'};drawPanel();return}
+ if(b.id==='all'){p.pending.filter(function(x){return x.s==='m'}).forEach(accept);drawPanel();return}
+ var a=b.getAttribute('data-a'),x=(tab==='v'?p.pending:p.active)[+b.getAttribute('data-i')];
+ if(!x)return;
+ if(a==='ok'){accept(x);drawPanel()}
+ if(a==='no'){x.s='d';drawPanel()}
+ if(a==='kelola')modal(x);
+});
+
+/* ===== skala mengikuti lebar layar ===== */
+var box=document.getElementById('box');
+function fit(){var k=box.clientWidth/1440;S.style.transform='scale('+k+')';box.style.height=(1024*k)+'px'}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

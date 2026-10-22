@@ -1,361 +1,138 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Login - Portal Ekstrakurikuler SMA Trisula Praja</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Condiment&family=Concert+One&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<style>
-/* =========================================================
-   Login - Portal Ekstrakurikuler Trisula Praja
-   Sumber: frame Figma "UI LOGIN SISWA" (1440 x 1024)
-   ========================================================= */
-
-:root {
-  --green: #004029;
-  --green-dark: #002015;
-  --green-btn: #023724;
-  --gold: #ffcc00;
-  --lime: #ecff60;
-  --text: #364153;
-  --muted: #4a5565;
-  --border: #d1d5dc;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--green);
-  color: #fff;
-  font-family: "Inter", system-ui, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* ---------- Bar atas ---------- */
-.topbar {
-  position: relative;
-  z-index: 3;
-  height: 85px;
-  background: var(--green-dark);
-  margin-bottom: 21px; /* ruang untuk garis putih di bawah bar */
-}
-.topbar__badge {
-  position: absolute;
-  z-index: 3;
-  left: clamp(16px, 6.7vw, 96px);
-  top: -204px;
-  width: 125px;
-  height: 350px;
-  background: #404942;
-  border: 8px solid var(--gold);
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 10px;
-}
-.topbar__badge img {
-  width: 84px;
-  height: 84px;
-  object-fit: cover;
-  margin-bottom: 4px;
-}
-.topbar__line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  z-index: 2;
-  height: 21px;
-  background: #fff;
-}
-
-/* ---------- Area utama ---------- */
-.login {
-  position: relative;
-  min-height: calc(100vh - 106px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px;
-  padding: 48px clamp(16px, 5.5vw, 80px) 48px clamp(16px, 2vw, 32px);
-  overflow: hidden;
-}
-@media (min-height: 940px) { .login { min-height: 918px; } }
-
-.login__watermark {
-  position: absolute;
-  left: -175px;
-  top: -61px;
-  width: 1048px;
-  height: 1048px;
-  object-fit: cover;
-  opacity: 0.28;
-  pointer-events: none;
-}
-
-/* ---------- Judul kiri ---------- */
-.brand {
-  position: relative;
-  z-index: 1;
-  flex: 1 1 auto;
-  min-width: 0;
-  margin-top: -80px;
-}
-.brand p { white-space: nowrap; line-height: 1.1; font-size: clamp(40px, 6.7vw, 96px); }
-.brand__line1 { font-family: "Condiment", cursive; margin-left: clamp(0px, 5vw, 70px); }
-.brand__line2 { font-family: "Condiment", cursive; margin-left: clamp(0px, 4vw, 60px); }
-.brand__line3 { font-family: "Concert One", sans-serif; color: var(--lime); margin-top: 6px; }
-
-/* ---------- Kartu login ---------- */
-.panel {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 448px;
-  max-width: 448px;
-  width: 100%;
-  margin-top: 70px;
-}
-.card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 20px 12.5px rgba(0, 0, 0, 0.1), 0 8px 5px rgba(0, 0, 0, 0.1);
-}
-.card__title { color: var(--green); font-size: 24px; font-weight: 700; line-height: 32px; }
-.card__subtitle { color: var(--muted); font-size: 16px; line-height: 24px; margin-top: 8px; }
-
-.field { margin-top: 24px; }
-.field:first-of-type { margin-top: 32px; }
-.field label { display: block; color: var(--text); font-size: 14px; line-height: 20px; margin-bottom: 8px; }
-
-.input { position: relative; }
-.input__icon {
-  position: absolute;
-  left: 12px;
-  top: 15px;
-  width: 20px;
-  height: 20px;
-  color: #6a7282;
-  pointer-events: none;
-}
-.input input {
-  width: 100%;
-  height: 50px;
-  padding: 12px 16px 12px 40px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font: 400 16px "Inter", sans-serif;
-  color: #0a0a0a;
-  background: #fff;
-}
-.input input::placeholder { color: rgba(10, 10, 10, 0.5); }
-.input input:focus { outline: 2px solid var(--green); outline-offset: 1px; border-color: transparent; }
-
-/* ---------- Pilihan peran ---------- */
-.roles { border: 0; margin-top: 24px; }
-.roles legend { color: var(--text); font-size: 14px; line-height: 20px; margin-bottom: 8px; padding: 0; }
-.roles__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.role {
-  height: 92px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: #fff;
-  border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  color: var(--text);
-  font: 400 16px/24px "Inter", sans-serif;
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-}
-.role svg { width: 24px; height: 24px; }
-.role:hover { border-color: #b8c4bd; }
-.role.is-active { background: #eff6ff; border-color: var(--green-btn); color: var(--green-btn); }
-
-/* ---------- Tombol & tautan ---------- */
-.error { margin-top: 16px; color: #c62828; font-size: 14px; }
-.btn-login {
-  display: block;
-  width: 100%;
-  height: 48px;
-  margin-top: 24px;
-  border: 0;
-  border-radius: 10px;
-  background: var(--green);
-  color: #fff;
-  font: 800 24px/24px "Inter", sans-serif;
-  cursor: pointer;
-  transition: filter 0.15s;
-}
-.btn-login:hover { filter: brightness(1.2); }
-.forgot {
-  display: block;
-  margin-top: 24px;
-  text-align: center;
-  color: var(--green-btn);
-  font-size: 14px;
-  line-height: 20px;
-  text-decoration: none;
-}
-.forgot:hover { text-decoration: underline; }
-
-.legal { margin-top: 24px; text-align: center; font-size: 12px; line-height: 16px; }
-
-/* ---------- Responsif ---------- */
-@media (max-width: 960px) {
-  .login { flex-direction: column; justify-content: flex-start; padding-top: 40px; }
-  .brand { margin-top: 0; }
-  .brand p { margin-left: 0 !important; }
-  .panel { margin-top: 0; flex: none; }
-}
-
-/* ---------- Tambahan: bantuan WhatsApp, status, aksesibilitas ---------- */
-.help {
-  margin-top: 24px;
-  text-align: center;
-  color: var(--green-btn);
-  font-size: 14px;
-  line-height: 20px;
-}
-.help a {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 4px;
-  color: inherit;
-  text-decoration: none;
-  cursor: pointer;
-}
-.help a:hover strong { text-decoration: underline; }
-.help svg { width: 20px; height: 20px; color: #0f5132; margin-top: -6px; }
-
-.error[hidden] { display: none; }
-.input.is-invalid input { border-color: #c62828; }
-.btn-login:disabled { opacity: 0.7; cursor: progress; filter: none; }
-
-.btn-login:focus-visible,
-.role:focus-visible,
-.help a:focus-visible,
-.topbar__badge:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
-
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Portal Ekstrakurikuler Trisula Praja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Condiment&family=Inter:wght@400;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
 
-<header class="topbar">
-  <a class="topbar__badge" href="portal.html" aria-label="Kembali ke portal">
-    <img src="img/logo-perisai.png" alt="Logo SMA Trisula Praja" />
-  </a>
+  <!-- ===== BAR ATAS ===== -->
+  <header class="topbar">
+    <a class="topbar__badge" href="portal.html" aria-label="Kembali ke Portal">
+      <img src="assets/logo.png" alt="Logo SMA Trisula Praja" onerror="this.style.display='none'" />
+    </a>
+  </header>
   <div class="topbar__line"></div>
-</header>
 
-<main class="login">
-  <img class="login__watermark" src="img/logo-perisai.png" alt="" aria-hidden="true" />
+  <main class="login">
+    <img class="login__watermark" src="assets/logo.png" alt="" onerror="this.style.display='none'" />
 
-  <div class="brand">
-    <p class="brand__line1">PORTAL</p>
-    <p class="brand__line2">EKSTRAKURIKULER</p>
-    <p class="brand__line3">TRISULA PRAJA</p>
-  </div>
+    <!-- ===== JUDUL KIRI ===== -->
+    <section class="brand">
+      <p class="brand__line1">PORTAL</p>
+      <p class="brand__line2">EKSTRAKURIKULER</p>
+      <p class="brand__line3">TRISULA PRAJA</p>
+    </section>
 
-  <div class="panel">
-    <form class="card" id="form" novalidate>
-      <h1 class="card__title">Selamat Datang Kembali!</h1>
-      <p class="card__subtitle">Masuk untuk melanjutkan ke dasbor Anda</p>
+    <!-- ===== KARTU LOGIN ===== -->
+    <section class="panel">
+      <form class="card" id="loginForm" novalidate>
+        <h2 class="card__title">Selamat Datang Kembali!</h2>
+        <p class="card__subtitle">Masuk untuk melanjutkan ke dasbor Anda</p>
 
-      <div class="field">
-        <label for="user">Username</label>
-        <div class="input">
-          <svg class="input__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-          <input id="user" type="text" placeholder="Masukan Username" autocomplete="username" autocapitalize="none" spellcheck="false" />
+        <div class="field">
+          <label for="username">Username</label>
+          <div class="input">
+            <svg class="input__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
+              <path d="m3 6 7 5 7-5" />
+            </svg>
+            <input id="username" name="username" type="text" placeholder="Masukan Username" autocomplete="username" />
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label for="pass">Password</label>
-        <div class="input">
-          <svg class="input__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <input id="pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input">
+            <svg class="input__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3.5" y="9" width="13" height="8" rx="2" />
+              <path d="M6.5 9V6.5a3.5 3.5 0 0 1 7 0V9" />
+            </svg>
+            <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
         </div>
-      </div>
 
-      <fieldset class="roles">
-        <legend>Silahkan Pilih Peran Anda!</legend>
-        <div class="roles__grid">
-          <button type="button" class="role is-active" data-peran="siswa" aria-pressed="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
-            Siswa
-          </button>
-          <button type="button" class="role" data-peran="pembimbing" aria-pressed="false">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 10-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-            Pembimbing
-          </button>
-        </div>
-      </fieldset>
+        <fieldset class="roles">
+          <legend>Silahkan Pilih Peran Anda!</legend>
+          <div class="roles__grid">
+            <button type="button" class="role is-active" data-role="siswa" aria-pressed="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
+              </svg>
+              <span>Siswa</span>
+            </button>
+            <button type="button" class="role" data-role="pembimbing" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 9.5 12 5l10 4.5-10 4.5z" />
+                <path d="M6 11.5v4.5c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" />
+                <path d="M22 9.5V15" />
+              </svg>
+              <span>Pembimbing</span>
+            </button>
+          </div>
+        </fieldset>
 
-      <p class="error" id="err" role="alert" hidden></p>
+        <p class="error" id="formError" role="alert" hidden></p>
 
-      <button class="btn-login" id="go" type="submit">Login</button>
+        <button type="submit" class="btn-login">Login</button>
 
-      <p class="help">
-        Butuh Bantuan?
-        <a href="https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20butuh%20bantuan%20login%20Portal%20Ekstrakurikuler" target="_blank" rel="noopener noreferrer" aria-label="Hubungi admin lewat WhatsApp">
-          <strong>klik disini</strong>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.4 15.1L2 22l5-1.6A9.9 9.9 0 1 0 12.04 2Zm5.8 14c-.25.7-1.45 1.35-2 1.4-.5.05-1.15.07-1.85-.15a15 15 0 0 1-1.7-.62c-3-1.3-4.95-4.3-5.1-4.5-.15-.2-1.2-1.6-1.2-3s.75-2.1 1-2.4c.25-.3.55-.37.75-.37h.55c.18 0 .42-.07.65.5.25.6.85 2.1.92 2.25.07.15.12.32.02.52-.1.2-.15.32-.3.5l-.45.52c-.15.15-.3.3-.12.6.17.3.77 1.27 1.65 2.05 1.13 1 2.1 1.32 2.4 1.47.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.7.8 2 .95.3.15.5.22.57.35.07.12.07.72-.18 1.4Z"/></svg>
-        </a>
+        <a class="forgot" href="#">Forgot your password?</a>
+      </form>
+
+      <p class="legal">
+        By signing in, you agree to our Terms of Service and Privacy Policy.<br />
+        Your privacy and data security are our top priorities.
       </p>
-    </form>
+    </section>
+  </main>
 
-    <p class="legal">By signing in, you agree to our Terms of Service and Privacy Policy.<br />Your privacy and data security are our top priorities.</p>
-  </div>
-</main>
+  <script>
+    (function () {
+      var form = document.getElementById('loginForm');
+      var error = document.getElementById('formError');
+      var roleButtons = document.querySelectorAll('.role');
+      // Peran awal: login.html?peran=pembimbing langsung memilih "Pembimbing"
+      var role = new URLSearchParams(location.search).get('peran') === 'pembimbing' ? 'pembimbing' : 'siswa';
 
-<script>
-  var peran = 'siswa';
-  var tombol = document.querySelectorAll('.role');
+      function tandaiPeran() {
+        roleButtons.forEach(function (b) {
+          var aktif = b.dataset.role === role;
+          b.classList.toggle('is-active', aktif);
+          b.setAttribute('aria-pressed', aktif ? 'true' : 'false');
+        });
+      }
+      tandaiPeran();
 
-  function pilih(nilai) {
-    peran = nilai;
-    tombol.forEach(function (x) {
-      var aktif = x.dataset.peran === nilai;
-      x.classList.toggle('is-active', aktif);
-      x.setAttribute('aria-pressed', aktif);
-    });
-  }
+      // Pilih peran (Siswa / Pembimbing)
+      roleButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          role = btn.dataset.role;
+          tandaiPeran();
+        });
+      });
 
-  // Jika dialihkan dari halaman pembimbing (?peran=pembimbing), pilih peran itu otomatis.
-  if (new URLSearchParams(location.search).get('peran') === 'pembimbing') pilih('pembimbing');
-  tombol.forEach(function (b) { b.addEventListener('click', function () { pilih(b.dataset.peran); }); });
-
-  document.getElementById('form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var err = document.getElementById('err');
-    var iu = document.getElementById('user'), ip = document.getElementById('pass');
-    var u = iu.value.trim(), p = ip.value;
-    iu.parentNode.classList.toggle('is-invalid', !u);
-    ip.parentNode.classList.toggle('is-invalid', !p);
-    if (!u || !p) {
-      err.textContent = !u && !p ? 'Username dan password wajib diisi.' : (!u ? 'Username wajib diisi.' : 'Password wajib diisi.');
-      err.hidden = false;
-      (!u ? iu : ip).focus();
-      return;
-    }
-    err.hidden = true;
-    var go = document.getElementById('go');
-    go.disabled = true;
-    go.textContent = 'Memproses...';
-    // Simpan peran supaya dibaca penjaga akses (js/auth.js dan js/auth-siswa.js).
-    try { localStorage.setItem('peran', peran); } catch (x) {}
-    // Sementara: belum ada pengecekan ke database (login sungguhan = langkah berikutnya).
-    location.href = peran === 'siswa' ? 'dashboard-siswa.html' : 'dashboard-pembimbing.html';
-  });
-</script>
+      // Kirim form. Saat ini hanya memeriksa kolom kosong lalu pindah halaman.
+      // Ganti bagian ini dengan proses login ke server jika sudah ada backend.
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var u = document.getElementById('username').value.trim();
+        var p = document.getElementById('password').value;
+        if (!u || !p) {
+          error.textContent = 'Username dan password wajib diisi.';
+          error.hidden = false;
+          return;
+        }
+        error.hidden = true;
+        try { localStorage.setItem('peran', role); } catch (err) {}
+        window.location.href = role === 'siswa' ? 'dashboard-siswa.html' : 'dashboard-pembimbing.html';
+      });
+    })();
+  </script>
 </body>
 </html>

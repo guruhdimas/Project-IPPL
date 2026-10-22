@@ -208,3 +208,5 @@
 }
 
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.chip-n { display: inline-grid; place-items: center; min-width: 16px; height: 16px; margin-left: 6px; padding: 0 5px; border-radius: 999px; background: #d92d20; color: #fff; font: 700 10px/1 "Inter", sans-serif; }
