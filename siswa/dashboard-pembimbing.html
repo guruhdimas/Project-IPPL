@@ -1,68 +1,32 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard Pembimbing - Portal Ekstrakurikuler</title>
-  <script src="js/auth.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Carlito:wght@400;700&family=Concert+One&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/pembimbing.css" />
-  <link rel="stylesheet" href="css/dashboard-pembimbing.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Pembimbing | Portal Ekstrakurikuler</title>
+<script src="js/auth.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&family=Carlito:wght@400;700&family=Concert+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/pb-layout.css">
+<link rel="stylesheet" href="css/dashboard-pembimbing.css">
+<style>
+:root{--yellow:#fc0;--amber:#d97706}
+body{margin:0;background:#f7f9fb;font-family:Calibri,Carlito,sans-serif;color:#000}
+.pb-page a{color:inherit;text-decoration:none}
+.pb-page .welcome__btn{color:#fff}
+.pb-page .stat__sub--green{color:#42b761}
+.pb-page .stat__sub--red{color:red}
+.pb-page{max-width:1101px}
+</style>
 </head>
 <body>
 
-  <!-- ===== SIDEBAR ===== -->
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <img src="assets/logo.png" alt="" onerror="this.style.display='none'" />
-      <span>SMA TRISULA PRAJA</span>
-    </div>
+<aside id="pb-sidebar" data-active="dashboard"></aside>
 
-    <ul class="menu">
-      <li><a class="is-active" href="dashboard-pembimbing.html">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 2 12h3v9h5v-6h4v6h5v-9h3z"/></svg>Dashboard</a></li>
-      <li><a href="kelola-anggota.html">
-        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="8" r="4"/><path d="M1 21c0-4 3-7 7-7s7 3 7 7z"/><circle cx="17" cy="9" r="3"/><path d="M16 14.2c4-.4 7 2.2 7 6.8h-6c0-2.7-.4-4.9-1-6.8z"/></svg>Kelola Anggota</a></li>
-      <li><a href="jadwal-pembimbing.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M9 17v-4l-1.5 1M14 17v-4h2.5v4h-2.5z" stroke-width="1.5"/></svg>Jadwal</a></li>
-      <li><a href="kelola-tugas.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h3M13 8h3M8 12h3M13 12h3M8 16h3M13 16h3"/></svg>Tugas</a></li>
-      <li><a href="absensi-pembimbing.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9zM9 14l2 2 4-4"/></svg>Absensi</a></li>
-      <li><a href="pengumuman-pembimbing.html">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h3l7 4V6L6 10zM16 8.5v7a3.5 3.5 0 0 0 0-7zM20 6v12a6 6 0 0 0 0-12z"/></svg>Pengumuman</a></li>
-      <li><a href="indeks-penilaian.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6" stroke-dasharray="1 0"/></svg>Indeks Penilaian</a></li>
-    </ul>
-
-    <button class="logout" type="button" id="logout">Logout</button>
-  </aside>
-
-  <!-- ===== KONTEN ===== -->
-  <div class="main">
-    <header class="topbar">
-      <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-      <div class="topbar__right">
-        <button class="bell" type="button" aria-label="Notifikasi">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-          <i></i>
-        </button>
-        <div class="avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="5"/><path d="M2 24c0-6 4.5-9 10-9s10 3 10 9z"/></svg>
-        </div>
-        <div class="who">
-          <p class="who__name" id="namaPembimbing">Abdul Husein, S.T</p>
-          <span class="who__role">Pembimbing</span>
-        </div>
-      </div>
-    </header>
-
-    <div class="content">
-      <div class="page">
+<div class="pb-main">
+  <header id="pb-topbar"></header>
+  <main id="app" class="pb-page">
 
         <!-- Banner sambutan -->
         <section class="welcome">
@@ -71,7 +35,7 @@
             <h1 class="welcome__title">SELAMAT DATANG, <span id="namaSapa">Abdul Husein, S.T</span></h1>
             <p class="welcome__sub" id="subSapa"></p>
           </div>
-          <a class="welcome__btn" href="kelola-anggota.html">Verifikasi Sekarang</a>
+          <a class="welcome__btn" href="kelola-anggota-pembimbing.html">Verifikasi Sekarang</a>
         </section>
 
         <!-- Kartu angka -->
@@ -79,7 +43,7 @@
           <div class="stat">
             <p class="stat__label">Ekskul Aktif</p>
             <p class="stat__value">4</p>
-            <a class="stat__sub" href="kelola-anggota.html">Lihat Semua</a>
+            <a class="stat__sub" href="kelola-anggota-pembimbing.html">Lihat Semua</a>
           </div>
           <div class="stat">
             <p class="stat__label">Total Anggota</p>
@@ -138,25 +102,33 @@
         <section class="latest">
           <div class="latest__head">
             <h2 class="panel__title">Pendaftar Terbaru</h2>
-            <a class="pill-btn" href="kelola-anggota.html">Kelola</a>
+            <a class="pill-btn" href="kelola-anggota-pembimbing.html">Kelola</a>
           </div>
           <div class="latest__list" id="pendaftarList"></div>
         </section>
-      </div>
-
-      <p class="footer-note">Portal Ekstrakurikuler © 2026 · SMA Trisula Praja</p>
-    </div>
-  </div>
+      
+  </main>
+  <div id="pb-foot"></div>
+</div>
 
 <script src="js/ekskul-data.js"></script>
 <script src="js/pembimbing-data.js"></script>
 <script>
-  // Buka/tutup sidebar di layar kecil
-  var sidebar = document.getElementById('sidebar');
-  document.getElementById('menuBtn').addEventListener('click', function () { sidebar.classList.toggle('is-open'); });
-  document.querySelector('.main').addEventListener('click', function () { sidebar.classList.remove('is-open'); });
-  document.getElementById('logout').addEventListener('click', keluarAkun);
-
+  /* Nama pembimbing dari data, dipakai juga oleh topbar bersama */
+  if (typeof PEMBIMBING !== 'undefined' && PEMBIMBING.nama) window.PB_USER = {nama: PEMBIMBING.nama};
+</script>
+<script src="js/pb-layout-v2.js"></script>
+<script>
+/* Tambalan: pastikan semua menu selalu menuju halamannya, apa pun versi pb-layout.js yang termuat */
+(function(){
+  var map={dashboard:'dashboard-pembimbing.html',kelola:'kelola-anggota-pembimbing.html',jadwal:'jadwal-pembimbing.html',tugas:'tugas-pembimbing.html',absensi:'absensi-pembimbing.html',pengumuman:'pengumuman-pembimbing.html',penilaian:'indeks-penilaian-pembimbing.html'};
+  Object.keys(map).forEach(function(k){
+    var a=document.querySelector('#pb-sidebar a[data-k="'+k+'"]');
+    if(a){a.setAttribute('href',map[k]);a.removeAttribute('data-soon');}
+  });
+})();
+</script>
+<script>
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -166,7 +138,6 @@
   var $ = function (id) { return document.getElementById(id); };
   var menunggu = pendaftarMenunggu();
 
-  $('namaPembimbing').textContent = PEMBIMBING.nama;
   $('namaSapa').textContent = PEMBIMBING.nama;
   $('tanggal').textContent = tanggalPanjang();
   $('subSapa').textContent = menunggu.length + ' pendaftaran menunggu dan 2 tugas belum dinilai';

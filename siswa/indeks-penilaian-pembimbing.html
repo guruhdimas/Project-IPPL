@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indeks Penilaian · Pembimbing | Portal Ekstrakurikuler</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&family=Carlito:wght@400;700&family=Concert+One&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/pb-layout.css">
+<style>
+body{margin:0;background:#f7f9fb;font-family:Calibri,Carlito,sans-serif;color:#000}
+.panel{background:#fff;border-radius:14px;overflow:hidden;min-height:540px;max-width:1061px}
+.panel-head{background:#013020;color:#fff;height:88px;padding:0 21px;display:flex;flex-direction:column;justify-content:center}
+.panel-head h1{margin:0;font:700 16px system-ui,'Segoe UI',sans-serif}
+.panel-head p{margin:2px 0 0;font:700 14px system-ui,'Segoe UI',sans-serif}
+[hidden]{display:none!important}
+button{font:inherit}
+button:focus-visible,a:focus-visible{outline:2px solid #0f5132;outline-offset:2px}
+
+/* 1. daftar ekskul */
+.cards{padding:24px 21px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,315px));gap:24px}
+.ek{border:1px solid #999;border-radius:14px;padding:16px 17px 12px;display:flex;flex-direction:column;gap:6px;background:#fff}
+.ek h3{margin:0;font:700 14px system-ui,'Segoe UI',sans-serif}
+.ek .d{margin:0;font:400 11px/1.35 system-ui,'Segoe UI',sans-serif;color:#928787;min-height:44px}
+.ek .pb{font-size:12px;color:#928787;margin-top:6px}.ek .pb b{font-weight:400;color:#000}
+.jml{display:flex;justify-content:space-between;font-size:12px;color:#928787;margin-top:4px}.jml b{font-weight:400;color:#000}
+.trk{height:4px;background:#d9d9d9;border-radius:3px;overflow:hidden}.trk i{display:block;height:100%;background:#2e7d32}
+.lihat{align-self:flex-start;margin-top:6px;border:0;background:#d9d9d9;color:#000;border-radius:12px;padding:1px 12px;font-size:11px;cursor:pointer}
+.lihat:hover{background:#c8c8c8}
+
+/* 2. tabel siswa */
+.sub{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 21px 0;flex-wrap:wrap}
+.sub h2{margin:0;font:700 14px system-ui,'Segoe UI',sans-serif}
+.sub span{font-size:11px;color:#928787}.sub span b{font-weight:400;color:#000}
+.back{border:0;background:none;color:#0f5132;cursor:pointer;font-size:14px;padding:0 0 0 0;margin-right:12px}
+.box{margin:18px 28px 28px;border:1px solid #757575;border-radius:14px;overflow-x:auto}
+table{width:100%;min-width:640px;border-collapse:collapse;font:400 14px system-ui,'Segoe UI',sans-serif}
+th{background:#e8f5e9;color:#004029;font-weight:400;text-align:left;padding:12px 32px;height:41px}
+td{padding:6px 32px;height:46px;border-top:1px solid #757575}
+td.nm{font-weight:700}td.kl{color:#615f5f}
+.c{text-align:center}.r{text-align:right}
+.rp{border:1px solid #000;border-radius:12px;background:#fff;color:#615f5f;font:700 14px system-ui,'Segoe UI',sans-serif;height:30px;width:108px;cursor:pointer}
+.rp:hover{background:#eef6f1;color:#000}
+
+/* 3. rapor */
+.rapor{padding:30px 40px 40px;display:grid;grid-template-columns:minmax(0,1fr) 232px;gap:48px;max-width:900px;margin:0 auto}
+.col{display:grid;gap:24px;align-content:start}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.st{background:#f0f0f0;border-radius:14px;padding:14px 20px;height:100px}
+.st h4{margin:0;font:700 12px system-ui,'Segoe UI',sans-serif}
+.st p{margin:6px 0 0;text-align:center;font:700 30px system-ui,'Segoe UI',sans-serif}
+.bars{background:#f0f0f0;border-radius:14px;padding:16px 22px;display:grid;gap:2px}
+.br{display:grid;gap:2px;font:700 12px system-ui,'Segoe UI',sans-serif}
+.br div:first-child{display:flex;justify-content:space-between}
+.br .trk{background:#fff;height:5px;border-radius:0}.br .trk i{background:#1b6e2a;border-radius:0}
+.gap{height:14px}
+.det{background:#f0f0f0;border-radius:14px;padding:16px 20px 20px}
+.det h4{margin:0 0 20px;font:700 12px system-ui,'Segoe UI',sans-serif}
+.det div{display:flex;justify-content:space-between;font:400 11px system-ui,'Segoe UI',sans-serif;padding:9px 0}
+@media(max-width:900px){.rapor{grid-template-columns:1fr;padding:20px 16px;gap:24px}.two{gap:16px}}
+</style>
+</head>
+<body>
+
+<aside id="pb-sidebar" data-active="penilaian"></aside>
+
+<div class="pb-main">
+  <header id="pb-topbar"></header>
+  <main id="app" class="pb-page">
+    <section class="panel">
+      <div class="panel-head" id="head"><h1>Indeks Penilaian</h1><p>Rekapan Penilaian Pencapaian Siswa</p></div>
+
+      <div id="v-list"><div class="cards" id="cards"></div></div>
+
+      <div id="v-table" hidden>
+        <div class="sub"><div><button class="back" type="button" id="back1">‹ Kembali</button><h2 style="display:inline" id="tEk"></h2></div><span>Pembimbing: <b>Abdul Husein S.Pd</b></span></div>
+        <div class="box"><table>
+          <thead><tr><th>NAMA SISWA</th><th class="c">KELAS</th><th></th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table></div>
+      </div>
+
+      <div id="v-rapor" hidden>
+        <div class="sub"><button class="back" type="button" id="back2">‹ Kembali ke daftar siswa</button></div>
+        <div class="rapor">
+          <div class="col">
+            <div class="two">
+              <div class="st"><h4>Rata-Rata Nilai</h4><p id="avg"></p></div>
+              <div class="st"><h4>Kehadiran</h4><p id="hadir"></p></div>
+            </div>
+            <div class="bars" id="bars"></div>
+          </div>
+          <div class="det"><h4>Detail penilaian</h4><div id="det" style="display:block"></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="pb-foot"></div>
+</div>
+
+<script src="js/pb-layout-v2.js"></script>
+<script>
+/* Tambalan: pastikan menu selalu menuju halamannya, apa pun versi pb-layout.js yang termuat */
+(function(){
+  var map={tugas:'tugas-pembimbing.html',absensi:'absensi-pembimbing.html',pengumuman:'pengumuman-pembimbing.html',penilaian:'indeks-penilaian-pembimbing.html'};
+  Object.keys(map).forEach(function(k){
+    var a=document.querySelector('#pb-sidebar a[data-k="'+k+'"]');
+    if(a){a.setAttribute('href',map[k]);a.removeAttribute('data-soon');}
+  });
+})();
+</script>
+<script>
+const $ = id => document.getElementById(id);
+
+/* Data contoh (sesuai desain). Ganti dengan data dari backend bila sudah ada. */
+const POIN = {'A+':4.3,'A':4,'A-':3.7,'B+':3.3,'B':3,'B-':2.7,'C+':2.3};
+const HURUF = Object.keys(POIN);
+const EKSKUL = [
+  {id:'robotic', nama:'Robotic', jml:20, maks:30,
+   desc:'Merakit robot, mempelajari sensor, mikrokontroler, Internet of Things, dan mengikuti kompetisi teknologi.',
+   nilai:['Rakit Lengan Robot','Kelistrikan Robot','Coding','Rakit Controler','Jelaskan Fungsi komponen','Perbaikan eror'],
+   siswa:[['Dimas Saputra','XII IPA 2'],['Agus Santoso','XII IPA 1'],['Rahayu Dwi Kartika','XI IPS 1'],['Dwi Kartika','XII IPA 3'],['Randi Rahmat','XII IPA 2'],['Wahyu Firmawan','XI IPS 2']]},
+  {id:'cyber', nama:'Cyber', jml:20, maks:30,
+   desc:'Belajar pemrograman, jaringan komputer, keamanan digital, pengembangan website, dan kompetisi Capture the Flag secara legal.',
+   nilai:['Jaringan Dasar','Keamanan Web','Pemrograman Python','Capture the Flag','Analisis Log','Laporan Temuan'],
+   siswa:[['Randi Darmawan','XII IPA 1'],['Nadia Putri','XI IPA 3'],['Fajar Nugroho','XII IPS 1']]}
+];
+/* Rapor: Dimas mengikuti desain; siswa lain berupa data contoh yang bervariasi. */
+const DIMAS = {avg:'A+',hadir:98,bars:[['kedisiplinan',80],['Kemandirian',85],['Kreativitas',73],['Kepemimpinan',87]],detail:['A+','A','B+','B','A-','A+']};
+function rapor(e, i){
+  if (e.id==='robotic' && i===0) return DIMAS;
+  const detail = e.nilai.map((_,k)=>HURUF[(i*2+k*3+1)%5]);
+  const mean = detail.reduce((s,g)=>s+POIN[g],0)/detail.length;
+  const avg = HURUF.find(g=>POIN[g]<=mean+0.15)||'B';
+  return {avg, hadir:78+((i*7+e.nama.length)%21),
+    bars:['kedisiplinan','Kemandirian','Kreativitas','Kepemimpinan'].map((n,k)=>[n,65+((i*9+k*7+e.nama.length)%31)]), detail};
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function bar(n,v){return '<div class="br"><div><span>'+esc(n)+'</span><span>'+v+'%</span></div><div class="trk"><i style="width:'+v+'%"></i></div></div>'}
+
+function show(view){['list','table','rapor'].forEach(v=>{$('v-'+v).hidden=v!==view})}
+
+function renderList(){
+  show('list');
+  $('head').innerHTML='<h1>Indeks Penilaian</h1><p>Rekapan Penilaian Pencapaian Siswa</p>';
+  $('cards').innerHTML=EKSKUL.map(e=>'<div class="ek"><h3>'+esc(e.nama)+'</h3><p class="d">'+esc(e.desc)+'</p><div class="pb">Pembimbing: <b>Abdul Husein, S.T</b></div><div class="jml"><span>Jumlah Siswa</span><b>'+e.jml+'/'+e.maks+'</b></div><div class="trk"><i style="width:'+Math.round(e.jml/e.maks*100)+'%"></i></div><button class="lihat" type="button" data-e="'+e.id+'">Lihat</button></div>').join('');
+}
+function renderTable(e){
+  show('table');
+  $('head').innerHTML='<h1>Indeks Penilaian</h1><p>Rekapan Penilaian Pencapaian Siswa</p>';
+  $('tEk').textContent=e.nama;
+  $('rows').innerHTML=e.siswa.map((s,i)=>'<tr><td class="nm">'+esc(s[0])+'</td><td class="kl">'+esc(s[1])+'</td><td class="r"><button class="rp" type="button" data-i="'+i+'">Lihat Raport</button></td></tr>').join('');
+}
+function renderRapor(e,i){
+  show('rapor');
+  const s=e.siswa[i], r=rapor(e,i);
+  $('head').innerHTML='<h1>'+esc(s[0])+'</h1><p>'+esc(s[1])+'</p>';
+  $('avg').textContent=r.avg; $('hadir').textContent=r.hadir+'%';
+  $('bars').innerHTML=bar('kehadiran',r.hadir)+'<div class="gap"></div>'+r.bars.map(b=>bar(b[0],b[1])).join('');
+  $('det').innerHTML=e.nilai.map((n,k)=>'<div><span>'+esc(n)+'</span><span>'+r.detail[k]+'</span></div>').join('');
+}
+
+/* Navigasi lewat hash agar tombol Back browser berfungsi: #robotic atau #robotic/0 */
+function route(){
+  const p=(location.hash||'').slice(1).split('/');
+  const e=EKSKUL.find(x=>x.id===p[0]);
+  if(!e) return renderList();
+  const i=parseInt(p[1],10);
+  if(!isNaN(i) && e.siswa[i]) return renderRapor(e,i);
+  renderTable(e);
+}
+$('cards').addEventListener('click',ev=>{const b=ev.target.closest('.lihat');if(b)location.hash=b.dataset.e});
+$('rows').addEventListener('click',ev=>{const b=ev.target.closest('.rp');if(b)location.hash=location.hash.slice(1).split('/')[0]+'/'+b.dataset.i});
+$('back1').addEventListener('click',()=>{location.hash=''; history.replaceState(null,'',location.pathname); route()});
+$('back2').addEventListener('click',()=>{location.hash=location.hash.slice(1).split('/')[0]});
+document.addEventListener('pb:nav-active',()=>{history.replaceState(null,'',location.pathname);route()});
+addEventListener('hashchange',route);
+route();
+</script>
+</body>
+</html>

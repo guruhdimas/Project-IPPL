@@ -79,7 +79,17 @@ td.st{text-align:center;font-weight:700;color:#615f5f}
   <div id="pb-foot"></div>
 </div>
 
-<script src="js/pb-layout.js"></script>
+<script src="js/pb-layout-v2.js"></script>
+<script>
+/* Tambalan: pastikan menu Tugas, Absensi, Pengumuman & Penilaian selalu menuju halamannya, apa pun versi pb-layout.js yang termuat */
+(function(){
+  var map={tugas:'tugas-pembimbing.html',absensi:'absensi-pembimbing.html',pengumuman:'pengumuman-pembimbing.html',penilaian:'indeks-penilaian-pembimbing.html'};
+  Object.keys(map).forEach(function(k){
+    var a=document.querySelector('#pb-sidebar a[data-k="'+k+'"]');
+    if(a){a.setAttribute('href',map[k]);a.removeAttribute('data-soon');}
+  });
+})();
+</script>
 <script>
 const STATUS = ['Hadir','Izin','Sakit','Alpa'];
 const KEY = 'pb_absensi_robotic';

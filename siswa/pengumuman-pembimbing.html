@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pengumuman · Pembimbing | Portal Ekstrakurikuler</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&family=Carlito:wght@400;700&family=Concert+One&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/pb-layout.css">
+<style>
+body{margin:0;background:#f7f9fb;font-family:Calibri,Carlito,sans-serif;color:#000}
+.panel{background:#fff;border-radius:14px;overflow:hidden;min-height:586px;max-width:1061px}
+.panel-head{background:#013020;color:#fff;height:88px;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.panel-head h1{margin:0;font:700 16px system-ui,'Segoe UI',sans-serif}
+.panel-head p{margin:2px 0 0;font:700 14px system-ui,'Segoe UI',sans-serif;color:#fff5f5}
+.mk{display:inline-flex;align-items:center;gap:10px;background:#999;color:#fff;border:0;border-radius:12px;height:36px;padding:0 16px;font:400 16px Calibri,Carlito,sans-serif;cursor:pointer}
+.mk:hover{background:#7f7f7f}
+.mk svg{width:20px;height:20px}
+.list{padding:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,315px));gap:24px 26px}
+.card{position:relative;height:137px;border:1px solid #999;border-radius:14px;background:#fff;color:inherit;text-align:left;padding:11px 19px 12px;cursor:pointer;display:flex;flex-direction:column;font:inherit}
+.card:hover{border-color:#0f5132}
+.card h3{margin:0;font:700 14px system-ui,'Segoe UI',sans-serif}
+.card p{margin:6px 0 0;font:400 12px/1.25 system-ui,'Segoe UI',sans-serif;color:#7c7c7c;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .m{margin-top:auto;font-size:12px;line-height:18px;color:#928787}
+.card .m b{font-weight:400;color:#000}
+.baru{position:absolute;top:10px;right:20px;background:#90d0e8;color:#757575;border-radius:14px;font:700 8px/12px system-ui,sans-serif;padding:0 12px}
+.empty{grid-column:1/-1;text-align:center;color:#7c7c7c;padding:60px 0;font-family:system-ui,sans-serif}
+.empty b{display:block;color:#000;font-size:14px;margin-bottom:4px}
+.scrim{position:fixed;inset:0;background:rgba(40,48,60,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:1000}
+.scrim.open{display:flex}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:364px;box-shadow:0 16px 40px rgba(0,0,0,.25);overflow:hidden;max-height:92vh;overflow-y:auto;font-family:Inter,sans-serif}
+.modal.wide{max-width:583px}
+.mh{padding:20px 17px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;font-weight:500;font-size:13px}
+.x{background:none;border:0;font-size:20px;line-height:1;cursor:pointer;padding:2px 6px;color:inherit}
+.mb{padding:16px 17px;display:grid;gap:12px}
+label{display:grid;gap:7px;font-size:12px;font-weight:500}
+input,select,textarea{font:400 12px Inter,sans-serif;color:#000;background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;width:100%;box-sizing:border-box}
+textarea{height:70px;resize:vertical}
+input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#b91c1c}
+.err{color:#b91c1c;font-size:11px;font-weight:400}
+.mf{background:#f7f9fb;border-top:1px solid #e5e7eb;padding:12px 17px;display:flex;justify-content:flex-end;gap:8px}
+.btn{font:600 12px Inter,sans-serif;border-radius:6px;padding:8px 14px;border:1px solid #e5e7eb;background:#fff;color:#000;cursor:pointer}
+.btn.pri{background:#0f5132;border-color:#0f5132;color:#fff}
+.btn.pri:hover{background:#013020}
+.btn:disabled{background:#a3c4b5;border-color:#a3c4b5;color:#fff;cursor:not-allowed}
+.mk:focus-visible,.btn:focus-visible,.card:focus-visible,.x:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #0f5132;outline-offset:2px}
+.dh{background:#013020;color:#fff;padding:14px 17px 12px;display:flex;justify-content:space-between;align-items:flex-start}
+.pill{display:inline-block;background:#90d0e8;color:#06222e;border-radius:12px;font-size:9px;padding:3px 12px;margin-bottom:12px}
+.dh h2{margin:0;font:700 14px Arial,sans-serif}
+.dh .x{border:1.5px solid #fff;border-radius:50%;width:26px;height:26px;padding:0;font-size:14px;color:#fff;display:grid;place-items:center}
+.dbody{display:grid;grid-template-columns:1fr 1fr}
+.dbody>div{padding:14px 17px}
+.dbody>div+div{border-left:1px solid #e5e7eb}
+.dbody p{margin:0;line-height:1.55;font-size:10.5px}
+.info{background:#f3f5f4;border-radius:8px;padding:12px 14px;margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
+.info span{display:block;color:#7c7c7c;font-size:9px}
+.info b{font-size:9.5px}
+.ch{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:11px}
+.cnt{background:rgba(112,192,160,.35);border-radius:10px;font-size:8px;font-weight:500;padding:2px 10px;color:#0f5132}
+.cm{background:#f3f5f4;border-radius:8px;padding:8px 10px;margin-top:8px}
+.cm div{display:flex;justify-content:space-between;color:#7c7c7c;font-size:8px}
+.cm b{color:#000;font-size:9.5px}
+.cm p{margin-top:4px}
+.dbody label{margin-top:12px;font-size:9px}
+.dbody textarea{height:38px;font-size:9px}
+.send{text-align:right;margin-top:10px}
+@media(max-width:900px){.dbody{grid-template-columns:1fr}.dbody>div+div{border-left:0;border-top:1px solid #e5e7eb}}
+</style>
+</head>
+<body>
+
+<aside id="pb-sidebar" data-active="pengumuman"></aside>
+
+<div class="pb-main">
+  <header id="pb-topbar"></header>
+  <main id="app" class="pb-page">
+    <section class="panel">
+      <div class="panel-head">
+        <div><h1>Daftar Ekstrakurikuler</h1><p>Lihat Pembimbing, Kuota, Dan Status Pendaftaran</p></div>
+        <button class="mk" id="openNew" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg>Buat Pengumuman</button>
+      </div>
+      <div class="list" id="list"></div>
+    </section>
+  </main>
+  <div id="pb-foot"></div>
+</div>
+
+<div class="scrim" id="newScrim"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="nt">
+  <div class="mh"><span id="nt">Buat Pengumuman</span><button class="x" data-close type="button" aria-label="Tutup">×</button></div>
+  <div class="mb">
+    <label>Tujuan<select id="fTarget"><option>Semua Ekskul</option><option>Robotic</option><option>Basket</option></select></label>
+    <label>Judul<input id="fTitle" maxlength="80"><span class="err" id="eTitle"></span></label>
+    <label>Isi<textarea id="fBody"></textarea><span class="err" id="eBody"></span></label>
+  </div>
+  <div class="mf"><button class="btn" data-close type="button">Batal</button><button class="btn pri" id="send" type="button">Kirim</button></div>
+</div></div>
+
+<div class="scrim" id="detScrim"><div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="dt">
+  <div class="dh"><div><span class="pill" id="dPill">Pengumuman baru</span><h2 id="dt"></h2></div><button class="x" data-close type="button" aria-label="Tutup">×</button></div>
+  <div class="dbody">
+    <div><p id="dBody"></p><div class="info" id="dInfo"></div></div>
+    <div>
+      <div class="ch">Komentar <span class="cnt" id="dCnt"></span></div>
+      <div id="dCm"></div>
+      <label>Tambahkan komentar<textarea id="cIn" placeholder="Tulis pertanyaan atau komentar..."></textarea></label>
+      <div class="send"><button class="btn pri" id="cSend" type="button" disabled>Kirim Komentar</button></div>
+    </div>
+  </div>
+</div></div>
+
+<script src="js/pb-layout-v2.js"></script>
+<script>
+/* Tambalan: pastikan semua menu selalu menuju halamannya, apa pun versi pb-layout.js yang termuat */
+(function(){
+  var map={dashboard:'dashboard-pembimbing.html',kelola:'kelola-anggota-pembimbing.html',jadwal:'jadwal-pembimbing.html',tugas:'tugas-pembimbing.html',absensi:'absensi-pembimbing.html',pengumuman:'pengumuman-pembimbing.html',penilaian:'indeks-penilaian-pembimbing.html'};
+  Object.keys(map).forEach(function(k){
+    var a=document.querySelector('#pb-sidebar a[data-k="'+k+'"]');
+    if(a){a.setAttribute('href',map[k]);a.removeAttribute('data-soon');}
+  });
+})();
+</script>
+<script>
+const KEY = 'pb_pengumuman';
+const $ = id => document.getElementById(id);
+
+/* Data contoh (sesuai desain). Ganti dengan data dari backend bila sudah ada. */
+const DEFAULT = [
+  {id:1, t:'Pelatihan Robotic Bersama Ahli', s:'Pelahtihan Mengenai Sistem Robotic Bersama Dr. Ilham Setiawan M.T',
+   b:'Pelatihan mengenai sistem robotic bersama Dr. Ilham Setiawan M.T. Kegiatan ini ditujukan untuk seluruh anggota Robotic Club yang ingin memperdalam perancangan dan pemrograman robot.',
+   d:'Rabu, 7 Oktober 2026', extra:[['Waktu Pelatihan','Sabtu, 10.00 WIB'],['Tempat','Laboratorium Robotic']], isNew:true,
+   c:[{n:'Nadia Putri', w:'08 Oktober 2026, 09.15', x:'Apakah peserta perlu membawa laptop sendiri, Pak?'},
+      {n:'Abdul Husein, S.T', w:'08 Oktober 2026, 10.02', x:'Iya, silakan membawa laptop dan charger masing-masing.'}]},
+  {id:2, t:'Pameran Robotic', s:'Pameran Karya Robotic Club', b:'Pameran Karya Robotic Club',
+   d:'Kamis, 1 Oktober 2026', extra:[], isNew:false, c:[]}
+];
+
+let items = DEFAULT, cur = null;
+try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (Array.isArray(s)) items = s; } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} };
+const find = () => items.find(i => i.id === cur);
+const nextId = () => items.reduce((m, i) => Math.max(m, i.id), 0) + 1;
+
+function render() {
+  $('list').replaceChildren(...(items.length ? items.map(i => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'card'; b.dataset.id = i.id;
+    b.innerHTML = (i.isNew ? '<span class="baru">Baru</span>' : '') + '<h3></h3><p></p><div class="m">Pembimbing: <b>Abdul Husein, S.T</b><br>Di Terbitkan: <b></b></div>';
+    b.querySelector('h3').textContent = i.t;
+    b.querySelector('p').textContent = i.s;
+    b.querySelector('.m b:last-child').textContent = i.d;
+    return b;
+  }) : [Object.assign(document.createElement('div'), {className:'empty', innerHTML:'<b>Belum ada pengumuman</b>Pilih Buat Pengumuman untuk menulis yang pertama.'})]));
+}
+
+function detail() {
+  const i = find();
+  $('dt').textContent = i.t; $('dBody').textContent = i.b;
+  $('dPill').hidden = !i.isNew;
+  $('dInfo').replaceChildren(...[['Pembimbing','Abdul Husein, S.T'],['Diterbitkan',i.d],...i.extra].map(r => {
+    const d = document.createElement('div'); d.innerHTML = '<span></span><b></b>';
+    d.children[0].textContent = r[0]; d.children[1].textContent = r[1]; return d;
+  }));
+  $('dCnt').textContent = i.c.length + ' komentar';
+  $('dCm').replaceChildren(...i.c.map(c => {
+    const d = document.createElement('div'); d.className = 'cm';
+    d.innerHTML = '<div><b></b><span></span></div><p></p>';
+    d.querySelector('b').textContent = c.n; d.querySelector('span').textContent = c.w; d.querySelector('p').textContent = c.x; return d;
+  }));
+}
+
+const openM = id => $(id).classList.add('open');
+const closeAll = () => document.querySelectorAll('.scrim').forEach(s => s.classList.remove('open'));
+
+$('openNew').addEventListener('click', () => {
+  $('fTitle').value = ''; $('fBody').value = ''; $('fTarget').selectedIndex = 0;
+  $('eTitle').textContent = $('eBody').textContent = '';
+  $('fTitle').removeAttribute('aria-invalid'); $('fBody').removeAttribute('aria-invalid');
+  openM('newScrim'); $('fTitle').focus();
+});
+
+$('list').addEventListener('click', e => {
+  const c = e.target.closest('.card'); if (!c) return;
+  cur = +c.dataset.id; find().isNew = false; save(); render(); detail();
+  $('cIn').value = ''; $('cSend').disabled = true; openM('detScrim');
+});
+
+document.addEventListener('click', e => { if (e.target.closest('[data-close]') || e.target.classList.contains('scrim')) closeAll(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+
+$('send').addEventListener('click', () => {
+  const t = $('fTitle').value.trim(), b = $('fBody').value.trim();
+  $('eTitle').textContent = t ? '' : 'Judul wajib diisi.';
+  $('eBody').textContent = b.length >= 10 ? '' : 'Isi minimal 10 karakter.';
+  $('fTitle').setAttribute('aria-invalid', String(!t));
+  $('fBody').setAttribute('aria-invalid', String(b.length < 10));
+  if (!t || b.length < 10) return;
+  /* Kirim ke backend di sini, mis. fetch('/api/pengumuman', {method:'POST', body: JSON.stringify({...})}) */
+  items.unshift({id:nextId(), t, s:b, b,
+    d:new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),
+    extra:[['Tujuan',$('fTarget').value]], isNew:true, c:[]});
+  save(); closeAll(); render(); toast('Pengumuman terkirim');
+});
+
+$('cIn').addEventListener('input', () => { $('cSend').disabled = !$('cIn').value.trim(); });
+$('cSend').addEventListener('click', () => {
+  find().c.push({n:'Abdul Husein, S.T', w:'Baru saja', x:$('cIn').value.trim()});
+  $('cIn').value = ''; $('cSend').disabled = true; save(); detail();
+});
+
+render();
+</script>
+</body>
+</html>

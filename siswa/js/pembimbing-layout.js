@@ -28,9 +28,9 @@
     {k: 'dashboard',  t: 'Dasboard',         ic: 'home',         href: 'dashboard-pembimbing.html'},
     {k: 'kelola',     t: 'Kelola Anggota',   ic: 'group',        href: 'kelola-anggota-pembimbing.html'},
     {k: 'jadwal',     t: 'Jadwal',           ic: 'calendar',     href: 'jadwal-pembimbing.html'},
-    {k: 'tugas',      t: 'Tugas',            ic: 'requirements', href: null},
-    {k: 'absensi',    t: 'Absensi',          ic: 'inspection',   href: null},
-    {k: 'pengumuman', t: 'Pengumuman',       ic: 'commercial',   href: null},
+    {k: 'tugas',      t: 'Tugas',            ic: 'requirements', href: 'tugas-pembimbing.html'},
+    {k: 'absensi',    t: 'Absensi',          ic: 'inspection',   href: 'absensi-pembimbing.html'},
+    {k: 'pengumuman', t: 'Pengumuman',       ic: 'commercial',   href: 'pengumuman-pembimbing.html'},
     {k: 'penilaian',  t: 'Indeks Penilaian', ic: 'graph',        href: null}
   ];
 

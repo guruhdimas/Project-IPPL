@@ -117,7 +117,8 @@ function go(n){
  document.title=NM[n]+' – SMA Trisula Praja';
 }
 function route(){var i=SL.indexOf((location.hash||'').slice(1));go(i<0?0:i)}
-S.querySelectorAll('.nav').forEach(function(e,i){e.addEventListener('click',function(){go(i);try{location.hash=SL[i]}catch(x){}})});
+var URL_=[null,'kelola-anggota-pembimbing.html','jadwal-pembimbing.html','tugas-pembimbing.html','absensi-pembimbing.html','pengumuman-pembimbing.html','indeks-penilaian-pembimbing.html'];
+S.querySelectorAll('.nav').forEach(function(e,i){e.addEventListener('click',function(){if(URL_[i]){location.href=URL_[i];return}go(i);try{location.hash=SL[i]}catch(x){}})});
 document.getElementById('back').addEventListener('click',function(){go(0);try{location.hash=SL[0]}catch(x){}});
 addEventListener('hashchange',route);route();
 var box=document.getElementById('box');

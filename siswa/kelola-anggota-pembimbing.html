@@ -148,7 +148,17 @@ td:first-child{color:#000;font-weight:700}
   <div class="dlg" id="dlg"></div>
 </div>
 
-<script src="js/pb-layout.js"></script>
+<script src="js/pb-layout-v2.js"></script>
+<script>
+/* Tambalan: pastikan menu Tugas, Absensi, Pengumuman & Penilaian selalu menuju halamannya, apa pun versi pb-layout.js yang termuat */
+(function(){
+  var map={tugas:'tugas-pembimbing.html',absensi:'absensi-pembimbing.html',pengumuman:'pengumuman-pembimbing.html',penilaian:'indeks-penilaian-pembimbing.html'};
+  Object.keys(map).forEach(function(k){
+    var a=document.querySelector('#pb-sidebar a[data-k="'+k+'"]');
+    if(a){a.setAttribute('href',map[k]);a.removeAttribute('data-soon');}
+  });
+})();
+</script>
 <script>
 /* ---------- Data ---------- */
 const PEMBIMBING = 'Abdul Husein, S.T';
